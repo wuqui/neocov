@@ -1,6 +1,7 @@
 {
   "neocov": {
     "Overview": "/",
-    "Read data": "read_data.html"
+    "Read data": "read_data.html",
+    "Preprocess comments": "preproc.html"
   }
 }

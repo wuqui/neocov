@@ -54,6 +54,12 @@ nb_path: "00_read_data.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Get-file-paths">Get file paths<a class="anchor-link" href="#Get-file-paths"> </a></h2>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -99,7 +105,7 @@ nb_path: "00_read_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_comments_paths_year" class="doc_header"><code>get_comments_paths_year</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/read_data.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_comments_paths_year</code>(<strong><code>COMMENTS_DIR</code></strong>, <strong><code>YEAR</code></strong>)</p>
+<h4 id="get_comments_paths_year" class="doc_header"><code>get_comments_paths_year</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/read_data.py#L11" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_comments_paths_year</code>(<strong><code>COMMENTS_DIR</code></strong>, <strong><code>YEAR</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -227,6 +233,241 @@ nb_path: "00_read_data.ipynb"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comment_paths_year</span> <span class="o">=</span> <span class="n">get_comments_paths_year</span><span class="p">(</span><span class="n">COMMENTS_DIR</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Read-comments">Read comments<a class="anchor-link" href="#Read-comments"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Read-1-comments-csv-file">Read <code>1</code> comments <code>csv</code> file<a class="anchor-link" href="#Read-1-comments-csv-file"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fpath</span> <span class="o">=</span> <span class="n">comment_paths_year</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="read_comm_csv" class="doc_header"><code>read_comm_csv</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/read_data.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_comm_csv</code>(<strong><code>fpath</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span> <span class="o">=</span> <span class="n">read_comm_csv</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 200000 entries, 0 to 199999
+Data columns (total 5 columns):
+ #   Column       Non-Null Count   Dtype         
+---  ------       --------------   -----         
+ 0   author       200000 non-null  string        
+ 1   body         200000 non-null  string        
+ 2   created_utc  200000 non-null  datetime64[ns]
+ 3   id           200000 non-null  string        
+ 4   subreddit    200000 non-null  string        
+dtypes: datetime64[ns](1), string(4)
+memory usage: 9.2 MB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Read-multiple-comment-csv-files">Read multiple comment <code>csv</code> files<a class="anchor-link" href="#Read-multiple-comment-csv-files"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="read_comm_csvs" class="doc_header"><code>read_comm_csvs</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/read_data.py#L46" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_comm_csvs</code>(<strong><code>fpaths</code></strong>:<code>list</code>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span> <span class="o">=</span> <span class="n">read_comm_csvs</span><span class="p">(</span><span class="n">comment_paths_year</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>subreddit
+AskReddit             429516
+politics              146023
+memes                  99027
+teenagers              89685
+dankmemes              84107
+                       ...  
+no_u                       1
+CuteBobby                  1
+no_drama                   1
+WorldBoxGodSandbox         1
+FatFurryPorn               1
+Length: 66885, dtype: int64</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 

@@ -11,7 +11,18 @@
       %reload_ext autoreload
 
 
+```python
+# all_data
+```
+
+```python
+from neocov.read_data import *
+from neocov.preproc import *
+```
+
 # Read data
+
+### Get file paths
 
 ```python
 COMMENTS_DIR = '../data/comments/by_date/'
@@ -22,59 +33,91 @@ YEAR = 2019
 ```
 
 ```python
-get_comments_paths_year(COMMENTS_DIR, '2019')
+comment_paths_year = get_comments_paths_year(COMMENTS_DIR, '2019')
+```
+
+### Read comments
+
+```python
+comments = read_comm_csvs(comment_paths_year)
+```
+
+```python
+comments.value_counts('subreddit')
 ```
 
 
 
 
-    [PosixPath('../data/comments/by_date/2019-05-07_21:11:36___2019-05-07_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-08-07_21:12:15___2019-08-07_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-07-14_21:06:51___2019-07-14_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-07-01_21:59:59___2019-07-01_21:19:55.csv'),
-     PosixPath('../data/comments/by_date/2019-05-14_21:15:37___2019-05-14_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-06-07_21:17:11___2019-06-07_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-02-01_22:59:59___2019-02-01_22:02:38.csv'),
-     PosixPath('../data/comments/by_date/2019-02-07_22:06:26___2019-02-07_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-06-01_21:59:59___2019-06-01_21:09:37.csv'),
-     PosixPath('../data/comments/by_date/2019-11-07_22:24:23___2019-11-07_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-03-14_22:06:05___2019-03-14_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-10-07_21:17:33___2019-10-07_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-02-14_22:04:57___2019-02-14_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-12-07_22:29:19___2019-12-07_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-08-01_21:59:59___2019-08-01_21:13:12.csv'),
-     PosixPath('../data/comments/by_date/2019-03-01_22:59:59___2019-03-01_22:04:58.csv'),
-     PosixPath('../data/comments/by_date/2019-04-19_21:03:20___2019-04-19_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-06-14_21:02:30___2019-06-14_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-01-19_22:12:29___2019-01-19_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-11-14_22:11:50___2019-11-14_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-01-01_22:59:59___2019-01-01_21:59:07.csv'),
-     PosixPath('../data/comments/by_date/2019-12-19_22:09:07___2019-12-19_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-12-01_22:59:59___2019-12-01_22:36:30.csv'),
-     PosixPath('../data/comments/by_date/2019-04-01_21:59:59___2019-04-01_21:05:49.csv'),
-     PosixPath('../data/comments/by_date/2019-11-01_22:59:59___2019-11-01_22:06:28.csv'),
-     PosixPath('../data/comments/by_date/2019-10-01_21:59:59___2019-10-01_21:14:05.csv'),
-     PosixPath('../data/comments/by_date/2019-09-19_21:12:20___2019-09-19_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-01-07_22:14:11___2019-01-07_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-04-14_21:01:38___2019-04-14_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-07-19_21:10:09___2019-07-19_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-05-01_21:59:59___2019-05-01_21:10:03.csv'),
-     PosixPath('../data/comments/by_date/2019-09-14_21:17:45___2019-09-14_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-03-19_22:08:57___2019-03-19_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-09-01_21:59:59___2019-09-01_21:03:54.csv'),
-     PosixPath('../data/comments/by_date/2019-01-14_22:04:48___2019-01-14_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-09-07_21:09:47___2019-09-07_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-10-14_21:33:09___2019-10-14_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-08-19_21:10:07___2019-08-19_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-10-19_21:04:06___2019-10-19_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-12-14_22:34:00___2019-12-14_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-03-07_22:06:55___2019-03-07_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-02-19_22:06:50___2019-02-19_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-08-14_21:13:49___2019-08-14_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-05-19_21:16:29___2019-05-19_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-07-07_21:07:10___2019-07-07_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-04-07_21:10:44___2019-04-07_21:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-11-19_22:15:40___2019-11-19_22:59:59.csv'),
-     PosixPath('../data/comments/by_date/2019-06-19_21:09:12___2019-06-19_21:59:59.csv')]
+    subreddit
+    AskReddit             429516
+    politics              146023
+    memes                  99027
+    teenagers              89685
+    dankmemes              84107
+                           ...  
+    no_u                       1
+    CuteBobby                  1
+    no_drama                   1
+    WorldBoxGodSandbox         1
+    FatFurryPorn               1
+    Length: 66885, dtype: int64
 
+
+
+### Pre-process comments
+
+#### run preprocessing
+
+```python
+%%time
+docs_clean = clean_docs(comments['body'])
+```
+
+```python
+docs_clean
+```
+
+
+
+
+    1          [if, this, is, a, dank, meme, upvote, this, co...
+    2          [just, threaten, them, that, you, ll, call, th...
+    4          [honestly, do, you, really, wanna, go, through...
+    5          [i, actually, think, they, wouldn, t, have, pu...
+    6          [as, a, girl, on, the, sub, i, laughed, at, th...
+                                     ...                        
+    9599968    [i, think, they, would, interpret, residential...
+    9599971    [16, is, a, very, young, age, they, do, a, lot...
+    9599972    [i, would, ve, downvoted, but, since, you, adm...
+    9599974    [guy, who, made, the, crossbuck, had, one, job...
+    9599978    [this, is, barely, even, half, an, inch, by, t...
+    Name: body, Length: 5308119, dtype: object
+
+
+
+#### save to disk
+
+```python
+%%time
+docs_clean.to_csv(f'../data/docs_clean/{YEAR}.csv', index=False)
+```
+
+    CPU times: user 49.2 s, sys: 22 s, total: 1min 11s
+    Wall time: 2min 19s
+
+
+#### load from disk
+
+```python
+import pandas as pd
+```
+
+```python
+%%time
+docs_clean = pd.read_csv(f'../data/docs_clean/{YEAR}.csv', index_col=0, header=None)
+```
+
+    CPU times: user 20.2 s, sys: 2.47 s, total: 22.6 s
+    Wall time: 28.6 s
 

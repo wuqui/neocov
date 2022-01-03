@@ -29,18 +29,37 @@ COMMENTS_DIR = '../data/comments/by_date/'
 ```
 
 ```python
-YEAR = 2019
+YEAR = 2020
 ```
 
 ```python
-comment_paths_year = get_comments_paths_year(COMMENTS_DIR, '2019')
+comment_paths_year = get_comments_paths_year(COMMENTS_DIR, YEAR)
 ```
 
 ### Read comments
 
 ```python
+%%time
 comments = read_comm_csvs(comment_paths_year)
 ```
+
+```python
+comments.info()
+```
+
+    <class 'pandas.core.frame.DataFrame'>
+    RangeIndex: 9599970 entries, 0 to 9599969
+    Data columns (total 5 columns):
+     #   Column       Dtype         
+    ---  ------       -----         
+     0   author       string        
+     1   body         string        
+     2   created_utc  datetime64[ns]
+     3   id           string        
+     4   subreddit    string        
+    dtypes: datetime64[ns](1), string(4)
+    memory usage: 366.2 MB
+
 
 ```python
 comments.value_counts('subreddit')
@@ -50,18 +69,18 @@ comments.value_counts('subreddit')
 
 
     subreddit
-    AskReddit             429516
-    politics              146023
-    memes                  99027
-    teenagers              89685
-    dankmemes              84107
-                           ...  
-    no_u                       1
-    CuteBobby                  1
-    no_drama                   1
-    WorldBoxGodSandbox         1
-    FatFurryPorn               1
-    Length: 66885, dtype: int64
+    AskReddit              341545
+    politics               136751
+    memes                  129039
+    WatchUFC248Stream       75756
+    wallstreetbets          75698
+                            ...  
+    TimTeemoSubmissions         1
+    TimberAndStone              1
+    Timberland                  1
+    TimeTrap                    1
+    zztails                     1
+    Length: 93128, dtype: int64
 
 
 
@@ -74,6 +93,10 @@ comments.value_counts('subreddit')
 docs_clean = clean_docs(comments['body'])
 ```
 
+    CPU times: user 2min 17s, sys: 7min 11s, total: 9min 29s
+    Wall time: 59min
+
+
 ```python
 docs_clean
 ```
@@ -81,18 +104,18 @@ docs_clean
 
 
 
-    1          [if, this, is, a, dank, meme, upvote, this, co...
-    2          [just, threaten, them, that, you, ll, call, th...
-    4          [honestly, do, you, really, wanna, go, through...
-    5          [i, actually, think, they, wouldn, t, have, pu...
-    6          [as, a, girl, on, the, sub, i, laughed, at, th...
+    0          [oh, okay, thank, you, so, much, for, the, rep...
+    1          [es, tan, deprimente, ver, cuando, esta, clase...
+    4          [am, i, the, only, person, who, thinks, this, ...
+    5          [sorry, this, happened, in, hamilton, ontario,...
+    7          [that, was, awesome, man, i, want, to, be, you...
                                      ...                        
-    9599968    [i, think, they, would, interpret, residential...
-    9599971    [16, is, a, very, young, age, they, do, a, lot...
-    9599972    [i, would, ve, downvoted, but, since, you, adm...
-    9599974    [guy, who, made, the, crossbuck, had, one, job...
-    9599978    [this, is, barely, even, half, an, inch, by, t...
-    Name: body, Length: 5308119, dtype: object
+    9599956    [the, third, downside, is, that, if, you, upda...
+    9599959    [what, do, you, mean, britain, stood, alone, i...
+    9599962    [flat, earth, started, as, a, joke, i, imagine...
+    9599963    [the, only, canonical, way, for, them, to, be,...
+    9599969    [yeah, its, weird, i, think, jamal, has, passe...
+    Name: body, Length: 5385571, dtype: object
 
 
 
@@ -103,8 +126,8 @@ docs_clean
 docs_clean.to_csv(f'../data/docs_clean/{YEAR}.csv', index=False)
 ```
 
-    CPU times: user 49.2 s, sys: 22 s, total: 1min 11s
-    Wall time: 2min 19s
+    CPU times: user 51.3 s, sys: 36.7 s, total: 1min 28s
+    Wall time: 3min 55s
 
 
 #### load from disk

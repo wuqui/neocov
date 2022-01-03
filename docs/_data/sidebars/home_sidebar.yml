@@ -10,7 +10,7 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: NeoCov
+      title: Read data
       url: read_data.html
     output: web
     title: neocov

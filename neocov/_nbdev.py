@@ -2,7 +2,7 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"say_hello": "00_read_data.ipynb"}
+index = {"get_comments_paths_year": "00_read_data.ipynb"}
 
 modules = ["read_data.py"]
 

@@ -1,35 +1,5 @@
-# neocov
-> social semantic variation
+# NeoCov
+> Semantic change and social semantic variation of Covid-related English neologisms on Reddit.
 
 
-This file will become your README and also the index of your documentation.
-
-## Install
-
-`pip install your_project_name`
-
-## How to use
-
-Fill me in please! Don't forget code examples:
-
-```python
-1+1
-```
-
-
-
-
-    2
-
-
-
-```python
-say_hello('quirin')
-```
-
-
-
-
-    'Hello quirin!'
-
-
+# Read data

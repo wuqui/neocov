@@ -2,10 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"say_hello": "00_core.ipynb",
-         "add": "00_core.ipynb"}
+index = {"say_hello": "00_read_data.ipynb"}
 
-modules = ["core.py"]
+modules = ["read_data.py"]
 
 doc_url = "https://wuqui.github.io/neocov/"
 

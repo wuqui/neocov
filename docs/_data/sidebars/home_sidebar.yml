@@ -15,6 +15,9 @@ entries:
     - output: web,pdf
       title: Preprocess comments
       url: preproc.html
+    - output: web,pdf
+      title: Type embeddings
+      url: type_emb.html
     output: web
     title: neocov
   output: web

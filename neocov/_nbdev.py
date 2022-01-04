@@ -4,12 +4,7 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"get_comments_paths_year": "00_read_data.ipynb",
          "read_comm_csv": "00_read_data.ipynb",
-         "read_comm_csvs": "00_read_data.ipynb",
-         "conv_to_lowerc": "01_preproc.ipynb",
-         "rm_punct": "01_preproc.ipynb",
-         "tokenize": "01_preproc.ipynb",
-         "detect_short_doc": "01_preproc.ipynb",
-         "clean_docs": "01_preproc.ipynb"}
+         "read_comm_csvs": "00_read_data.ipynb"}
 
 modules = ["read_data.py",
            "preproc.py"]

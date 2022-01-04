@@ -2,6 +2,7 @@
   "neocov": {
     "Overview": "/",
     "Read data": "read_data.html",
-    "Preprocess comments": "preproc.html"
+    "Preprocess comments": "preproc.html",
+    "Type embeddings": "type_emb.html"
   }
 }

@@ -97,9 +97,26 @@ nb_path: "index.ipynb"
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Read-data">Read data<a class="anchor-link" href="#Read-data"> </a></h1>
+<h2 id="Read-data">Read data<a class="anchor-link" href="#Read-data"> </a></h2>
 </div>
 </div>
 </div>
@@ -133,7 +150,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YEAR</span> <span class="o">=</span> <span class="mi">2020</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YEAR</span> <span class="o">=</span> <span class="s1">&#39;2019&#39;</span>
 </pre></div>
 
     </div>
@@ -181,6 +198,21 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 54.9 s, sys: 35.7 s, total: 1min 30s
+Wall time: 3min 38s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -191,7 +223,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span>
 </pre></div>
 
     </div>
@@ -203,21 +235,128 @@ nb_path: "index.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 9599970 entries, 0 to 9599969
-Data columns (total 5 columns):
- #   Column       Dtype         
----  ------       -----         
- 0   author       string        
- 1   body         string        
- 2   created_utc  datetime64[ns]
- 3   id           string        
- 4   subreddit    string        
-dtypes: datetime64[ns](1), string(4)
-memory usage: 366.2 MB
-</pre>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>author</th>
+      <th>body</th>
+      <th>created_utc</th>
+      <th>id</th>
+      <th>subreddit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Avinse</td>
+      <td>Username Checks Out</td>
+      <td>2019-05-07 21:11:36</td>
+      <td>emrv0h9</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>KeepingDankMemesDank</td>
+      <td>If this is a dank meme, **Upvote** this commen...</td>
+      <td>2019-05-07 21:11:37</td>
+      <td>emrv0jp</td>
+      <td>dankmemes</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>UhPhrasing</td>
+      <td>Just threaten them that you'll call the corpor...</td>
+      <td>2019-05-07 21:11:37</td>
+      <td>emrv0jq</td>
+      <td>golf</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[deleted]</td>
+      <td>[removed]</td>
+      <td>2019-05-07 21:11:37</td>
+      <td>emrv0jr</td>
+      <td>Barca</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>EnergetikNA</td>
+      <td>honestly, do you really wanna go through an en...</td>
+      <td>2019-05-07 21:11:37</td>
+      <td>emrv0js</td>
+      <td>soccer</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>9599974</th>
+      <td>DogBeersHadOne</td>
+      <td>Guy who made the crossbuck had one job. One go...</td>
+      <td>2019-06-19 21:59:59</td>
+      <td>erl9mvx</td>
+      <td>trains</td>
+    </tr>
+    <tr>
+      <th>9599975</th>
+      <td>VenomousCoffee</td>
+      <td>Page number? Picture of the page?</td>
+      <td>2019-06-19 21:59:59</td>
+      <td>erl9mvw</td>
+      <td>marvelstudios</td>
+    </tr>
+    <tr>
+      <th>9599976</th>
+      <td>Homerundude698</td>
+      <td>So sexy baby</td>
+      <td>2019-06-19 21:59:59</td>
+      <td>erl9mvv</td>
+      <td>gonewild30plus</td>
+    </tr>
+    <tr>
+      <th>9599977</th>
+      <td>CircusRama</td>
+      <td>Removed for Rule 8</td>
+      <td>2019-06-19 21:59:59</td>
+      <td>erl9mwa</td>
+      <td>fivenightsatfreddys</td>
+    </tr>
+    <tr>
+      <th>9599978</th>
+      <td>BusShelter</td>
+      <td>This is barely even half an inch by the looks ...</td>
+      <td>2019-06-19 21:59:59</td>
+      <td>erl9muw</td>
+      <td>soccer</td>
+    </tr>
+  </tbody>
+</table>
+<p>9599979 rows × 5 columns</p>
 </div>
+</div>
+
 </div>
 
 </div>
@@ -249,18 +388,18 @@ memory usage: 366.2 MB
 
 <div class="output_text output_subarea output_execute_result">
 <pre>subreddit
-AskReddit              341545
-politics               136751
-memes                  129039
-WatchUFC248Stream       75756
-wallstreetbets          75698
-                        ...  
-TimTeemoSubmissions         1
-TimberAndStone              1
-Timberland                  1
-TimeTrap                    1
-zztails                     1
-Length: 93128, dtype: int64</pre>
+AskReddit             429516
+politics              146023
+memes                  99027
+teenagers              89685
+dankmemes              84107
+                       ...  
+no_u                       1
+CuteBobby                  1
+no_drama                   1
+WorldBoxGodSandbox         1
+FatFurryPorn               1
+Length: 66885, dtype: int64</pre>
 </div>
 
 </div>
@@ -273,13 +412,13 @@ Length: 93128, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pre-process-comments">Pre-process comments<a class="anchor-link" href="#Pre-process-comments"> </a></h3>
+<h2 id="Pre-process-comments">Pre-process comments<a class="anchor-link" href="#Pre-process-comments"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="run-preprocessing">run preprocessing<a class="anchor-link" href="#run-preprocessing"> </a></h4>
+<h3 id="run-preprocessing">run preprocessing<a class="anchor-link" href="#run-preprocessing"> </a></h3>
 </div>
 </div>
 </div>
@@ -304,8 +443,8 @@ Length: 93128, dtype: int64</pre>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 2min 17s, sys: 7min 11s, total: 9min 29s
-Wall time: 59min
+<pre>CPU times: user 2min 12s, sys: 6min 28s, total: 8min 41s
+Wall time: 36min 17s
 </pre>
 </div>
 </div>
@@ -323,7 +462,24 @@ Wall time: 59min
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments_sm</span> <span class="o">=</span> <span class="n">comments</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments_sm</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">conv_to_lowerc</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -338,18 +494,18 @@ Wall time: 59min
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0          [oh, okay, thank, you, so, much, for, the, rep...
-1          [es, tan, deprimente, ver, cuando, esta, clase...
-4          [am, i, the, only, person, who, thinks, this, ...
-5          [sorry, this, happened, in, hamilton, ontario,...
-7          [that, was, awesome, man, i, want, to, be, you...
-                                 ...                        
-9599956    [the, third, downside, is, that, if, you, upda...
-9599959    [what, do, you, mean, britain, stood, alone, i...
-9599962    [flat, earth, started, as, a, joke, i, imagine...
-9599963    [the, only, canonical, way, for, them, to, be,...
-9599969    [yeah, its, weird, i, think, jamal, has, passe...
-Name: body, Length: 5385571, dtype: object</pre>
+<pre>0                                   username checks out
+1     if this is a dank meme, **upvote** this commen...
+2     just threaten them that you&#39;ll call the corpor...
+3                                             [removed]
+4     honestly, do you really wanna go through an en...
+                            ...                        
+95    thank you! \n\ni had someone ask me in person ...
+96    people always imagine robots taking over the h...
+97                 sexy before and after!   good job...
+98                                jk, i only want frank
+99    not sure if this belongs here but here we go.\...
+Name: body, Length: 100, dtype: object</pre>
 </div>
 
 </div>
@@ -362,7 +518,13 @@ Name: body, Length: 5385571, dtype: object</pre>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="save-to-disk">save to disk<a class="anchor-link" href="#save-to-disk"> </a></h4>
+<h3 id="save-to-disk">save to disk<a class="anchor-link" href="#save-to-disk"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="csv"><code>csv</code><a class="anchor-link" href="#csv"> </a></h4>
 </div>
 </div>
 </div>
@@ -401,7 +563,7 @@ Wall time: 3min 55s
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="load-from-disk">load from disk<a class="anchor-link" href="#load-from-disk"> </a></h4>
+<h4 id="feather"><code>feather</code><a class="anchor-link" href="#feather"> </a></h4>
 </div>
 </div>
 </div>
@@ -412,7 +574,7 @@ Wall time: 3min 55s
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean_fr</span> <span class="o">=</span> <span class="n">docs_clean</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -422,6 +584,122 @@ Wall time: 3min 55s
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">docs_clean_fr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>pandas.core.series.Series</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean</span><span class="o">.</span><span class="n">to_feather</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../data/docs_clean/</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s1">.feather&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+<span class="ansi-green-fg">/var/folders/gp/dw55jb3d3gl6jn22rscvxjm40000gn/T/ipykernel_56072/3858824913.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>docs_clean<span class="ansi-blue-fg">.</span>to_feather<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;../data/docs_clean/{YEAR}.feather&#39;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">__getattr__</span><span class="ansi-blue-fg">(self, name)</span>
+<span class="ansi-green-intense-fg ansi-bold">   5485</span>         ):
+<span class="ansi-green-intense-fg ansi-bold">   5486</span>             <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">[</span>name<span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">-&gt; 5487</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> object<span class="ansi-blue-fg">.</span>__getattribute__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> name<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   5488</span> 
+<span class="ansi-green-intense-fg ansi-bold">   5489</span>     <span class="ansi-green-fg">def</span> __setattr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> name<span class="ansi-blue-fg">:</span> str<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-red-fg">AttributeError</span>: &#39;Series&#39; object has no attribute &#39;to_feather&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean_feath</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_feather</span><span class="p">(</span><span class="s1">&#39;~/Desktop/comments.feather&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="load-from-disk">load from disk<a class="anchor-link" href="#load-from-disk"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -443,12 +721,457 @@ Wall time: 3min 55s
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 20.2 s, sys: 2.47 s, total: 22.6 s
-Wall time: 28.6 s
+<pre>CPU times: user 21 s, sys: 1.52 s, total: 22.5 s
+Wall time: 22.9 s
 </pre>
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">docs_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../data/docs_clean/</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">})</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;timed exec&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/util/_decorators.py</span> in <span class="ansi-cyan-fg">wrapper</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    309</span>                     stacklevel<span class="ansi-blue-fg">=</span>stacklevel<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    310</span>                 )
+<span class="ansi-green-fg">--&gt; 311</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    312</span> 
+<span class="ansi-green-intense-fg ansi-bold">    313</span>         <span class="ansi-green-fg">return</span> wrapper
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/io/parsers/readers.py</span> in <span class="ansi-cyan-fg">read_csv</span><span class="ansi-blue-fg">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="ansi-green-intense-fg ansi-bold">    584</span>     kwds<span class="ansi-blue-fg">.</span>update<span class="ansi-blue-fg">(</span>kwds_defaults<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    585</span> 
+<span class="ansi-green-fg">--&gt; 586</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> _read<span class="ansi-blue-fg">(</span>filepath_or_buffer<span class="ansi-blue-fg">,</span> kwds<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    587</span> 
+<span class="ansi-green-intense-fg ansi-bold">    588</span> 
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/io/parsers/readers.py</span> in <span class="ansi-cyan-fg">_read</span><span class="ansi-blue-fg">(filepath_or_buffer, kwds)</span>
+<span class="ansi-green-intense-fg ansi-bold">    486</span> 
+<span class="ansi-green-intense-fg ansi-bold">    487</span>     <span class="ansi-green-fg">with</span> parser<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 488</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> parser<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span>nrows<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    489</span> 
+<span class="ansi-green-intense-fg ansi-bold">    490</span> 
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/io/parsers/readers.py</span> in <span class="ansi-cyan-fg">read</span><span class="ansi-blue-fg">(self, nrows)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1045</span>     <span class="ansi-green-fg">def</span> read<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> nrows<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1046</span>         nrows <span class="ansi-blue-fg">=</span> validate_integer<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;nrows&#34;</span><span class="ansi-blue-fg">,</span> nrows<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">-&gt; 1047</span><span class="ansi-red-fg">         </span>index<span class="ansi-blue-fg">,</span> columns<span class="ansi-blue-fg">,</span> col_dict <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_engine<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span>nrows<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1048</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1049</span>         <span class="ansi-green-fg">if</span> index <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/io/parsers/c_parser_wrapper.py</span> in <span class="ansi-cyan-fg">read</span><span class="ansi-blue-fg">(self, nrows)</span>
+<span class="ansi-green-intense-fg ansi-bold">    222</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    223</span>             <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>low_memory<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 224</span><span class="ansi-red-fg">                 </span>chunks <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_reader<span class="ansi-blue-fg">.</span>read_low_memory<span class="ansi-blue-fg">(</span>nrows<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    225</span>                 <span class="ansi-red-fg"># destructive to chunks</span>
+<span class="ansi-green-intense-fg ansi-bold">    226</span>                 data <span class="ansi-blue-fg">=</span> _concatenate_chunks<span class="ansi-blue-fg">(</span>chunks<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader.read_low_memory</span><span class="ansi-blue-fg">()</span>
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader._read_rows</span><span class="ansi-blue-fg">()</span>
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader._convert_column_data</span><span class="ansi-blue-fg">()</span>
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers._apply_converter</span><span class="ansi-blue-fg">()</span>
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/core/computation/eval.py</span> in <span class="ansi-cyan-fg">eval</span><span class="ansi-blue-fg">(expr, parser, engine, truediv, local_dict, global_dict, resolvers, level, target, inplace)</span>
+<span class="ansi-green-intense-fg ansi-bold">    335</span>     <span class="ansi-green-fg">for</span> expr <span class="ansi-green-fg">in</span> exprs<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    336</span>         expr <span class="ansi-blue-fg">=</span> _convert_expression<span class="ansi-blue-fg">(</span>expr<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 337</span><span class="ansi-red-fg">         </span>_check_for_locals<span class="ansi-blue-fg">(</span>expr<span class="ansi-blue-fg">,</span> level<span class="ansi-blue-fg">,</span> parser<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    338</span> 
+<span class="ansi-green-intense-fg ansi-bold">    339</span>         <span class="ansi-red-fg"># get our (possibly passed-in) scope</span>
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/core/computation/eval.py</span> in <span class="ansi-cyan-fg">_check_for_locals</span><span class="ansi-blue-fg">(expr, stack_level, parser)</span>
+<span class="ansi-green-intense-fg ansi-bold">    157</span> 
+<span class="ansi-green-intense-fg ansi-bold">    158</span>     <span class="ansi-green-fg">if</span> at_top_of_stack <span class="ansi-green-fg">or</span> not_pandas_parser<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 159</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">for</span> toknum<span class="ansi-blue-fg">,</span> tokval <span class="ansi-green-fg">in</span> tokenize_string<span class="ansi-blue-fg">(</span>expr<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    160</span>             <span class="ansi-green-fg">if</span> toknum <span class="ansi-blue-fg">==</span> tokenize<span class="ansi-blue-fg">.</span>OP <span class="ansi-green-fg">and</span> tokval <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;@&#34;</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    161</span>                 <span class="ansi-green-fg">raise</span> SyntaxError<span class="ansi-blue-fg">(</span>msg<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/core/computation/parsing.py</span> in <span class="ansi-cyan-fg">tokenize_string</span><span class="ansi-blue-fg">(source)</span>
+<span class="ansi-green-intense-fg ansi-bold">    183</span>     <span class="ansi-red-fg"># Loop over all tokens till a backtick (`) is found.</span>
+<span class="ansi-green-intense-fg ansi-bold">    184</span>     <span class="ansi-red-fg"># Then, take all tokens till the next backtick to form a backtick quoted string</span>
+<span class="ansi-green-fg">--&gt; 185</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">for</span> toknum<span class="ansi-blue-fg">,</span> tokval<span class="ansi-blue-fg">,</span> start<span class="ansi-blue-fg">,</span> _<span class="ansi-blue-fg">,</span> _ <span class="ansi-green-fg">in</span> token_generator<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    186</span>         <span class="ansi-green-fg">if</span> tokval <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;`&#34;</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    187</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/tokenize.py</span> in <span class="ansi-cyan-fg">_tokenize</span><span class="ansi-blue-fg">(readline, encoding)</span>
+<span class="ansi-green-intense-fg ansi-bold">    533</span>                 token<span class="ansi-blue-fg">,</span> initial <span class="ansi-blue-fg">=</span> line<span class="ansi-blue-fg">[</span>start<span class="ansi-blue-fg">:</span>end<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> line<span class="ansi-blue-fg">[</span>start<span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">    534</span> 
+<span class="ansi-green-fg">--&gt; 535</span><span class="ansi-red-fg">                 if (initial in numchars or                 # ordinary number
+</span><span class="ansi-green-intense-fg ansi-bold">    536</span>                     (initial == &#39;.&#39; and token != &#39;.&#39; and token != &#39;...&#39;)):
+<span class="ansi-green-intense-fg ansi-bold">    537</span>                     <span class="ansi-green-fg">yield</span> TokenInfo<span class="ansi-blue-fg">(</span>NUMBER<span class="ansi-blue-fg">,</span> token<span class="ansi-blue-fg">,</span> spos<span class="ansi-blue-fg">,</span> epos<span class="ansi-blue-fg">,</span> line<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Series([], Name: [&#39;if&#39;, &#39;this&#39;, &#39;is&#39;, &#39;a&#39;, &#39;dank&#39;, &#39;meme&#39;, &#39;upvote&#39;, &#39;this&#39;, &#39;comment&#39;, &#39;if&#39;, &#39;this&#39;, &#39;is&#39;, &#39;not&#39;, &#39;a&#39;, &#39;dank&#39;, &#39;meme&#39;, &#39;downvote&#39;, &#39;this&#39;, &#39;comment&#39;, &#39;if&#39;, &#39;this&#39;, &#39;post&#39;, &#39;breaks&#39;, &#39;the&#39;, &#39;rules&#39;, &#39;report&#39;, &#39;it&#39;, &#39;and&#39;, &#39;downvote&#39;, &#39;this&#39;, &#39;comment&#39;, &#39;thank&#39;, &#39;you&#39;, &#39;for&#39;, &#39;helping&#39;, &#39;us&#39;, &#39;in&#39;, &#39;keeping&#39;, &#39;r&#39;, &#39;dankmemes&#39;, &#39;dank&#39;, &#39;hit&#39;, &#39;us&#39;, &#39;up&#39;, &#39;https&#39;, &#39;www&#39;, &#39;reddit&#39;, &#39;com&#39;, &#39;message&#39;, &#39;compose&#39;, &#39;to&#39;, &#39;r&#39;, &#39;dankmemes&#39;, &#39;if&#39;, &#39;you&#39;, &#39;have&#39;, &#39;any&#39;, &#39;questions&#39;, &#39;i&#39;, &#39;m&#39;, &#39;a&#39;, &#39;bot&#39;], dtype: float64)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="from-parquet">from <code>parquet</code><a class="anchor-link" href="#from-parquet"> </a></h5>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">docs_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;~/promo/socemb/data/docs_clean/</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s1">.parquet&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 18.8 s, sys: 6.62 s, total: 25.5 s
+Wall time: 55.2 s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">docs_clean</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">docs_clean</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean</span> <span class="o">=</span> <span class="n">docs_clean</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Train-models">Train models<a class="anchor-link" href="#Train-models"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Create-corpus">Create corpus<a class="anchor-link" href="#Create-corpus"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">corpus</span> <span class="o">=</span> <span class="n">Corpus</span><span class="p">(</span><span class="n">docs_clean</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Train-model">Train model<a class="anchor-link" href="#Train-model"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">train_emb</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 54min 54s, sys: 3min 16s, total: 58min 11s
+Wall time: 24min 2s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>244740</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>244740</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Save-model">Save model<a class="anchor-link" href="#Save-model"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../out/models/</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s1">.model&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Load-models">Load models<a class="anchor-link" href="#Load-models"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_2019</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;out/models/2019.model&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_2020</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;out/models/2020.model&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 

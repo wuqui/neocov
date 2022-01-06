@@ -44,21 +44,6 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>The autoreload extension is already loaded. To reload it, use:
-  %reload_ext autoreload
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -116,6 +101,31 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Variables">Variables<a class="anchor-link" href="#Variables"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DATA_DIR</span> <span class="o">=</span> <span class="s1">&#39;../data/&#39;</span>
+<span class="n">COMMENTS_DIAC_DIR</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">DATA_DIR</span><span class="si">}</span><span class="s1">comments/by_date/&#39;</span>
+<span class="n">OUT_DIR</span> <span class="o">=</span> <span class="s1">&#39;..out/&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Read-data">Read data<a class="anchor-link" href="#Read-data"> </a></h2>
 </div>
 </div>
@@ -133,7 +143,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">COMMENTS_DIR</span> <span class="o">=</span> <span class="s1">&#39;../data/comments/by_date/&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YEAR</span> <span class="o">=</span> <span class="s1">&#39;2020&#39;</span>
 </pre></div>
 
     </div>
@@ -150,24 +160,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YEAR</span> <span class="o">=</span> <span class="s1">&#39;2019&#39;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comment_paths_year</span> <span class="o">=</span> <span class="n">get_comments_paths_year</span><span class="p">(</span><span class="n">COMMENTS_DIR</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comment_paths_year</span> <span class="o">=</span> <span class="n">get_comments_paths_year</span><span class="p">(</span><span class="n">COMMENTS_DIAC_DIR</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -198,21 +191,6 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 54.9 s, sys: 35.7 s, total: 1min 30s
-Wall time: 3min 38s
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -230,8 +208,1563 @@ Wall time: 3min 38s
 </div>
 </div>
 
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Pre-process-comments">Pre-process comments<a class="anchor-link" href="#Pre-process-comments"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="run-preprocessing">run preprocessing<a class="anchor-link" href="#run-preprocessing"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">comments</span> <span class="o">=</span> <span class="n">clean_comments</span><span class="p">(</span><span class="n">comments</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Train-models">Train models<a class="anchor-link" href="#Train-models"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Create-corpus">Create corpus<a class="anchor-link" href="#Create-corpus"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Corpus</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;An iterator that yields sentences (lists of str).&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">docs_clean</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">docs_clean</span> <span class="o">=</span> <span class="n">docs_clean</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">docs_clean</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">doc</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">corpus</span> <span class="o">=</span> <span class="n">Corpus</span><span class="p">(</span><span class="n">comments</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Train-model">Train model<a class="anchor-link" href="#Train-model"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train_emb</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> 
+              <span class="n">MIN_COUNT</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+              <span class="n">SIZE</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> 
+              <span class="n">WORKERS</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> 
+              <span class="n">WINDOW</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span>
+        <span class="n">corpus</span><span class="p">,</span> 
+        <span class="n">min_count</span><span class="o">=</span><span class="n">MIN_COUNT</span><span class="p">,</span>
+        <span class="n">vector_size</span><span class="o">=</span><span class="n">SIZE</span><span class="p">,</span>
+        <span class="n">workers</span><span class="o">=</span><span class="n">WORKERS</span><span class="p">,</span> 
+        <span class="n">window</span><span class="o">=</span><span class="n">WINDOW</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">train_emb</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Save-model">Save model<a class="anchor-link" href="#Save-model"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">OUT_DIR</span><span class="si">}</span><span class="s1">models/</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s1">.model&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Load-models">Load models<a class="anchor-link" href="#Load-models"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_2019</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{OUT_DIR}</span><span class="s1">models/2019.model&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_2020</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{OUT_DIR}</span><span class="s1">models/2020.model&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Align-models">Align models<a class="anchor-link" href="#Align-models"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">intersection_align_gensim</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">words</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Intersect two gensim word2vec models, m1 and m2.</span>
+<span class="sd">    Only the shared vocabulary between them is kept.</span>
+<span class="sd">    If &#39;words&#39; is set (as list or set), then the vocabulary is intersected with this list as well.</span>
+<span class="sd">    Indices are re-organized from 0..N in order of descending frequency (=sum of counts from both m1 and m2).</span>
+<span class="sd">    These indices correspond to the new syn0 and syn0norm objects in both gensim models:</span>
+<span class="sd">        -- so that Row 0 of m1.syn0 will be for the same word as Row 0 of m2.syn0</span>
+<span class="sd">        -- you can find the index of any word on the .index2word list: model.index2word.index(word) =&gt; 2</span>
+<span class="sd">    The .vocab dictionary is also updated for each model, preserving the count but updating the index.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get the vocab for each model</span>
+    <span class="n">vocab_m1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">m1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">)</span>
+    <span class="n">vocab_m2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">m2</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">)</span>
+
+    <span class="c1"># Find the common vocabulary</span>
+    <span class="n">common_vocab</span> <span class="o">=</span> <span class="n">vocab_m1</span> <span class="o">&amp;</span> <span class="n">vocab_m2</span>
+    <span class="k">if</span> <span class="n">words</span><span class="p">:</span> <span class="n">common_vocab</span> <span class="o">&amp;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+    <span class="c1"># If no alignment necessary because vocab is identical...</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">vocab_m1</span> <span class="o">-</span> <span class="n">common_vocab</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">vocab_m2</span> <span class="o">-</span> <span class="n">common_vocab</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">m1</span><span class="p">,</span><span class="n">m2</span><span class="p">)</span>
+
+    <span class="c1"># Otherwise sort by frequency (summed for both)</span>
+    <span class="n">common_vocab</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">common_vocab</span><span class="p">)</span>
+    <span class="n">common_vocab</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">m1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">m2</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># print(len(common_vocab))</span>
+
+    <span class="c1"># Then for each model...</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">]:</span>
+        <span class="c1"># Replace old syn0norm array with new one (with common vocab)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">common_vocab</span><span class="p">]</span>
+        <span class="n">old_arr</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span>
+        <span class="n">new_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">old_arr</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">])</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span> <span class="o">=</span> <span class="n">new_arr</span>
+
+        <span class="c1"># Replace old vocab dictionary with new one (with common vocab)</span>
+        <span class="c1"># and old index2word with new one</span>
+        <span class="n">new_key_to_index</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">new_index_to_key</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">new_index</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">common_vocab</span><span class="p">):</span>
+            <span class="n">new_key_to_index</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_index</span>
+            <span class="n">new_index_to_key</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span> <span class="o">=</span> <span class="n">new_key_to_index</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span> <span class="o">=</span> <span class="n">new_index_to_key</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span><span class="p">))</span>
+        
+    <span class="k">return</span> <span class="p">(</span><span class="n">m1</span><span class="p">,</span><span class="n">m2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">smart_procrustes_align_gensim</span><span class="p">(</span><span class="n">base_embed</span><span class="p">,</span> <span class="n">other_embed</span><span class="p">,</span> <span class="n">words</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Original script: https://gist.github.com/quadrismegistus/09a93e219a6ffc4f216fb85235535faf</span>
+<span class="sd">    Procrustes align two gensim word2vec models (to allow for comparison between same word across models).</span>
+<span class="sd">    Code ported from HistWords &lt;https://github.com/williamleif/histwords&gt; by William Hamilton &lt;wleif@stanford.edu&gt;.</span>
+<span class="sd">        </span>
+<span class="sd">    First, intersect the vocabularies (see `intersection_align_gensim` documentation).</span>
+<span class="sd">    Then do the alignment on the other_embed model.</span>
+<span class="sd">    Replace the other_embed model&#39;s syn0 and syn0norm numpy matrices with the aligned version.</span>
+<span class="sd">    Return other_embed.</span>
+<span class="sd">    If `words` is set, intersect the two models&#39; vocabulary with the vocabulary in words (see `intersection_align_gensim` documentation).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># make sure vocabulary and indices are aligned</span>
+    <span class="n">in_base_embed</span><span class="p">,</span> <span class="n">in_other_embed</span> <span class="o">=</span> <span class="n">intersection_align_gensim</span><span class="p">(</span><span class="n">base_embed</span><span class="p">,</span> <span class="n">other_embed</span><span class="p">,</span> <span class="n">words</span><span class="o">=</span><span class="n">words</span><span class="p">)</span>
+
+    <span class="c1"># get the (normalized) embedding matrices</span>
+    <span class="n">base_vecs</span> <span class="o">=</span> <span class="n">in_base_embed</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_normed_vectors</span><span class="p">()</span>
+    <span class="n">other_vecs</span> <span class="o">=</span> <span class="n">in_other_embed</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_normed_vectors</span><span class="p">()</span>
+
+    <span class="c1"># just a matrix dot product with numpy</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">other_vecs</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">base_vecs</span><span class="p">)</span> 
+    <span class="c1"># SVD method from numpy</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="c1"># another matrix operation</span>
+    <span class="n">ortho</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> 
+    <span class="c1"># Replace original array with modified one, i.e. multiplying the embedding matrix by &quot;ortho&quot;</span>
+    <span class="n">other_embed</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span> <span class="o">=</span> <span class="p">(</span><span class="n">other_embed</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ortho</span><span class="p">)</span>    
+    
+    <span class="k">return</span> <span class="n">other_embed</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">smart_procrustes_align_gensim</span><span class="p">(</span><span class="n">model_2019</span><span class="p">,</span> <span class="n">model_2020</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 <div class="output_wrapper">
 <div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>190756 190756
+190756 190756
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;gensim.models.word2vec.Word2Vec at 0x141570640&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">models_vocab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">[</span><span class="s1">&#39;2019&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_2019</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)],</span>
+        <span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_2020</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)],</span>
+        <span class="p">[</span><span class="s1">&#39;intersection&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">model_2019</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">model_2020</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)))]</span>
+    <span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;words&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">models_vocab</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>words</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019</td>
+      <td>190756</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2020</td>
+      <td>190756</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>intersection</td>
+      <td>190756</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">models_vocab</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">OUT_DIR</span><span class="si">}</span><span class="s1">models_vocab.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Measure-distances">Measure distances<a class="anchor-link" href="#Measure-distances"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">spatial</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">measure_distances</span><span class="p">(</span><span class="n">model_1</span><span class="p">,</span> <span class="n">model_2</span><span class="p">):</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">(</span>
+            <span class="c1">#[w, spatial.distance.euclidean(model_1.wv[w], model_2.wv[w]), </span>
+            <span class="c1">#[w, np.sum(model_1.wv[w] * model_2.wv[w]) / (np.linalg.norm(model_1.wv[w]) * np.linalg.norm(model_2.wv[w])), </span>
+            <span class="p">[</span><span class="n">w</span><span class="p">,</span> <span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">cosine</span><span class="p">(</span><span class="n">model_1</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">model_2</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">w</span><span class="p">]),</span> 
+             <span class="n">model_1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">),</span> 
+             <span class="n">model_2</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+            <span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">model_1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span>
+        <span class="p">),</span> 
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;lex&#39;</span><span class="p">,</span> <span class="s1">&#39;dist_sem&#39;</span><span class="p">,</span> <span class="s2">&quot;freq_1&quot;</span><span class="p">,</span> <span class="s2">&quot;freq_2&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">distances</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">distances</span> <span class="o">=</span> <span class="n">measure_distances</span><span class="p">(</span><span class="n">model_2019</span><span class="p">,</span> <span class="n">model_2020</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">distances</span>\
+    <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;dist_sem&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>lex</th>
+      <th>dist_sem</th>
+      <th>freq_1</th>
+      <th>freq_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>181299</th>
+      <td>financiados</td>
+      <td>1.270406</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>165232</th>
+      <td>______________________________________________...</td>
+      <td>1.257892</td>
+      <td>9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>181454</th>
+      <td>2ffireemblem</td>
+      <td>1.247719</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>189647</th>
+      <td>obedece</td>
+      <td>1.239514</td>
+      <td>7</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>126402</th>
+      <td>1281</td>
+      <td>1.218590</td>
+      <td>14</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>175</th>
+      <td>years</td>
+      <td>0.027202</td>
+      <td>175105</td>
+      <td>192696</td>
+    </tr>
+    <tr>
+      <th>171086</th>
+      <td>ppx_yo_dt_b_asin_title_o09_s00</td>
+      <td>0.025620</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>46607</th>
+      <td>imagestabilization</td>
+      <td>0.025614</td>
+      <td>85</td>
+      <td>92</td>
+    </tr>
+    <tr>
+      <th>144119</th>
+      <td>ppx_yo_dt_b_asin_title_o03_s00</td>
+      <td>0.018814</td>
+      <td>11</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>68529</th>
+      <td>u5e9htr</td>
+      <td>0.012333</td>
+      <td>42</td>
+      <td>46</td>
+    </tr>
+  </tbody>
+</table>
+<p>190756 rows × 4 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_sem_change_cands</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">freq_min</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">sem_change_cands</span> <span class="o">=</span> <span class="p">(</span><span class="n">distances</span>
+        <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;freq_1 &gt; @freq_min and freq_2 &gt; @freq_min&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;lex.str.isalpha() == True&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;lex.str.len() &gt; 3&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;dist_sem&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">sem_change_cands</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sem_change_cands</span> <span class="o">=</span> <span class="n">get_sem_change_cands</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">freq_min</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">sem_change_cands</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>lex</th>
+      <th>dist_sem</th>
+      <th>freq_1</th>
+      <th>freq_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>corona</td>
+      <td>0.927504</td>
+      <td>3553</td>
+      <td>3684</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pandemic</td>
+      <td>0.912615</td>
+      <td>9504</td>
+      <td>9957</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>snapchatting</td>
+      <td>0.912304</td>
+      <td>2262</td>
+      <td>2345</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>dodo</td>
+      <td>0.864197</td>
+      <td>1651</td>
+      <td>1716</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>rubric</td>
+      <td>0.839424</td>
+      <td>1058</td>
+      <td>1109</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>neon</td>
+      <td>0.393886</td>
+      <td>1326</td>
+      <td>1391</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>villagers</td>
+      <td>0.393821</td>
+      <td>1274</td>
+      <td>1333</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>goose</td>
+      <td>0.391982</td>
+      <td>1197</td>
+      <td>1260</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>mute</td>
+      <td>0.391320</td>
+      <td>5323</td>
+      <td>5505</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>lastly</td>
+      <td>0.389894</td>
+      <td>2129</td>
+      <td>2193</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 4 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sem_change_cands_out</span> <span class="o">=</span> <span class="n">sem_change_cands</span>\
+    <span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;dist_sem&#39;</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">index_1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">dist_sem</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist_sem&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">dist_sem</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist_sem&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;index_1&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;lex&#39;</span><span class="p">:</span> <span class="s1">&#39;Lexeme&#39;</span><span class="p">,</span> <span class="s1">&#39;dist_sem&#39;</span><span class="p">:</span> <span class="s1">&#39;SemDist&#39;</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">sem_change_cands_out</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Lexeme</th>
+      <th>SemDist</th>
+      <th>freq_1</th>
+      <th>freq_2</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>corona</td>
+      <td>0.93</td>
+      <td>3553</td>
+      <td>3684</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pandemic</td>
+      <td>0.91</td>
+      <td>9504</td>
+      <td>9957</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>snapchatting</td>
+      <td>0.91</td>
+      <td>2262</td>
+      <td>2345</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>dodo</td>
+      <td>0.86</td>
+      <td>1651</td>
+      <td>1716</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>rubric</td>
+      <td>0.84</td>
+      <td>1058</td>
+      <td>1109</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>nices</td>
+      <td>0.81</td>
+      <td>7457</td>
+      <td>7710</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>hyphens</td>
+      <td>0.81</td>
+      <td>1044</td>
+      <td>1096</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>asterisks</td>
+      <td>0.81</td>
+      <td>1085</td>
+      <td>1138</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>distancing</td>
+      <td>0.79</td>
+      <td>2910</td>
+      <td>3038</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>newbies</td>
+      <td>0.78</td>
+      <td>1566</td>
+      <td>1644</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>delet</td>
+      <td>0.78</td>
+      <td>1269</td>
+      <td>1329</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>blah</td>
+      <td>0.75</td>
+      <td>3683</td>
+      <td>3826</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>tracing</td>
+      <td>0.75</td>
+      <td>1228</td>
+      <td>1293</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>warzone</td>
+      <td>0.71</td>
+      <td>1022</td>
+      <td>1070</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>yandex</td>
+      <td>0.70</td>
+      <td>1111</td>
+      <td>1169</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>gaysnapchat</td>
+      <td>0.70</td>
+      <td>5145</td>
+      <td>5328</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>lockdown</td>
+      <td>0.70</td>
+      <td>4494</td>
+      <td>4642</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>muda</td>
+      <td>0.69</td>
+      <td>3300</td>
+      <td>3436</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>specifying</td>
+      <td>0.68</td>
+      <td>1135</td>
+      <td>1191</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>origi</td>
+      <td>0.67</td>
+      <td>1219</td>
+      <td>1282</td>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sem_change_cands_out</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+        <span class="s1">&#39;</span><span class="si">{OUT_DIR}</span><span class="s1">sem_change_cands.csv&#39;</span><span class="p">,</span>
+        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Lexeme&#39;</span><span class="p">,</span> <span class="s1">&#39;SemDist&#39;</span><span class="p">],</span>
+        <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Inspect-nearest-neighbours">Inspect nearest neighbours<a class="anchor-link" href="#Inspect-nearest-neighbours"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">LEX_NBS</span> <span class="o">=</span> <span class="s1">&#39;distancing&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_nearest_neighbours_models</span><span class="p">(</span><span class="n">lex</span><span class="p">,</span> <span class="n">freq_min</span><span class="p">,</span> <span class="n">model_1</span><span class="p">,</span> <span class="n">model_2</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">100_000</span><span class="p">):</span>
+    <span class="n">nbs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">model_1</span><span class="p">,</span> <span class="n">model_2</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">nb</span><span class="p">,</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">lex</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="n">topn</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">freq_min</span><span class="p">:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;lex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nb</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
+                <span class="n">nbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">nbs_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nbs</span><span class="p">)</span>
+    <span class="n">nbs_df</span> <span class="o">=</span> <span class="n">nbs_df</span>\
+        <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;freq &gt; @freq_min&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">group_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">group</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;similarity&#39;</span><span class="p">))</span>
+    <span class="n">nbs_model_1</span> <span class="o">=</span> <span class="n">nbs_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;model == 1&#39;</span><span class="p">)</span>
+    <span class="n">nbs_model_2</span> <span class="o">=</span> <span class="n">nbs_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;model == 2&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nbs_model_1</span><span class="p">,</span> <span class="n">nbs_model_2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nbs_model_1</span><span class="p">,</span> <span class="n">nbs_model_2</span> <span class="o">=</span> <span class="n">get_nearest_neighbours_models</span><span class="p">(</span>
+    <span class="n">lex</span><span class="o">=</span><span class="n">LEX_NBS</span><span class="p">,</span> 
+    <span class="n">freq_min</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">model_1</span><span class="o">=</span><span class="n">model_2019</span><span class="p">,</span> 
+    <span class="n">model_2</span><span class="o">=</span><span class="n">model_2020</span>
+<span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span>
+    <span class="n">nbs_model_1</span><span class="p">,</span>
+    <span class="n">nbs_model_2</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model</th>
+      <th>lex</th>
+      <th>similarity</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>distanced</td>
+      <td>0.837815</td>
+      <td>309</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>disassociate</td>
+      <td>0.717895</td>
+      <td>93</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>detaching</td>
+      <td>0.685801</td>
+      <td>61</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>deluding</td>
+      <td>0.667654</td>
+      <td>104</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>bettering</td>
+      <td>0.633784</td>
+      <td>198</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>incriminate</td>
+      <td>0.629239</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>isolating</td>
+      <td>0.629057</td>
+      <td>685</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>distract</td>
+      <td>0.617911</td>
+      <td>1553</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1</td>
+      <td>handicapping</td>
+      <td>0.610600</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>detach</td>
+      <td>0.603991</td>
+      <td>244</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model</th>
+      <th>lex</th>
+      <th>similarity</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>36688</th>
+      <td>2</td>
+      <td>distanced</td>
+      <td>0.553989</td>
+      <td>326</td>
+    </tr>
+    <tr>
+      <th>36689</th>
+      <td>2</td>
+      <td>isolation</td>
+      <td>0.547227</td>
+      <td>2037</td>
+    </tr>
+    <tr>
+      <th>36690</th>
+      <td>2</td>
+      <td>gatherings</td>
+      <td>0.519332</td>
+      <td>921</td>
+    </tr>
+    <tr>
+      <th>36691</th>
+      <td>2</td>
+      <td>distance</td>
+      <td>0.511493</td>
+      <td>11355</td>
+    </tr>
+    <tr>
+      <th>36692</th>
+      <td>2</td>
+      <td>lockdowns</td>
+      <td>0.499619</td>
+      <td>991</td>
+    </tr>
+    <tr>
+      <th>36693</th>
+      <td>2</td>
+      <td>quarantines</td>
+      <td>0.487039</td>
+      <td>159</td>
+    </tr>
+    <tr>
+      <th>36694</th>
+      <td>2</td>
+      <td>lockdown</td>
+      <td>0.483064</td>
+      <td>4642</td>
+    </tr>
+    <tr>
+      <th>36695</th>
+      <td>2</td>
+      <td>masks</td>
+      <td>0.477628</td>
+      <td>8997</td>
+    </tr>
+    <tr>
+      <th>36696</th>
+      <td>2</td>
+      <td>precautions</td>
+      <td>0.469785</td>
+      <td>1237</td>
+    </tr>
+    <tr>
+      <th>36697</th>
+      <td>2</td>
+      <td>quarantine</td>
+      <td>0.468756</td>
+      <td>5225</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nbs_model_1</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">OUT_DIR</span><span class="si">}</span><span class="s1">neighbours/</span><span class="si">{</span><span class="n">LEX_NBS</span><span class="si">}</span><span class="s1">_2019.csv&#39;</span><span class="p">)</span>
+<span class="n">nbs_model_2</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">OUT_DIR</span><span class="si">}</span><span class="s1">neighbours/</span><span class="si">{</span><span class="n">LEX_NBS</span><span class="si">}</span><span class="s1">_2020.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Inspect-subreddits">Inspect subreddits<a class="anchor-link" href="#Inspect-subreddits"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="read-comments">read comments<a class="anchor-link" href="#read-comments"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YEAR</span> <span class="o">=</span> <span class="mi">2019</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments_paths</span> <span class="o">=</span> <span class="n">get_comments_paths_year</span><span class="p">(</span><span class="n">COMMENTS_DIAC_DIR</span><span class="p">,</span> <span class="n">YEAR</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">comments</span> <span class="o">=</span> <span class="n">read_comm_csvs</span><span class="p">(</span><span class="n">comments_paths</span><span class="p">)</span>
+<span class="n">comments</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 47.7 s, sys: 6.22 s, total: 54 s
+Wall time: 54.8 s
+</pre>
+</div>
+</div>
 
 <div class="output_area">
 
@@ -365,60 +1898,20 @@ Wall time: 3min 38s
 </div>
     {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>subreddit
-AskReddit             429516
-politics              146023
-memes                  99027
-teenagers              89685
-dankmemes              84107
-                       ...  
-no_u                       1
-CuteBobby                  1
-no_drama                   1
-WorldBoxGodSandbox         1
-FatFurryPorn               1
-Length: 66885, dtype: int64</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Pre-process-comments">Pre-process comments<a class="anchor-link" href="#Pre-process-comments"> </a></h2>
+<p>TODO: filter comments</p>
+<ul>
+<li>[ ] remove duplicates</li>
+<li>[ ] remove bots</li>
+</ul>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="run-preprocessing">run preprocessing<a class="anchor-link" href="#run-preprocessing"> </a></h3>
+<h2 id="get-subreddit-counts">get subreddit counts<a class="anchor-link" href="#get-subreddit-counts"> </a></h2>
 </div>
 </div>
 </div>
@@ -429,40 +1922,12 @@ Length: 66885, dtype: int64</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">docs_clean</span> <span class="o">=</span> <span class="n">clean_docs</span><span class="p">(</span><span class="n">comments</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 2min 12s, sys: 6min 28s, total: 8min 41s
-Wall time: 36min 17s
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments_sm</span> <span class="o">=</span> <span class="n">comments</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_subr_counts</span><span class="p">(</span><span class="n">comments</span><span class="p">):</span>
+    <span class="n">subr_counts</span> <span class="o">=</span> <span class="n">comments</span>\
+        <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">comments_num</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">))</span>\
+        <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;comments_num&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">subr_counts</span>
 </pre></div>
 
     </div>
@@ -479,102 +1944,7 @@ Wall time: 36min 17s
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments_sm</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">conv_to_lowerc</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>0                                   username checks out
-1     if this is a dank meme, **upvote** this commen...
-2     just threaten them that you&#39;ll call the corpor...
-3                                             [removed]
-4     honestly, do you really wanna go through an en...
-                            ...                        
-95    thank you! \n\ni had someone ask me in person ...
-96    people always imagine robots taking over the h...
-97                 sexy before and after!   good job...
-98                                jk, i only want frank
-99    not sure if this belongs here but here we go.\...
-Name: body, Length: 100, dtype: object</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="save-to-disk">save to disk<a class="anchor-link" href="#save-to-disk"> </a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="csv"><code>csv</code><a class="anchor-link" href="#csv"> </a></h4>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">docs_clean</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../data/docs_clean/</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 51.3 s, sys: 36.7 s, total: 1min 28s
-Wall time: 3min 55s
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="feather"><code>feather</code><a class="anchor-link" href="#feather"> </a></h4>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean_fr</span> <span class="o">=</span> <span class="n">docs_clean</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">subr_counts</span> <span class="o">=</span> <span class="n">get_subr_counts</span><span class="p">(</span><span class="n">comments</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -591,7 +1961,52 @@ Wall time: 3min 55s
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">docs_clean_fr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_subr_counts</span><span class="p">(</span><span class="n">subr_counts</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">chart</span> <span class="o">=</span> <span class="n">subr_counts</span>\
+        <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>\
+        <span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>\
+        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">)</span>\
+            <span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span>\
+            <span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;comments_num:Q&#39;</span><span class="p">),</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;subreddit:N&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s1">&#39;-x&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">chart</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">subr_counts_plt</span> <span class="o">=</span> <span class="n">plot_subr_counts</span><span class="p">(</span><span class="n">subr_counts</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">subr_counts_plt</span>
 </pre></div>
 
     </div>
@@ -604,9 +2019,62 @@ Wall time: 3min 55s
 <div class="output_area">
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
 
-<div class="output_text output_subarea output_execute_result">
-<pre>pandas.core.series.Series</pre>
+<div id="altair-viz-1d981c61e4bd4d54a9b18eeeaf7cd7ec"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-1d981c61e4bd4d54a9b18eeeaf7cd7ec") {
+      outputDiv = document.getElementById("altair-viz-1d981c61e4bd4d54a9b18eeeaf7cd7ec");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-151658c588b77c0f8397fe41b7b06449"}, "mark": "bar", "encoding": {"x": {"field": "comments_num", "type": "quantitative"}, "y": {"field": "subreddit", "sort": "-x", "type": "nominal"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-151658c588b77c0f8397fe41b7b06449": [{"subreddit": "AskReddit", "comments_num": 429516}, {"subreddit": "politics", "comments_num": 146023}, {"subreddit": "memes", "comments_num": 99027}, {"subreddit": "teenagers", "comments_num": 89685}, {"subreddit": "dankmemes", "comments_num": 84107}, {"subreddit": "PatriotsvsTexansLivz", "comments_num": 80476}, {"subreddit": "soccer", "comments_num": 73348}, {"subreddit": "nba", "comments_num": 69130}, {"subreddit": "AmItheAsshole", "comments_num": 65271}, {"subreddit": "funny", "comments_num": 64256}, {"subreddit": "NFLWeek14Lives", "comments_num": 60055}, {"subreddit": "nfl", "comments_num": 58602}, {"subreddit": "unpopularopinion", "comments_num": 55227}, {"subreddit": "worldnews", "comments_num": 54755}, {"subreddit": "ufc245fightonline", "comments_num": 48229}, {"subreddit": "The_Donald", "comments_num": 46733}, {"subreddit": "gaming", "comments_num": 45341}, {"subreddit": "UFC245StreamToday", "comments_num": 45162}, {"subreddit": "CFB", "comments_num": 44439}, {"subreddit": "news", "comments_num": 43733}]}}, {"mode": "vega-lite"});
+</script>
 </div>
 
 </div>
@@ -624,303 +2092,7 @@ Wall time: 3min 55s
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean</span><span class="o">.</span><span class="n">to_feather</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../data/docs_clean/</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s1">.feather&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
-<span class="ansi-green-fg">/var/folders/gp/dw55jb3d3gl6jn22rscvxjm40000gn/T/ipykernel_56072/3858824913.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>docs_clean<span class="ansi-blue-fg">.</span>to_feather<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;../data/docs_clean/{YEAR}.feather&#39;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/core/generic.py</span> in <span class="ansi-cyan-fg">__getattr__</span><span class="ansi-blue-fg">(self, name)</span>
-<span class="ansi-green-intense-fg ansi-bold">   5485</span>         ):
-<span class="ansi-green-intense-fg ansi-bold">   5486</span>             <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">[</span>name<span class="ansi-blue-fg">]</span>
-<span class="ansi-green-fg">-&gt; 5487</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> object<span class="ansi-blue-fg">.</span>__getattribute__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> name<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   5488</span> 
-<span class="ansi-green-intense-fg ansi-bold">   5489</span>     <span class="ansi-green-fg">def</span> __setattr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> name<span class="ansi-blue-fg">:</span> str<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-red-fg">AttributeError</span>: &#39;Series&#39; object has no attribute &#39;to_feather&#39;</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean_feath</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_feather</span><span class="p">(</span><span class="s1">&#39;~/Desktop/comments.feather&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="load-from-disk">load from disk<a class="anchor-link" href="#load-from-disk"> </a></h3>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">docs_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../data/docs_clean/</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 21 s, sys: 1.52 s, total: 22.5 s
-Wall time: 22.9 s
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">docs_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../data/docs_clean/</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">})</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;timed exec&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/util/_decorators.py</span> in <span class="ansi-cyan-fg">wrapper</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    309</span>                     stacklevel<span class="ansi-blue-fg">=</span>stacklevel<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    310</span>                 )
-<span class="ansi-green-fg">--&gt; 311</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    312</span> 
-<span class="ansi-green-intense-fg ansi-bold">    313</span>         <span class="ansi-green-fg">return</span> wrapper
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/io/parsers/readers.py</span> in <span class="ansi-cyan-fg">read_csv</span><span class="ansi-blue-fg">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
-<span class="ansi-green-intense-fg ansi-bold">    584</span>     kwds<span class="ansi-blue-fg">.</span>update<span class="ansi-blue-fg">(</span>kwds_defaults<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    585</span> 
-<span class="ansi-green-fg">--&gt; 586</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> _read<span class="ansi-blue-fg">(</span>filepath_or_buffer<span class="ansi-blue-fg">,</span> kwds<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    587</span> 
-<span class="ansi-green-intense-fg ansi-bold">    588</span> 
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/io/parsers/readers.py</span> in <span class="ansi-cyan-fg">_read</span><span class="ansi-blue-fg">(filepath_or_buffer, kwds)</span>
-<span class="ansi-green-intense-fg ansi-bold">    486</span> 
-<span class="ansi-green-intense-fg ansi-bold">    487</span>     <span class="ansi-green-fg">with</span> parser<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 488</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> parser<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span>nrows<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    489</span> 
-<span class="ansi-green-intense-fg ansi-bold">    490</span> 
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/io/parsers/readers.py</span> in <span class="ansi-cyan-fg">read</span><span class="ansi-blue-fg">(self, nrows)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1045</span>     <span class="ansi-green-fg">def</span> read<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> nrows<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1046</span>         nrows <span class="ansi-blue-fg">=</span> validate_integer<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;nrows&#34;</span><span class="ansi-blue-fg">,</span> nrows<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">-&gt; 1047</span><span class="ansi-red-fg">         </span>index<span class="ansi-blue-fg">,</span> columns<span class="ansi-blue-fg">,</span> col_dict <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_engine<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span>nrows<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1048</span> 
-<span class="ansi-green-intense-fg ansi-bold">   1049</span>         <span class="ansi-green-fg">if</span> index <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/io/parsers/c_parser_wrapper.py</span> in <span class="ansi-cyan-fg">read</span><span class="ansi-blue-fg">(self, nrows)</span>
-<span class="ansi-green-intense-fg ansi-bold">    222</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    223</span>             <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>low_memory<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 224</span><span class="ansi-red-fg">                 </span>chunks <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_reader<span class="ansi-blue-fg">.</span>read_low_memory<span class="ansi-blue-fg">(</span>nrows<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    225</span>                 <span class="ansi-red-fg"># destructive to chunks</span>
-<span class="ansi-green-intense-fg ansi-bold">    226</span>                 data <span class="ansi-blue-fg">=</span> _concatenate_chunks<span class="ansi-blue-fg">(</span>chunks<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader.read_low_memory</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader._read_rows</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers.TextReader._convert_column_data</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/_libs/parsers.pyx</span> in <span class="ansi-cyan-fg">pandas._libs.parsers._apply_converter</span><span class="ansi-blue-fg">()</span>
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/core/computation/eval.py</span> in <span class="ansi-cyan-fg">eval</span><span class="ansi-blue-fg">(expr, parser, engine, truediv, local_dict, global_dict, resolvers, level, target, inplace)</span>
-<span class="ansi-green-intense-fg ansi-bold">    335</span>     <span class="ansi-green-fg">for</span> expr <span class="ansi-green-fg">in</span> exprs<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    336</span>         expr <span class="ansi-blue-fg">=</span> _convert_expression<span class="ansi-blue-fg">(</span>expr<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 337</span><span class="ansi-red-fg">         </span>_check_for_locals<span class="ansi-blue-fg">(</span>expr<span class="ansi-blue-fg">,</span> level<span class="ansi-blue-fg">,</span> parser<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    338</span> 
-<span class="ansi-green-intense-fg ansi-bold">    339</span>         <span class="ansi-red-fg"># get our (possibly passed-in) scope</span>
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/core/computation/eval.py</span> in <span class="ansi-cyan-fg">_check_for_locals</span><span class="ansi-blue-fg">(expr, stack_level, parser)</span>
-<span class="ansi-green-intense-fg ansi-bold">    157</span> 
-<span class="ansi-green-intense-fg ansi-bold">    158</span>     <span class="ansi-green-fg">if</span> at_top_of_stack <span class="ansi-green-fg">or</span> not_pandas_parser<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 159</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">for</span> toknum<span class="ansi-blue-fg">,</span> tokval <span class="ansi-green-fg">in</span> tokenize_string<span class="ansi-blue-fg">(</span>expr<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    160</span>             <span class="ansi-green-fg">if</span> toknum <span class="ansi-blue-fg">==</span> tokenize<span class="ansi-blue-fg">.</span>OP <span class="ansi-green-fg">and</span> tokval <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;@&#34;</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    161</span>                 <span class="ansi-green-fg">raise</span> SyntaxError<span class="ansi-blue-fg">(</span>msg<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/pandas/core/computation/parsing.py</span> in <span class="ansi-cyan-fg">tokenize_string</span><span class="ansi-blue-fg">(source)</span>
-<span class="ansi-green-intense-fg ansi-bold">    183</span>     <span class="ansi-red-fg"># Loop over all tokens till a backtick (`) is found.</span>
-<span class="ansi-green-intense-fg ansi-bold">    184</span>     <span class="ansi-red-fg"># Then, take all tokens till the next backtick to form a backtick quoted string</span>
-<span class="ansi-green-fg">--&gt; 185</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">for</span> toknum<span class="ansi-blue-fg">,</span> tokval<span class="ansi-blue-fg">,</span> start<span class="ansi-blue-fg">,</span> _<span class="ansi-blue-fg">,</span> _ <span class="ansi-green-fg">in</span> token_generator<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    186</span>         <span class="ansi-green-fg">if</span> tokval <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#34;`&#34;</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    187</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/opt/miniconda3/envs/neocov/lib/python3.10/tokenize.py</span> in <span class="ansi-cyan-fg">_tokenize</span><span class="ansi-blue-fg">(readline, encoding)</span>
-<span class="ansi-green-intense-fg ansi-bold">    533</span>                 token<span class="ansi-blue-fg">,</span> initial <span class="ansi-blue-fg">=</span> line<span class="ansi-blue-fg">[</span>start<span class="ansi-blue-fg">:</span>end<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> line<span class="ansi-blue-fg">[</span>start<span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">    534</span> 
-<span class="ansi-green-fg">--&gt; 535</span><span class="ansi-red-fg">                 if (initial in numchars or                 # ordinary number
-</span><span class="ansi-green-intense-fg ansi-bold">    536</span>                     (initial == &#39;.&#39; and token != &#39;.&#39; and token != &#39;...&#39;)):
-<span class="ansi-green-intense-fg ansi-bold">    537</span>                     <span class="ansi-green-fg">yield</span> TokenInfo<span class="ansi-blue-fg">(</span>NUMBER<span class="ansi-blue-fg">,</span> token<span class="ansi-blue-fg">,</span> spos<span class="ansi-blue-fg">,</span> epos<span class="ansi-blue-fg">,</span> line<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Series([], Name: [&#39;if&#39;, &#39;this&#39;, &#39;is&#39;, &#39;a&#39;, &#39;dank&#39;, &#39;meme&#39;, &#39;upvote&#39;, &#39;this&#39;, &#39;comment&#39;, &#39;if&#39;, &#39;this&#39;, &#39;is&#39;, &#39;not&#39;, &#39;a&#39;, &#39;dank&#39;, &#39;meme&#39;, &#39;downvote&#39;, &#39;this&#39;, &#39;comment&#39;, &#39;if&#39;, &#39;this&#39;, &#39;post&#39;, &#39;breaks&#39;, &#39;the&#39;, &#39;rules&#39;, &#39;report&#39;, &#39;it&#39;, &#39;and&#39;, &#39;downvote&#39;, &#39;this&#39;, &#39;comment&#39;, &#39;thank&#39;, &#39;you&#39;, &#39;for&#39;, &#39;helping&#39;, &#39;us&#39;, &#39;in&#39;, &#39;keeping&#39;, &#39;r&#39;, &#39;dankmemes&#39;, &#39;dank&#39;, &#39;hit&#39;, &#39;us&#39;, &#39;up&#39;, &#39;https&#39;, &#39;www&#39;, &#39;reddit&#39;, &#39;com&#39;, &#39;message&#39;, &#39;compose&#39;, &#39;to&#39;, &#39;r&#39;, &#39;dankmemes&#39;, &#39;if&#39;, &#39;you&#39;, &#39;have&#39;, &#39;any&#39;, &#39;questions&#39;, &#39;i&#39;, &#39;m&#39;, &#39;a&#39;, &#39;bot&#39;], dtype: float64)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="from-parquet">from <code>parquet</code><a class="anchor-link" href="#from-parquet"> </a></h5>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">docs_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;~/promo/socemb/data/docs_clean/</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s1">.parquet&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 18.8 s, sys: 6.62 s, total: 25.5 s
-Wall time: 55.2 s
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">docs_clean</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">docs_clean</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">subr_counts_fname</span> <span class="o">=</span> <span class="s1">&#39;Covid&#39;</span>
 </pre></div>
 
     </div>
@@ -937,7 +2109,7 @@ Wall time: 55.2 s
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean</span> <span class="o">=</span> <span class="n">docs_clean</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">subr_counts_plt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;out/subr_counts_plt_</span><span class="si">{</span><span class="n">subr_counts_fname</span><span class="si">}</span><span class="s1">.svg&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -954,221 +2126,9 @@ Wall time: 55.2 s
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs_clean</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Train-models">Train models<a class="anchor-link" href="#Train-models"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Create-corpus">Create corpus<a class="anchor-link" href="#Create-corpus"> </a></h3>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">corpus</span> <span class="o">=</span> <span class="n">Corpus</span><span class="p">(</span><span class="n">docs_clean</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Train-model">Train model<a class="anchor-link" href="#Train-model"> </a></h3>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">train_emb</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 54min 54s, sys: 3min 16s, total: 58min 11s
-Wall time: 24min 2s
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>244740</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>244740</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Save-model">Save model<a class="anchor-link" href="#Save-model"> </a></h3>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../out/models/</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s1">.model&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Load-models">Load models<a class="anchor-link" href="#Load-models"> </a></h3>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_2019</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;out/models/2019.model&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_2020</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;out/models/2020.model&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span>\
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;subreddit == &quot;hdsportsfeedtv&quot;&#39;</span><span class="p">)</span>\
+     <span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
     </div>

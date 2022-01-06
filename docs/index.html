@@ -73,6 +73,8 @@ nb_path: "index.ipynb"
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">neocov.read_data</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">neocov.preproc</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">neocov.type_emb</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">neocov.communities</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 
     </div>
@@ -89,7 +91,27 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DATA_DIR</span> <span class="o">=</span> <span class="s1">&#39;../data/&#39;</span>
+<span class="n">COMMENTS_DIAC_DIR</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">DATA_DIR</span><span class="si">}</span><span class="s1">comments/by_date/&#39;</span>
+<span class="n">OUT_DIR</span> <span class="o">=</span> <span class="s1">&#39;../out/&#39;</span>
 </pre></div>
 
     </div>
@@ -105,34 +127,21 @@ nb_path: "index.ipynb"
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DATA_DIR</span> <span class="o">=</span> <span class="s1">&#39;../data/&#39;</span>
-<span class="n">COMMENTS_DIAC_DIR</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">DATA_DIR</span><span class="si">}</span><span class="s1">comments/by_date/&#39;</span>
-<span class="n">OUT_DIR</span> <span class="o">=</span> <span class="s1">&#39;..out/&#39;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Read-data">Read data<a class="anchor-link" href="#Read-data"> </a></h2>
+<h2 id="Semantic-change">Semantic change<a class="anchor-link" href="#Semantic-change"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Get-file-paths">Get file paths<a class="anchor-link" href="#Get-file-paths"> </a></h3>
+<h3 id="Read-data">Read data<a class="anchor-link" href="#Read-data"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Get-file-paths">Get file paths<a class="anchor-link" href="#Get-file-paths"> </a></h4>
 </div>
 </div>
 </div>
@@ -143,7 +152,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YEAR</span> <span class="o">=</span> <span class="s1">&#39;2020&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YEAR</span> <span class="o">=</span> <span class="s1">&#39;2019&#39;</span>
 </pre></div>
 
     </div>
@@ -172,7 +181,7 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Read-comments">Read comments<a class="anchor-link" href="#Read-comments"> </a></h3>
+<h4 id="Read-comments">Read comments<a class="anchor-link" href="#Read-comments"> </a></h4>
 </div>
 </div>
 </div>
@@ -211,32 +220,9 @@ nb_path: "index.ipynb"
 </div>
     {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Pre-process-comments">Pre-process comments<a class="anchor-link" href="#Pre-process-comments"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="run-preprocessing">run preprocessing<a class="anchor-link" href="#run-preprocessing"> </a></h3>
+<h3 id="Pre-process-comments">Pre-process comments<a class="anchor-link" href="#Pre-process-comments"> </a></h3>
 </div>
 </div>
 </div>
@@ -260,40 +246,16 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Train-models">Train models<a class="anchor-link" href="#Train-models"> </a></h2>
+<h3 id="Train-models">Train models<a class="anchor-link" href="#Train-models"> </a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Create-corpus">Create corpus<a class="anchor-link" href="#Create-corpus"> </a></h3>
+<h4 id="Create-corpus">Create corpus<a class="anchor-link" href="#Create-corpus"> </a></h4>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Corpus</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;An iterator that yields sentences (lists of str).&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">docs_clean</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">docs_clean</span> <span class="o">=</span> <span class="n">docs_clean</span>
-
-    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">docs_clean</span><span class="p">:</span>
-            <span class="k">yield</span> <span class="n">doc</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -313,56 +275,10 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Train-model">Train model<a class="anchor-link" href="#Train-model"> </a></h3>
+<h4 id="Train-model">Train model<a class="anchor-link" href="#Train-model"> </a></h4>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train_emb</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> 
-              <span class="n">MIN_COUNT</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
-              <span class="n">SIZE</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> 
-              <span class="n">WORKERS</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> 
-              <span class="n">WINDOW</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span>
-        <span class="n">corpus</span><span class="p">,</span> 
-        <span class="n">min_count</span><span class="o">=</span><span class="n">MIN_COUNT</span><span class="p">,</span>
-        <span class="n">vector_size</span><span class="o">=</span><span class="n">SIZE</span><span class="p">,</span>
-        <span class="n">workers</span><span class="o">=</span><span class="n">WORKERS</span><span class="p">,</span> 
-        <span class="n">window</span><span class="o">=</span><span class="n">WINDOW</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">model</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -371,7 +287,7 @@ nb_path: "index.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">train_emb</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -400,7 +316,7 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Save-model">Save model<a class="anchor-link" href="#Save-model"> </a></h3>
+<h4 id="Save-model">Save model<a class="anchor-link" href="#Save-model"> </a></h4>
 </div>
 </div>
 </div>
@@ -423,7 +339,7 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Load-models">Load models<a class="anchor-link" href="#Load-models"> </a></h3>
+<h4 id="Load-models">Load models<a class="anchor-link" href="#Load-models"> </a></h4>
 </div>
 </div>
 </div>
@@ -434,7 +350,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_2019</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{OUT_DIR}</span><span class="s1">models/2019.model&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_2019</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">OUT_DIR</span><span class="si">}</span><span class="s1">models/2019.model&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -451,7 +367,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_2020</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{OUT_DIR}</span><span class="s1">models/2020.model&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_2020</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">OUT_DIR</span><span class="si">}</span><span class="s1">models/2020.model&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -463,7 +379,7 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Align-models">Align models<a class="anchor-link" href="#Align-models"> </a></h2>
+<h3 id="Align-models">Align models<a class="anchor-link" href="#Align-models"> </a></h3>
 </div>
 </div>
 </div>
@@ -474,119 +390,8 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">intersection_align_gensim</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">words</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Intersect two gensim word2vec models, m1 and m2.</span>
-<span class="sd">    Only the shared vocabulary between them is kept.</span>
-<span class="sd">    If &#39;words&#39; is set (as list or set), then the vocabulary is intersected with this list as well.</span>
-<span class="sd">    Indices are re-organized from 0..N in order of descending frequency (=sum of counts from both m1 and m2).</span>
-<span class="sd">    These indices correspond to the new syn0 and syn0norm objects in both gensim models:</span>
-<span class="sd">        -- so that Row 0 of m1.syn0 will be for the same word as Row 0 of m2.syn0</span>
-<span class="sd">        -- you can find the index of any word on the .index2word list: model.index2word.index(word) =&gt; 2</span>
-<span class="sd">    The .vocab dictionary is also updated for each model, preserving the count but updating the index.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># Get the vocab for each model</span>
-    <span class="n">vocab_m1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">m1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">)</span>
-    <span class="n">vocab_m2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">m2</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">)</span>
-
-    <span class="c1"># Find the common vocabulary</span>
-    <span class="n">common_vocab</span> <span class="o">=</span> <span class="n">vocab_m1</span> <span class="o">&amp;</span> <span class="n">vocab_m2</span>
-    <span class="k">if</span> <span class="n">words</span><span class="p">:</span> <span class="n">common_vocab</span> <span class="o">&amp;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
-
-    <span class="c1"># If no alignment necessary because vocab is identical...</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">vocab_m1</span> <span class="o">-</span> <span class="n">common_vocab</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">vocab_m2</span> <span class="o">-</span> <span class="n">common_vocab</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">m1</span><span class="p">,</span><span class="n">m2</span><span class="p">)</span>
-
-    <span class="c1"># Otherwise sort by frequency (summed for both)</span>
-    <span class="n">common_vocab</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">common_vocab</span><span class="p">)</span>
-    <span class="n">common_vocab</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">m1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">m2</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="c1"># print(len(common_vocab))</span>
-
-    <span class="c1"># Then for each model...</span>
-    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">]:</span>
-        <span class="c1"># Replace old syn0norm array with new one (with common vocab)</span>
-        <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">common_vocab</span><span class="p">]</span>
-        <span class="n">old_arr</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span>
-        <span class="n">new_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">old_arr</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">])</span>
-        <span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span> <span class="o">=</span> <span class="n">new_arr</span>
-
-        <span class="c1"># Replace old vocab dictionary with new one (with common vocab)</span>
-        <span class="c1"># and old index2word with new one</span>
-        <span class="n">new_key_to_index</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">new_index_to_key</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">new_index</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">common_vocab</span><span class="p">):</span>
-            <span class="n">new_key_to_index</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_index</span>
-            <span class="n">new_index_to_key</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span> <span class="o">=</span> <span class="n">new_key_to_index</span>
-        <span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span> <span class="o">=</span> <span class="n">new_index_to_key</span>
-        
-        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span><span class="p">))</span>
-        
-    <span class="k">return</span> <span class="p">(</span><span class="n">m1</span><span class="p">,</span><span class="n">m2</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">smart_procrustes_align_gensim</span><span class="p">(</span><span class="n">base_embed</span><span class="p">,</span> <span class="n">other_embed</span><span class="p">,</span> <span class="n">words</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Original script: https://gist.github.com/quadrismegistus/09a93e219a6ffc4f216fb85235535faf</span>
-<span class="sd">    Procrustes align two gensim word2vec models (to allow for comparison between same word across models).</span>
-<span class="sd">    Code ported from HistWords &lt;https://github.com/williamleif/histwords&gt; by William Hamilton &lt;wleif@stanford.edu&gt;.</span>
-<span class="sd">        </span>
-<span class="sd">    First, intersect the vocabularies (see `intersection_align_gensim` documentation).</span>
-<span class="sd">    Then do the alignment on the other_embed model.</span>
-<span class="sd">    Replace the other_embed model&#39;s syn0 and syn0norm numpy matrices with the aligned version.</span>
-<span class="sd">    Return other_embed.</span>
-<span class="sd">    If `words` is set, intersect the two models&#39; vocabulary with the vocabulary in words (see `intersection_align_gensim` documentation).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># make sure vocabulary and indices are aligned</span>
-    <span class="n">in_base_embed</span><span class="p">,</span> <span class="n">in_other_embed</span> <span class="o">=</span> <span class="n">intersection_align_gensim</span><span class="p">(</span><span class="n">base_embed</span><span class="p">,</span> <span class="n">other_embed</span><span class="p">,</span> <span class="n">words</span><span class="o">=</span><span class="n">words</span><span class="p">)</span>
-
-    <span class="c1"># get the (normalized) embedding matrices</span>
-    <span class="n">base_vecs</span> <span class="o">=</span> <span class="n">in_base_embed</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_normed_vectors</span><span class="p">()</span>
-    <span class="n">other_vecs</span> <span class="o">=</span> <span class="n">in_other_embed</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_normed_vectors</span><span class="p">()</span>
-
-    <span class="c1"># just a matrix dot product with numpy</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">other_vecs</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">base_vecs</span><span class="p">)</span> 
-    <span class="c1"># SVD method from numpy</span>
-    <span class="n">u</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-    <span class="c1"># another matrix operation</span>
-    <span class="n">ortho</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> 
-    <span class="c1"># Replace original array with modified one, i.e. multiplying the embedding matrix by &quot;ortho&quot;</span>
-    <span class="n">other_embed</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span> <span class="o">=</span> <span class="p">(</span><span class="n">other_embed</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ortho</span><span class="p">)</span>    
-    
-    <span class="k">return</span> <span class="n">other_embed</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_2019_vocab</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_2019</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span>
+<span class="n">model_2020_vocab</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_2020</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -610,31 +415,6 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>190756 190756
-190756 190756
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;gensim.models.word2vec.Word2Vec at 0x141570640&gt;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -645,7 +425,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_2019</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_2020</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -663,73 +443,18 @@ nb_path: "index.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">models_vocab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="s1">&#39;Words&#39;</span><span class="p">],</span>
     <span class="n">data</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">[</span><span class="s1">&#39;2019&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_2019</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)],</span>
-        <span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_2020</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)],</span>
-        <span class="p">[</span><span class="s1">&#39;intersection&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">model_2019</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">model_2020</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)))]</span>
+        <span class="p">[</span><span class="s1">&#39;2019&#39;</span><span class="p">,</span> <span class="n">model_2019_vocab</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;2020&#39;</span><span class="p">,</span> <span class="n">model_2020_vocab</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;intersection&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_2019</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">key_to_index</span><span class="p">)]</span>
     <span class="p">],</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;words&#39;</span><span class="p">]</span>
 <span class="p">)</span>
 
 <span class="n">models_vocab</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>words</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2019</td>
-      <td>190756</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2020</td>
-      <td>190756</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>intersection</td>
-      <td>190756</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -755,56 +480,10 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Measure-distances">Measure distances<a class="anchor-link" href="#Measure-distances"> </a></h2>
+<h3 id="Measure-distances">Measure distances<a class="anchor-link" href="#Measure-distances"> </a></h3>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">spatial</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">measure_distances</span><span class="p">(</span><span class="n">model_1</span><span class="p">,</span> <span class="n">model_2</span><span class="p">):</span>
-    <span class="n">distances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="p">(</span>
-            <span class="c1">#[w, spatial.distance.euclidean(model_1.wv[w], model_2.wv[w]), </span>
-            <span class="c1">#[w, np.sum(model_1.wv[w] * model_2.wv[w]) / (np.linalg.norm(model_1.wv[w]) * np.linalg.norm(model_2.wv[w])), </span>
-            <span class="p">[</span><span class="n">w</span><span class="p">,</span> <span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">cosine</span><span class="p">(</span><span class="n">model_1</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">w</span><span class="p">],</span> <span class="n">model_2</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">w</span><span class="p">]),</span> 
-             <span class="n">model_1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">),</span> 
-             <span class="n">model_2</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
-            <span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">model_1</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span>
-        <span class="p">),</span> 
-        <span class="n">columns</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;lex&#39;</span><span class="p">,</span> <span class="s1">&#39;dist_sem&#39;</span><span class="p">,</span> <span class="s2">&quot;freq_1&quot;</span><span class="p">,</span> <span class="s2">&quot;freq_2&quot;</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">distances</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -837,129 +516,16 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>lex</th>
-      <th>dist_sem</th>
-      <th>freq_1</th>
-      <th>freq_2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>181299</th>
-      <td>financiados</td>
-      <td>1.270406</td>
-      <td>8</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>165232</th>
-      <td>______________________________________________...</td>
-      <td>1.257892</td>
-      <td>9</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>181454</th>
-      <td>2ffireemblem</td>
-      <td>1.247719</td>
-      <td>8</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>189647</th>
-      <td>obedece</td>
-      <td>1.239514</td>
-      <td>7</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>126402</th>
-      <td>1281</td>
-      <td>1.218590</td>
-      <td>14</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>175</th>
-      <td>years</td>
-      <td>0.027202</td>
-      <td>175105</td>
-      <td>192696</td>
-    </tr>
-    <tr>
-      <th>171086</th>
-      <td>ppx_yo_dt_b_asin_title_o09_s00</td>
-      <td>0.025620</td>
-      <td>8</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>46607</th>
-      <td>imagestabilization</td>
-      <td>0.025614</td>
-      <td>85</td>
-      <td>92</td>
-    </tr>
-    <tr>
-      <th>144119</th>
-      <td>ppx_yo_dt_b_asin_title_o03_s00</td>
-      <td>0.018814</td>
-      <td>11</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>68529</th>
-      <td>u5e9htr</td>
-      <td>0.012333</td>
-      <td>42</td>
-      <td>46</td>
-    </tr>
-  </tbody>
-</table>
-<p>190756 rows × 4 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>TODO: filter by true type frequency; <code>Gensim</code>'s type frequency seems incorrect; it probably reflects frequency ranks instead of total counts.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -967,7 +533,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_sem_change_cands</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">freq_min</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_sem_change_cands</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq_min</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">sem_change_cands</span> <span class="o">=</span> <span class="p">(</span><span class="n">distances</span>
         <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;freq_1 &gt; @freq_min and freq_2 &gt; @freq_min&#39;</span><span class="p">)</span>
         <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;lex.str.isalpha() == True&#39;</span><span class="p">)</span>
@@ -992,131 +558,20 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sem_change_cands</span> <span class="o">=</span> <span class="n">get_sem_change_cands</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">freq_min</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">freq_min</span> <span class="o">=</span> <span class="mi">1_000</span>
+
+<span class="n">sem_change_cands</span> <span class="o">=</span> <span class="n">distances</span>\
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;freq_1 &gt; @freq_min and freq_2 &gt; @freq_min&#39;</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;lex.str.isalpha() == True&#39;</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;lex.str.len() &gt; 3&#39;</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;dist_sem&#39;</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
 <span class="n">sem_change_cands</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>lex</th>
-      <th>dist_sem</th>
-      <th>freq_1</th>
-      <th>freq_2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>corona</td>
-      <td>0.927504</td>
-      <td>3553</td>
-      <td>3684</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>pandemic</td>
-      <td>0.912615</td>
-      <td>9504</td>
-      <td>9957</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>snapchatting</td>
-      <td>0.912304</td>
-      <td>2262</td>
-      <td>2345</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>dodo</td>
-      <td>0.864197</td>
-      <td>1651</td>
-      <td>1716</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>rubric</td>
-      <td>0.839424</td>
-      <td>1058</td>
-      <td>1109</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>neon</td>
-      <td>0.393886</td>
-      <td>1326</td>
-      <td>1391</td>
-    </tr>
-    <tr>
-      <th>96</th>
-      <td>villagers</td>
-      <td>0.393821</td>
-      <td>1274</td>
-      <td>1333</td>
-    </tr>
-    <tr>
-      <th>97</th>
-      <td>goose</td>
-      <td>0.391982</td>
-      <td>1197</td>
-      <td>1260</td>
-    </tr>
-    <tr>
-      <th>98</th>
-      <td>mute</td>
-      <td>0.391320</td>
-      <td>5323</td>
-      <td>5505</td>
-    </tr>
-    <tr>
-      <th>99</th>
-      <td>lastly</td>
-      <td>0.389894</td>
-      <td>2129</td>
-      <td>2193</td>
-    </tr>
-  </tbody>
-</table>
-<p>100 rows × 4 columns</p>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -1144,209 +599,6 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Lexeme</th>
-      <th>SemDist</th>
-      <th>freq_1</th>
-      <th>freq_2</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>corona</td>
-      <td>0.93</td>
-      <td>3553</td>
-      <td>3684</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>pandemic</td>
-      <td>0.91</td>
-      <td>9504</td>
-      <td>9957</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>snapchatting</td>
-      <td>0.91</td>
-      <td>2262</td>
-      <td>2345</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>dodo</td>
-      <td>0.86</td>
-      <td>1651</td>
-      <td>1716</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>rubric</td>
-      <td>0.84</td>
-      <td>1058</td>
-      <td>1109</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>nices</td>
-      <td>0.81</td>
-      <td>7457</td>
-      <td>7710</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>hyphens</td>
-      <td>0.81</td>
-      <td>1044</td>
-      <td>1096</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>asterisks</td>
-      <td>0.81</td>
-      <td>1085</td>
-      <td>1138</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>distancing</td>
-      <td>0.79</td>
-      <td>2910</td>
-      <td>3038</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>newbies</td>
-      <td>0.78</td>
-      <td>1566</td>
-      <td>1644</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>delet</td>
-      <td>0.78</td>
-      <td>1269</td>
-      <td>1329</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>blah</td>
-      <td>0.75</td>
-      <td>3683</td>
-      <td>3826</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>tracing</td>
-      <td>0.75</td>
-      <td>1228</td>
-      <td>1293</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>warzone</td>
-      <td>0.71</td>
-      <td>1022</td>
-      <td>1070</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>yandex</td>
-      <td>0.70</td>
-      <td>1111</td>
-      <td>1169</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>gaysnapchat</td>
-      <td>0.70</td>
-      <td>5145</td>
-      <td>5328</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>lockdown</td>
-      <td>0.70</td>
-      <td>4494</td>
-      <td>4642</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>muda</td>
-      <td>0.69</td>
-      <td>3300</td>
-      <td>3436</td>
-      <td>18</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>specifying</td>
-      <td>0.68</td>
-      <td>1135</td>
-      <td>1191</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>origi</td>
-      <td>0.67</td>
-      <td>1219</td>
-      <td>1282</td>
-      <td>20</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -1358,7 +610,7 @@ nb_path: "index.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sem_change_cands_out</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
-        <span class="s1">&#39;</span><span class="si">{OUT_DIR}</span><span class="s1">sem_change_cands.csv&#39;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">OUT_DIR</span><span class="si">}</span><span class="s1">sem_change_cands.csv&#39;</span><span class="p">,</span>
         <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Lexeme&#39;</span><span class="p">,</span> <span class="s1">&#39;SemDist&#39;</span><span class="p">],</span>
         <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">)</span>
@@ -1373,7 +625,7 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Inspect-nearest-neighbours">Inspect nearest neighbours<a class="anchor-link" href="#Inspect-nearest-neighbours"> </a></h2>
+<h3 id="Inspect-nearest-neighbours-of-lexemes">Inspect nearest neighbours of lexemes<a class="anchor-link" href="#Inspect-nearest-neighbours-of-lexemes"> </a></h3>
 </div>
 </div>
 </div>
@@ -1385,41 +637,6 @@ nb_path: "index.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">LEX_NBS</span> <span class="o">=</span> <span class="s1">&#39;distancing&#39;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_nearest_neighbours_models</span><span class="p">(</span><span class="n">lex</span><span class="p">,</span> <span class="n">freq_min</span><span class="p">,</span> <span class="n">model_1</span><span class="p">,</span> <span class="n">model_2</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">100_000</span><span class="p">):</span>
-    <span class="n">nbs</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">model_1</span><span class="p">,</span> <span class="n">model_2</span><span class="p">]):</span>
-        <span class="k">for</span> <span class="n">nb</span><span class="p">,</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">lex</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="n">topn</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">freq_min</span><span class="p">:</span>
-                <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
-                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
-                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;lex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nb</span>
-                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span>
-                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vecattr</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">)</span>
-                <span class="n">nbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="n">nbs_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nbs</span><span class="p">)</span>
-    <span class="n">nbs_df</span> <span class="o">=</span> <span class="n">nbs_df</span>\
-        <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;freq &gt; @freq_min&#39;</span><span class="p">)</span>\
-        <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">group_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>\
-        <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">group</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;similarity&#39;</span><span class="p">))</span>
-    <span class="n">nbs_model_1</span> <span class="o">=</span> <span class="n">nbs_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;model == 1&#39;</span><span class="p">)</span>
-    <span class="n">nbs_model_2</span> <span class="o">=</span> <span class="n">nbs_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;model == 2&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">nbs_model_1</span><span class="p">,</span> <span class="n">nbs_model_2</span>
 </pre></div>
 
     </div>
@@ -1453,224 +670,6 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea ">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>lex</th>
-      <th>similarity</th>
-      <th>freq</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>distanced</td>
-      <td>0.837815</td>
-      <td>309</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>disassociate</td>
-      <td>0.717895</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>detaching</td>
-      <td>0.685801</td>
-      <td>61</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>deluding</td>
-      <td>0.667654</td>
-      <td>104</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>bettering</td>
-      <td>0.633784</td>
-      <td>198</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>1</td>
-      <td>incriminate</td>
-      <td>0.629239</td>
-      <td>80</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>1</td>
-      <td>isolating</td>
-      <td>0.629057</td>
-      <td>685</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>1</td>
-      <td>distract</td>
-      <td>0.617911</td>
-      <td>1553</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>1</td>
-      <td>handicapping</td>
-      <td>0.610600</td>
-      <td>54</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>1</td>
-      <td>detach</td>
-      <td>0.603991</td>
-      <td>244</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea ">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>lex</th>
-      <th>similarity</th>
-      <th>freq</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>36688</th>
-      <td>2</td>
-      <td>distanced</td>
-      <td>0.553989</td>
-      <td>326</td>
-    </tr>
-    <tr>
-      <th>36689</th>
-      <td>2</td>
-      <td>isolation</td>
-      <td>0.547227</td>
-      <td>2037</td>
-    </tr>
-    <tr>
-      <th>36690</th>
-      <td>2</td>
-      <td>gatherings</td>
-      <td>0.519332</td>
-      <td>921</td>
-    </tr>
-    <tr>
-      <th>36691</th>
-      <td>2</td>
-      <td>distance</td>
-      <td>0.511493</td>
-      <td>11355</td>
-    </tr>
-    <tr>
-      <th>36692</th>
-      <td>2</td>
-      <td>lockdowns</td>
-      <td>0.499619</td>
-      <td>991</td>
-    </tr>
-    <tr>
-      <th>36693</th>
-      <td>2</td>
-      <td>quarantines</td>
-      <td>0.487039</td>
-      <td>159</td>
-    </tr>
-    <tr>
-      <th>36694</th>
-      <td>2</td>
-      <td>lockdown</td>
-      <td>0.483064</td>
-      <td>4642</td>
-    </tr>
-    <tr>
-      <th>36695</th>
-      <td>2</td>
-      <td>masks</td>
-      <td>0.477628</td>
-      <td>8997</td>
-    </tr>
-    <tr>
-      <th>36696</th>
-      <td>2</td>
-      <td>precautions</td>
-      <td>0.469785</td>
-      <td>1237</td>
-    </tr>
-    <tr>
-      <th>36697</th>
-      <td>2</td>
-      <td>quarantine</td>
-      <td>0.468756</td>
-      <td>5225</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -1694,13 +693,19 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Inspect-subreddits">Inspect subreddits<a class="anchor-link" href="#Inspect-subreddits"> </a></h1>
+<h2 id="Social-semantic-variation">Social semantic variation<a class="anchor-link" href="#Social-semantic-variation"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="read-comments">read comments<a class="anchor-link" href="#read-comments"> </a></h2>
+<h3 id="Inspect-subreddits">Inspect subreddits<a class="anchor-link" href="#Inspect-subreddits"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="read-comments">read comments<a class="anchor-link" href="#read-comments"> </a></h4>
 </div>
 </div>
 </div>
@@ -1760,8 +765,8 @@ nb_path: "index.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 47.7 s, sys: 6.22 s, total: 54 s
-Wall time: 54.8 s
+<pre>CPU times: user 48.6 s, sys: 6.54 s, total: 55.1 s
+Wall time: 56 s
 </pre>
 </div>
 </div>
@@ -1911,32 +916,10 @@ Wall time: 54.8 s
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="get-subreddit-counts">get subreddit counts<a class="anchor-link" href="#get-subreddit-counts"> </a></h2>
+<h4 id="get-subreddit-counts">get subreddit counts<a class="anchor-link" href="#get-subreddit-counts"> </a></h4>
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_subr_counts</span><span class="p">(</span><span class="n">comments</span><span class="p">):</span>
-    <span class="n">subr_counts</span> <span class="o">=</span> <span class="n">comments</span>\
-        <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">)</span>\
-        <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">comments_num</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">))</span>\
-        <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;comments_num&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">subr_counts</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1945,50 +928,6 @@ Wall time: 54.8 s
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">subr_counts</span> <span class="o">=</span> <span class="n">get_subr_counts</span><span class="p">(</span><span class="n">comments</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_subr_counts</span><span class="p">(</span><span class="n">subr_counts</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
-    <span class="n">chart</span> <span class="o">=</span> <span class="n">subr_counts</span>\
-        <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>\
-        <span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>\
-        <span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">)</span>\
-            <span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span>\
-            <span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-                <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;comments_num:Q&#39;</span><span class="p">),</span>
-                <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;subreddit:N&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s1">&#39;-x&#39;</span><span class="p">)</span>
-            <span class="p">)</span>
-    <span class="k">return</span> <span class="n">chart</span>
 </pre></div>
 
     </div>
@@ -2021,13 +960,13 @@ Wall time: 54.8 s
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-1d981c61e4bd4d54a9b18eeeaf7cd7ec"></div>
+<div id="altair-viz-28f42ba5ccb5467bbf5b008ccdfa8388"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-1d981c61e4bd4d54a9b18eeeaf7cd7ec") {
-      outputDiv = document.getElementById("altair-viz-1d981c61e4bd4d54a9b18eeeaf7cd7ec");
+    if (outputDiv.id !== "altair-viz-28f42ba5ccb5467bbf5b008ccdfa8388") {
+      outputDiv = document.getElementById("altair-viz-28f42ba5ccb5467bbf5b008ccdfa8388");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -2092,24 +1031,7 @@ Wall time: 54.8 s
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">subr_counts_fname</span> <span class="o">=</span> <span class="s1">&#39;Covid&#39;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">subr_counts_plt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;out/subr_counts_plt_</span><span class="si">{</span><span class="n">subr_counts_fname</span><span class="si">}</span><span class="s1">.svg&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">subr_counts_plt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">OUT_DIR</span><span class="si">}</span><span class="s1">subr_counts.png&#39;</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -2127,11 +1049,136 @@ Wall time: 54.8 s
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span>\
-    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;subreddit == &quot;hdsportsfeedtv&quot;&#39;</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;subreddit == &quot;AskReddit&quot;&#39;</span><span class="p">)</span>\
      <span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>author</th>
+      <th>body</th>
+      <th>created_utc</th>
+      <th>id</th>
+      <th>subreddit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2720703</th>
+      <td>Blueowl789</td>
+      <td>oh yeah? quote it</td>
+      <td>2019-12-07 22:45:53</td>
+      <td>fa0ql3q</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>6612440</th>
+      <td>ghostoflops</td>
+      <td>Lurking for jerking off, participating for con...</td>
+      <td>2019-09-01 21:07:19</td>
+      <td>eyrlxlg</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>8541016</th>
+      <td>WhenAllElseFail</td>
+      <td>so i put my hands up, they're playing my song,...</td>
+      <td>2019-08-14 21:46:21</td>
+      <td>eww2p0q</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>6482914</th>
+      <td>Tyr_ranical</td>
+      <td>Wait is this reply about stuff here, or a thin...</td>
+      <td>2019-03-19 22:29:49</td>
+      <td>eiwy4fz</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>599903</th>
+      <td>JazzUnlikeTheCaroot</td>
+      <td>You as a director 😀</td>
+      <td>2019-07-14 21:59:58</td>
+      <td>etsbx0o</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>6102560</th>
+      <td>_luckybandit_</td>
+      <td>DashieXP or Dashie games
+
+He stopped uploading...</td>
+      <td>2019-05-01 21:34:58</td>
+      <td>em9fj76</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>7595345</th>
+      <td>neovangelis</td>
+      <td>Periscope for "wizards"</td>
+      <td>2019-08-19 21:58:51</td>
+      <td>exfzg04</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>2155937</th>
+      <td>Byrinthion</td>
+      <td>I’m not a developer haha, I’m a writer. So I d...</td>
+      <td>2019-03-14 22:47:57</td>
+      <td>eijpp3m</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>2698189</th>
+      <td>AutoModerator</td>
+      <td>**PLEASE READ THIS MESSAGE IN ITS ENTIRETY BEF...</td>
+      <td>2019-12-07 22:41:05</td>
+      <td>fa0q2w2</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>7483454</th>
+      <td>neovangelis</td>
+      <td>The Native Americans who came before them woul...</td>
+      <td>2019-08-19 21:30:52</td>
+      <td>exfwxci</td>
+      <td>AskReddit</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 

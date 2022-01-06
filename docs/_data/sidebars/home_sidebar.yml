@@ -18,6 +18,9 @@ entries:
     - output: web,pdf
       title: Type embeddings
       url: type_emb.html
+    - output: web,pdf
+      title: Communities
+      url: communities.html
     output: web
     title: neocov
   output: web

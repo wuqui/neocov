@@ -14,33 +14,38 @@
 ```python
 from neocov.read_data import *
 from neocov.preproc import *
+from neocov.type_emb import *
+from neocov.communities import *
 ```
 
 ```python
+from gensim.models import Word2Vec
 import pandas as pd
 ```
-
-## Variables
 
 ```python
 DATA_DIR = '../data/'
 COMMENTS_DIAC_DIR = f'{DATA_DIR}comments/by_date/'
-OUT_DIR = '..out/'
+OUT_DIR = '../out/'
 ```
 
-## Read data
+## Variables
 
-### Get file paths
+## Semantic change
+
+### Read data
+
+#### Get file paths
 
 ```python
-YEAR = '2020'
+YEAR = '2019'
 ```
 
 ```python
 comment_paths_year = get_comments_paths_year(COMMENTS_DIAC_DIR, YEAR)
 ```
 
-### Read comments
+#### Read comments
 
 ```python
 %%time
@@ -51,281 +56,81 @@ comments = read_comm_csvs(comment_paths_year)
 comments
 ```
 
-```python
-comments.value_counts('subreddit')
-```
-
-## Pre-process comments
-
-### run preprocessing
+### Pre-process comments
 
 ```python
 %%time
 comments = clean_comments(comments)
 ```
 
-## Train models
+### Train models
 
-### Create corpus
-
-```python
-class Corpus:
-    """An iterator that yields sentences (lists of str)."""
-    def __init__(self, docs_clean):
-        self.docs_clean = docs_clean
-
-    def __iter__(self):
-        for doc in self.docs_clean:
-            yield doc
-```
+#### Create corpus
 
 ```python
 corpus = Corpus(comments['body'])
 ```
 
-### Train model
-
-```python
-from gensim.models import Word2Vec
-```
-
-```python
-def train_emb(corpus, 
-              MIN_COUNT=5, 
-              SIZE=300, 
-              WORKERS=8, 
-              WINDOW=5):
-    model = Word2Vec(
-        corpus, 
-        min_count=MIN_COUNT,
-        vector_size=SIZE,
-        workers=WORKERS, 
-        window=WINDOW
-    )
-    return model
-```
+#### Train model
 
 ```python
 %%time
-model = train_emb(corpus)
+model = train_model(corpus)
 ```
 
 ```python
 len(model.wv.key_to_index)
 ```
 
-### Save model
+#### Save model
 
 ```python
 model.save(f'{OUT_DIR}models/{YEAR}.model')
 ```
 
-### Load models
+#### Load models
 
 ```python
-model_2019 = Word2Vec.load('{OUT_DIR}models/2019.model')
+model_2019 = Word2Vec.load(f'{OUT_DIR}models/2019.model')
 ```
 
 ```python
-model_2020 = Word2Vec.load('{OUT_DIR}models/2020.model')
+model_2020 = Word2Vec.load(f'{OUT_DIR}models/2020.model')
 ```
 
-## Align models
+### Align models
 
 ```python
-import numpy as np
-```
-
-```python
-def intersection_align_gensim(m1, m2, words=None):
-    """
-    Intersect two gensim word2vec models, m1 and m2.
-    Only the shared vocabulary between them is kept.
-    If 'words' is set (as list or set), then the vocabulary is intersected with this list as well.
-    Indices are re-organized from 0..N in order of descending frequency (=sum of counts from both m1 and m2).
-    These indices correspond to the new syn0 and syn0norm objects in both gensim models:
-        -- so that Row 0 of m1.syn0 will be for the same word as Row 0 of m2.syn0
-        -- you can find the index of any word on the .index2word list: model.index2word.index(word) => 2
-    The .vocab dictionary is also updated for each model, preserving the count but updating the index.
-    """
-
-    # Get the vocab for each model
-    vocab_m1 = set(m1.wv.index_to_key)
-    vocab_m2 = set(m2.wv.index_to_key)
-
-    # Find the common vocabulary
-    common_vocab = vocab_m1 & vocab_m2
-    if words: common_vocab &= set(words)
-
-    # If no alignment necessary because vocab is identical...
-    if not vocab_m1 - common_vocab and not vocab_m2 - common_vocab:
-        return (m1,m2)
-
-    # Otherwise sort by frequency (summed for both)
-    common_vocab = list(common_vocab)
-    common_vocab.sort(key=lambda w: m1.wv.get_vecattr(w, "count") + m2.wv.get_vecattr(w, "count"), reverse=True)
-    # print(len(common_vocab))
-
-    # Then for each model...
-    for m in [m1, m2]:
-        # Replace old syn0norm array with new one (with common vocab)
-        indices = [m.wv.key_to_index[w] for w in common_vocab]
-        old_arr = m.wv.vectors
-        new_arr = np.array([old_arr[index] for index in indices])
-        m.wv.vectors = new_arr
-
-        # Replace old vocab dictionary with new one (with common vocab)
-        # and old index2word with new one
-        new_key_to_index = {}
-        new_index_to_key = []
-        for new_index, key in enumerate(common_vocab):
-            new_key_to_index[key] = new_index
-            new_index_to_key.append(key)
-        m.wv.key_to_index = new_key_to_index
-        m.wv.index_to_key = new_index_to_key
-        
-        print(len(m.wv.key_to_index), len(m.wv.vectors))
-        
-    return (m1,m2)
-```
-
-```python
-def smart_procrustes_align_gensim(base_embed, other_embed, words=None):
-    """
-    Original script: https://gist.github.com/quadrismegistus/09a93e219a6ffc4f216fb85235535faf
-    Procrustes align two gensim word2vec models (to allow for comparison between same word across models).
-    Code ported from HistWords <https://github.com/williamleif/histwords> by William Hamilton <wleif@stanford.edu>.
-        
-    First, intersect the vocabularies (see `intersection_align_gensim` documentation).
-    Then do the alignment on the other_embed model.
-    Replace the other_embed model's syn0 and syn0norm numpy matrices with the aligned version.
-    Return other_embed.
-    If `words` is set, intersect the two models' vocabulary with the vocabulary in words (see `intersection_align_gensim` documentation).
-    """
-
-    # make sure vocabulary and indices are aligned
-    in_base_embed, in_other_embed = intersection_align_gensim(base_embed, other_embed, words=words)
-
-    # get the (normalized) embedding matrices
-    base_vecs = in_base_embed.wv.get_normed_vectors()
-    other_vecs = in_other_embed.wv.get_normed_vectors()
-
-    # just a matrix dot product with numpy
-    m = other_vecs.T.dot(base_vecs) 
-    # SVD method from numpy
-    u, _, v = np.linalg.svd(m)
-    # another matrix operation
-    ortho = u.dot(v) 
-    # Replace original array with modified one, i.e. multiplying the embedding matrix by "ortho"
-    other_embed.wv.vectors = (other_embed.wv.vectors).dot(ortho)    
-    
-    return other_embed
+model_2019_vocab = len(model_2019.wv.key_to_index)
+model_2020_vocab = len(model_2020.wv.key_to_index)
 ```
 
 ```python
 smart_procrustes_align_gensim(model_2019, model_2020)
 ```
 
-    190756 190756
-    190756 190756
-
-
-
-
-
-    <gensim.models.word2vec.Word2Vec at 0x141570640>
-
-
-
 ```python
-import pandas as pd
+assert len(model_2019.wv.key_to_index) == len(model_2020.wv.vectors)
 ```
 
 ```python
 models_vocab = pd.DataFrame(
+    columns=['Model', 'Words'],
     data=[
-        ['2019', len(model_2019.wv.key_to_index)],
-        ['2020', len(model_2020.wv.key_to_index)],
-        ['intersection', len(set(model_2019.wv.key_to_index).intersection(set(model_2020.wv.key_to_index)))]
+        ['2019', model_2019_vocab],
+        ['2020', model_2020_vocab],
+        ['intersection', len(model_2019.wv.key_to_index)]
     ],
-    columns=['', 'words']
 )
 
 models_vocab
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th></th>
-      <th>words</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2019</td>
-      <td>190756</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2020</td>
-      <td>190756</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>intersection</td>
-      <td>190756</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
 ```python
 models_vocab.to_csv(f'{OUT_DIR}models_vocab.csv', index=False)
 ```
 
-## Measure distances
-
-```python
-from scipy import spatial
-```
-
-```python
-def measure_distances(model_1, model_2):
-    distances = pd.DataFrame(
-    data=(
-            #[w, spatial.distance.euclidean(model_1.wv[w], model_2.wv[w]), 
-            #[w, np.sum(model_1.wv[w] * model_2.wv[w]) / (np.linalg.norm(model_1.wv[w]) * np.linalg.norm(model_2.wv[w])), 
-            [w, spatial.distance.cosine(model_1.wv[w], model_2.wv[w]), 
-             model_1.wv.get_vecattr(w, "count"), 
-             model_2.wv.get_vecattr(w, "count")
-            ] for w in model_1.wv.index_to_key
-        ), 
-        columns = ('lex', 'dist_sem', "freq_1", "freq_2")
-    )
-    return distances
-```
+### Measure distances
 
 ```python
 distances = measure_distances(model_2019, model_2020)
@@ -337,120 +142,10 @@ distances\
 
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>lex</th>
-      <th>dist_sem</th>
-      <th>freq_1</th>
-      <th>freq_2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>181299</th>
-      <td>financiados</td>
-      <td>1.270406</td>
-      <td>8</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>165232</th>
-      <td>______________________________________________...</td>
-      <td>1.257892</td>
-      <td>9</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>181454</th>
-      <td>2ffireemblem</td>
-      <td>1.247719</td>
-      <td>8</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>189647</th>
-      <td>obedece</td>
-      <td>1.239514</td>
-      <td>7</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>126402</th>
-      <td>1281</td>
-      <td>1.218590</td>
-      <td>14</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>175</th>
-      <td>years</td>
-      <td>0.027202</td>
-      <td>175105</td>
-      <td>192696</td>
-    </tr>
-    <tr>
-      <th>171086</th>
-      <td>ppx_yo_dt_b_asin_title_o09_s00</td>
-      <td>0.025620</td>
-      <td>8</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>46607</th>
-      <td>imagestabilization</td>
-      <td>0.025614</td>
-      <td>85</td>
-      <td>92</td>
-    </tr>
-    <tr>
-      <th>144119</th>
-      <td>ppx_yo_dt_b_asin_title_o03_s00</td>
-      <td>0.018814</td>
-      <td>11</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>68529</th>
-      <td>u5e9htr</td>
-      <td>0.012333</td>
-      <td>42</td>
-      <td>46</td>
-    </tr>
-  </tbody>
-</table>
-<p>190756 rows × 4 columns</p>
-</div>
-
-
+TODO: filter by true type frequency; `Gensim`'s type frequency seems incorrect; it probably reflects frequency ranks instead of total counts.
 
 ```python
-def get_sem_change_cands(distances, k=20, freq_min=1):
+def get_sem_change_cands(distances, k=10, freq_min=1):
     sem_change_cands = (distances
         .query('freq_1 > @freq_min and freq_2 > @freq_min')
         .query('lex.str.isalpha() == True')
@@ -462,121 +157,18 @@ def get_sem_change_cands(distances, k=20, freq_min=1):
 ```
 
 ```python
-sem_change_cands = get_sem_change_cands(distances, k=100, freq_min=1000)
+k = 20
+freq_min = 1_000
+
+sem_change_cands = distances\
+    .query('freq_1 > @freq_min and freq_2 > @freq_min')\
+    .query('lex.str.isalpha() == True')\
+    .query('lex.str.len() > 3')\
+    .nlargest(k, 'dist_sem')\
+    .reset_index(drop=True)
+
 sem_change_cands
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>lex</th>
-      <th>dist_sem</th>
-      <th>freq_1</th>
-      <th>freq_2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>corona</td>
-      <td>0.927504</td>
-      <td>3553</td>
-      <td>3684</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>pandemic</td>
-      <td>0.912615</td>
-      <td>9504</td>
-      <td>9957</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>snapchatting</td>
-      <td>0.912304</td>
-      <td>2262</td>
-      <td>2345</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>dodo</td>
-      <td>0.864197</td>
-      <td>1651</td>
-      <td>1716</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>rubric</td>
-      <td>0.839424</td>
-      <td>1058</td>
-      <td>1109</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>neon</td>
-      <td>0.393886</td>
-      <td>1326</td>
-      <td>1391</td>
-    </tr>
-    <tr>
-      <th>96</th>
-      <td>villagers</td>
-      <td>0.393821</td>
-      <td>1274</td>
-      <td>1333</td>
-    </tr>
-    <tr>
-      <th>97</th>
-      <td>goose</td>
-      <td>0.391982</td>
-      <td>1197</td>
-      <td>1260</td>
-    </tr>
-    <tr>
-      <th>98</th>
-      <td>mute</td>
-      <td>0.391320</td>
-      <td>5323</td>
-      <td>5505</td>
-    </tr>
-    <tr>
-      <th>99</th>
-      <td>lastly</td>
-      <td>0.389894</td>
-      <td>2129</td>
-      <td>2193</td>
-    </tr>
-  </tbody>
-</table>
-<p>100 rows × 4 columns</p>
-</div>
-
-
 
 ```python
 sem_change_cands_out = sem_change_cands\
@@ -589,235 +181,18 @@ sem_change_cands_out = sem_change_cands\
 sem_change_cands_out.head(20)
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Lexeme</th>
-      <th>SemDist</th>
-      <th>freq_1</th>
-      <th>freq_2</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>corona</td>
-      <td>0.93</td>
-      <td>3553</td>
-      <td>3684</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>pandemic</td>
-      <td>0.91</td>
-      <td>9504</td>
-      <td>9957</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>snapchatting</td>
-      <td>0.91</td>
-      <td>2262</td>
-      <td>2345</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>dodo</td>
-      <td>0.86</td>
-      <td>1651</td>
-      <td>1716</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>rubric</td>
-      <td>0.84</td>
-      <td>1058</td>
-      <td>1109</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>nices</td>
-      <td>0.81</td>
-      <td>7457</td>
-      <td>7710</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>hyphens</td>
-      <td>0.81</td>
-      <td>1044</td>
-      <td>1096</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>asterisks</td>
-      <td>0.81</td>
-      <td>1085</td>
-      <td>1138</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>distancing</td>
-      <td>0.79</td>
-      <td>2910</td>
-      <td>3038</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>newbies</td>
-      <td>0.78</td>
-      <td>1566</td>
-      <td>1644</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>delet</td>
-      <td>0.78</td>
-      <td>1269</td>
-      <td>1329</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>blah</td>
-      <td>0.75</td>
-      <td>3683</td>
-      <td>3826</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>tracing</td>
-      <td>0.75</td>
-      <td>1228</td>
-      <td>1293</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>warzone</td>
-      <td>0.71</td>
-      <td>1022</td>
-      <td>1070</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>yandex</td>
-      <td>0.70</td>
-      <td>1111</td>
-      <td>1169</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>gaysnapchat</td>
-      <td>0.70</td>
-      <td>5145</td>
-      <td>5328</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>lockdown</td>
-      <td>0.70</td>
-      <td>4494</td>
-      <td>4642</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>muda</td>
-      <td>0.69</td>
-      <td>3300</td>
-      <td>3436</td>
-      <td>18</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>specifying</td>
-      <td>0.68</td>
-      <td>1135</td>
-      <td>1191</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>origi</td>
-      <td>0.67</td>
-      <td>1219</td>
-      <td>1282</td>
-      <td>20</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
 ```python
 sem_change_cands_out.to_csv(
-        '{OUT_DIR}sem_change_cands.csv',
+        f'{OUT_DIR}sem_change_cands.csv',
         columns=['', 'Lexeme', 'SemDist'],
         index=False
     )
 ```
 
-## Inspect nearest neighbours
+### Inspect nearest neighbours of lexemes
 
 ```python
 LEX_NBS = 'distancing'
-```
-
-```python
-def get_nearest_neighbours_models(lex, freq_min, model_1, model_2, topn=100_000):
-    nbs = []
-    for count, model in enumerate([model_1, model_2]):
-        for nb, dist in model.wv.most_similar(lex, topn=topn):
-            if model.wv.get_vecattr(nb, 'count') > freq_min:
-                d = {}
-                d['model'] = count + 1
-                d['lex'] = nb
-                d['similarity'] = dist
-                d['freq'] = model.wv.get_vecattr(nb, "count")
-                nbs.append(d)
-    nbs_df = pd.DataFrame(nbs)
-    nbs_df = nbs_df\
-        .query('freq > @freq_min')\
-        .groupby('model', group_keys=False)\
-        .apply(lambda group: group.nlargest(10, 'similarity'))
-    nbs_model_1 = nbs_df.query('model == 1')
-    nbs_model_2 = nbs_df.query('model == 2')
-    return nbs_model_1, nbs_model_2
 ```
 
 ```python
@@ -834,216 +209,16 @@ display(
 )
 ```
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>lex</th>
-      <th>similarity</th>
-      <th>freq</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>distanced</td>
-      <td>0.837815</td>
-      <td>309</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>disassociate</td>
-      <td>0.717895</td>
-      <td>93</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>detaching</td>
-      <td>0.685801</td>
-      <td>61</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>deluding</td>
-      <td>0.667654</td>
-      <td>104</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>bettering</td>
-      <td>0.633784</td>
-      <td>198</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>1</td>
-      <td>incriminate</td>
-      <td>0.629239</td>
-      <td>80</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>1</td>
-      <td>isolating</td>
-      <td>0.629057</td>
-      <td>685</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>1</td>
-      <td>distract</td>
-      <td>0.617911</td>
-      <td>1553</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>1</td>
-      <td>handicapping</td>
-      <td>0.610600</td>
-      <td>54</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>1</td>
-      <td>detach</td>
-      <td>0.603991</td>
-      <td>244</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>lex</th>
-      <th>similarity</th>
-      <th>freq</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>36688</th>
-      <td>2</td>
-      <td>distanced</td>
-      <td>0.553989</td>
-      <td>326</td>
-    </tr>
-    <tr>
-      <th>36689</th>
-      <td>2</td>
-      <td>isolation</td>
-      <td>0.547227</td>
-      <td>2037</td>
-    </tr>
-    <tr>
-      <th>36690</th>
-      <td>2</td>
-      <td>gatherings</td>
-      <td>0.519332</td>
-      <td>921</td>
-    </tr>
-    <tr>
-      <th>36691</th>
-      <td>2</td>
-      <td>distance</td>
-      <td>0.511493</td>
-      <td>11355</td>
-    </tr>
-    <tr>
-      <th>36692</th>
-      <td>2</td>
-      <td>lockdowns</td>
-      <td>0.499619</td>
-      <td>991</td>
-    </tr>
-    <tr>
-      <th>36693</th>
-      <td>2</td>
-      <td>quarantines</td>
-      <td>0.487039</td>
-      <td>159</td>
-    </tr>
-    <tr>
-      <th>36694</th>
-      <td>2</td>
-      <td>lockdown</td>
-      <td>0.483064</td>
-      <td>4642</td>
-    </tr>
-    <tr>
-      <th>36695</th>
-      <td>2</td>
-      <td>masks</td>
-      <td>0.477628</td>
-      <td>8997</td>
-    </tr>
-    <tr>
-      <th>36696</th>
-      <td>2</td>
-      <td>precautions</td>
-      <td>0.469785</td>
-      <td>1237</td>
-    </tr>
-    <tr>
-      <th>36697</th>
-      <td>2</td>
-      <td>quarantine</td>
-      <td>0.468756</td>
-      <td>5225</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
 ```python
 nbs_model_1.to_csv(f'{OUT_DIR}neighbours/{LEX_NBS}_2019.csv')
 nbs_model_2.to_csv(f'{OUT_DIR}neighbours/{LEX_NBS}_2020.csv')
 ```
 
-# Inspect subreddits
+## Social semantic variation
 
-## read comments
+### Inspect subreddits
+
+#### read comments
 
 ```python
 YEAR = 2019
@@ -1059,8 +234,8 @@ comments = read_comm_csvs(comments_paths)
 comments
 ```
 
-    CPU times: user 47.7 s, sys: 6.22 s, total: 54 s
-    Wall time: 54.8 s
+    CPU times: user 48.6 s, sys: 6.54 s, total: 55.1 s
+    Wall time: 56 s
 
 
 
@@ -1192,37 +367,10 @@ TODO: filter comments
 - [ ] remove duplicates
 - [ ] remove bots
 
-## get subreddit counts
-
-```python
-def get_subr_counts(comments):
-    subr_counts = comments\
-        .groupby('subreddit')\
-        .agg(comments_num = ('subreddit', 'count'))\
-        .sort_values('comments_num', ascending=False)
-    return subr_counts
-```
+#### get subreddit counts
 
 ```python
 subr_counts = get_subr_counts(comments)
-```
-
-```python
-import altair as alt
-```
-
-```python
-def plot_subr_counts(subr_counts, k=20):
-    chart = subr_counts\
-        .reset_index()\
-        .iloc[:k]\
-        .pipe(alt.Chart)\
-            .mark_bar()\
-            .encode(
-                x=alt.X('comments_num:Q'),
-                y=alt.Y('subreddit:N', sort='-x')
-            )
-    return chart
 ```
 
 ```python
@@ -1234,13 +382,13 @@ subr_counts_plt
 
 
 
-<div id="altair-viz-1d981c61e4bd4d54a9b18eeeaf7cd7ec"></div>
+<div id="altair-viz-28f42ba5ccb5467bbf5b008ccdfa8388"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-1d981c61e4bd4d54a9b18eeeaf7cd7ec") {
-      outputDiv = document.getElementById("altair-viz-1d981c61e4bd4d54a9b18eeeaf7cd7ec");
+    if (outputDiv.id !== "altair-viz-28f42ba5ccb5467bbf5b008ccdfa8388") {
+      outputDiv = document.getElementById("altair-viz-28f42ba5ccb5467bbf5b008ccdfa8388");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1292,15 +440,128 @@ subr_counts_plt
 
 
 ```python
-subr_counts_fname = 'Covid'
-```
-
-```python
-subr_counts_plt.save(f'out/subr_counts_plt_{subr_counts_fname}.svg', scale_factor=2.0)
+subr_counts_plt.save(f'{OUT_DIR}subr_counts.png', scale_factor=2.0)
 ```
 
 ```python
 comments\
-    .query('subreddit == "hdsportsfeedtv"')\
+    .query('subreddit == "AskReddit"')\
      .sample(10)
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>author</th>
+      <th>body</th>
+      <th>created_utc</th>
+      <th>id</th>
+      <th>subreddit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2720703</th>
+      <td>Blueowl789</td>
+      <td>oh yeah? quote it</td>
+      <td>2019-12-07 22:45:53</td>
+      <td>fa0ql3q</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>6612440</th>
+      <td>ghostoflops</td>
+      <td>Lurking for jerking off, participating for con...</td>
+      <td>2019-09-01 21:07:19</td>
+      <td>eyrlxlg</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>8541016</th>
+      <td>WhenAllElseFail</td>
+      <td>so i put my hands up, they're playing my song,...</td>
+      <td>2019-08-14 21:46:21</td>
+      <td>eww2p0q</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>6482914</th>
+      <td>Tyr_ranical</td>
+      <td>Wait is this reply about stuff here, or a thin...</td>
+      <td>2019-03-19 22:29:49</td>
+      <td>eiwy4fz</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>599903</th>
+      <td>JazzUnlikeTheCaroot</td>
+      <td>You as a director 😀</td>
+      <td>2019-07-14 21:59:58</td>
+      <td>etsbx0o</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>6102560</th>
+      <td>_luckybandit_</td>
+      <td>DashieXP or Dashie games
+
+He stopped uploading...</td>
+      <td>2019-05-01 21:34:58</td>
+      <td>em9fj76</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>7595345</th>
+      <td>neovangelis</td>
+      <td>Periscope for "wizards"</td>
+      <td>2019-08-19 21:58:51</td>
+      <td>exfzg04</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>2155937</th>
+      <td>Byrinthion</td>
+      <td>I’m not a developer haha, I’m a writer. So I d...</td>
+      <td>2019-03-14 22:47:57</td>
+      <td>eijpp3m</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>2698189</th>
+      <td>AutoModerator</td>
+      <td>**PLEASE READ THIS MESSAGE IN ITS ENTIRETY BEF...</td>
+      <td>2019-12-07 22:41:05</td>
+      <td>fa0q2w2</td>
+      <td>AskReddit</td>
+    </tr>
+    <tr>
+      <th>7483454</th>
+      <td>neovangelis</td>
+      <td>The Native Americans who came before them woul...</td>
+      <td>2019-08-19 21:30:52</td>
+      <td>exfwxci</td>
+      <td>AskReddit</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+

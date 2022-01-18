@@ -543,7 +543,8 @@ nbs_model_1, nbs_model_2 = get_nearest_neighbours_models(
     lex=LEX_NBS, 
     freq_min=1,
     model_1=model_2019, 
-    model_2=model_2020
+    model_2=model_2020,
+    k=10
 )
 
 display(
@@ -553,205 +554,19 @@ display(
 ```
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+    ---------------------------------------------------------------------------
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+    NameError                                 Traceback (most recent call last)
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>lex</th>
-      <th>similarity</th>
-      <th>freq</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>perimeter</td>
-      <td>0.486453</td>
-      <td>530</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>rotation</td>
-      <td>0.438531</td>
-      <td>3259</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>prowl</td>
-      <td>0.422064</td>
-      <td>79</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>standby</td>
-      <td>0.421939</td>
-      <td>374</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>spotter</td>
-      <td>0.418285</td>
-      <td>171</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>1</td>
-      <td>turret</td>
-      <td>0.412857</td>
-      <td>1260</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>1</td>
-      <td>hof</td>
-      <td>0.409758</td>
-      <td>797</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>1</td>
-      <td>cqc</td>
-      <td>0.408991</td>
-      <td>198</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>1</td>
-      <td>galleon</td>
-      <td>0.406334</td>
-      <td>124</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>1</td>
-      <td>frontline</td>
-      <td>0.403402</td>
-      <td>678</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+    /var/folders/gp/dw55jb3d3gl6jn22rscvxjm40000gn/T/ipykernel_74735/1602480840.py in <module>
+          2     lex=LEX_NBS,
+          3     freq_min=1,
+    ----> 4     model_1=model_2019,
+          5     model_2=model_2020,
+          6     k=10
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>model</th>
-      <th>lex</th>
-      <th>similarity</th>
-      <th>freq</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>100000</th>
-      <td>2</td>
-      <td>lockdowns</td>
-      <td>0.764840</td>
-      <td>991</td>
-    </tr>
-    <tr>
-      <th>100001</th>
-      <td>2</td>
-      <td>quarantine</td>
-      <td>0.761415</td>
-      <td>5225</td>
-    </tr>
-    <tr>
-      <th>100002</th>
-      <td>2</td>
-      <td>pandemic</td>
-      <td>0.717629</td>
-      <td>9957</td>
-    </tr>
-    <tr>
-      <th>100003</th>
-      <td>2</td>
-      <td>shutdown</td>
-      <td>0.714777</td>
-      <td>1905</td>
-    </tr>
-    <tr>
-      <th>100004</th>
-      <td>2</td>
-      <td>shutdowns</td>
-      <td>0.636877</td>
-      <td>226</td>
-    </tr>
-    <tr>
-      <th>100005</th>
-      <td>2</td>
-      <td>quarantines</td>
-      <td>0.601028</td>
-      <td>160</td>
-    </tr>
-    <tr>
-      <th>100006</th>
-      <td>2</td>
-      <td>corona</td>
-      <td>0.579884</td>
-      <td>3684</td>
-    </tr>
-    <tr>
-      <th>100007</th>
-      <td>2</td>
-      <td>reopening</td>
-      <td>0.565140</td>
-      <td>757</td>
-    </tr>
-    <tr>
-      <th>100008</th>
-      <td>2</td>
-      <td>outbreak</td>
-      <td>0.557197</td>
-      <td>2213</td>
-    </tr>
-    <tr>
-      <th>100009</th>
-      <td>2</td>
-      <td>virus</td>
-      <td>0.550216</td>
-      <td>14315</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+    NameError: name 'model_2019' is not defined
 
 
 ```python
@@ -1290,6 +1105,8 @@ models_vocab.to_csv(f'{OUT_DIR}models_subrs_vocab.csv', index=False)
 distances = measure_distances(model_1, model_2)
 ```
 
+#### words that differ the most between both communities
+
 ```python
 freq_min = 100
 
@@ -1474,8 +1291,10 @@ distances\
 
 
 
+#### nearest neighbours for target lexemes in both communities
+
 ```python
-LEX = 'incivility'
+LEX = 'vaccine'
 ```
 
 ```python
@@ -1519,72 +1338,72 @@ display(nbs_model_1, nbs_model_2)
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>submission</td>
-      <td>0.441016</td>
-      <td>50354</td>
+      <td>vaccines</td>
+      <td>0.754159</td>
+      <td>41005</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
-      <td>sub</td>
-      <td>0.373823</td>
-      <td>74717</td>
+      <td>vaccin</td>
+      <td>0.745905</td>
+      <td>108</td>
     </tr>
     <tr>
       <th>2</th>
       <td>1</td>
-      <td>harping</td>
-      <td>0.301673</td>
-      <td>125</td>
+      <td>vaccination</td>
+      <td>0.633033</td>
+      <td>7667</td>
     </tr>
     <tr>
       <th>3</th>
       <td>1</td>
-      <td>hellbent</td>
-      <td>0.296312</td>
-      <td>112</td>
+      <td>vaccinations</td>
+      <td>0.569226</td>
+      <td>3305</td>
     </tr>
     <tr>
       <th>4</th>
       <td>1</td>
-      <td>tack</td>
-      <td>0.292103</td>
-      <td>155</td>
+      <td>jab</td>
+      <td>0.531420</td>
+      <td>713</td>
     </tr>
     <tr>
       <th>5</th>
       <td>1</td>
-      <td>predicated</td>
-      <td>0.287444</td>
-      <td>185</td>
+      <td>drug</td>
+      <td>0.519127</td>
+      <td>19090</td>
     </tr>
     <tr>
       <th>6</th>
       <td>1</td>
-      <td>fixated</td>
-      <td>0.283126</td>
-      <td>170</td>
+      <td>novavax</td>
+      <td>0.515097</td>
+      <td>158</td>
     </tr>
     <tr>
       <th>7</th>
       <td>1</td>
-      <td>par</td>
-      <td>0.280482</td>
-      <td>1222</td>
+      <td>cure</td>
+      <td>0.507441</td>
+      <td>8142</td>
     </tr>
     <tr>
       <th>8</th>
       <td>1</td>
-      <td>standby</td>
-      <td>0.272287</td>
-      <td>127</td>
+      <td>vax</td>
+      <td>0.491517</td>
+      <td>2940</td>
     </tr>
     <tr>
       <th>9</th>
       <td>1</td>
-      <td>drags</td>
-      <td>0.271937</td>
-      <td>148</td>
+      <td>eua</td>
+      <td>0.490937</td>
+      <td>702</td>
     </tr>
   </tbody>
 </table>
@@ -1618,74 +1437,406 @@ display(nbs_model_1, nbs_model_2)
   </thead>
   <tbody>
     <tr>
-      <th>21216</th>
+      <th>21542</th>
       <td>2</td>
-      <td>perma</td>
-      <td>0.353852</td>
-      <td>205</td>
+      <td>vaccines</td>
+      <td>0.770874</td>
+      <td>37084</td>
     </tr>
     <tr>
-      <th>21217</th>
+      <th>21543</th>
       <td>2</td>
-      <td>mistook</td>
-      <td>0.321916</td>
-      <td>121</td>
+      <td>vaccination</td>
+      <td>0.723819</td>
+      <td>7780</td>
     </tr>
     <tr>
-      <th>21218</th>
+      <th>21544</th>
       <td>2</td>
-      <td>thanked</td>
-      <td>0.311947</td>
-      <td>232</td>
+      <td>vaccinations</td>
+      <td>0.656477</td>
+      <td>3624</td>
     </tr>
     <tr>
-      <th>21219</th>
+      <th>21545</th>
       <td>2</td>
-      <td>thankyou</td>
-      <td>0.306021</td>
-      <td>131</td>
+      <td>vax</td>
+      <td>0.649080</td>
+      <td>3208</td>
     </tr>
     <tr>
-      <th>21220</th>
+      <th>21546</th>
       <td>2</td>
-      <td>strategist</td>
-      <td>0.304107</td>
-      <td>196</td>
+      <td>vac</td>
+      <td>0.586291</td>
+      <td>206</td>
     </tr>
     <tr>
-      <th>21221</th>
+      <th>21547</th>
       <td>2</td>
-      <td>uncalled</td>
-      <td>0.302803</td>
-      <td>126</td>
+      <td>immunization</td>
+      <td>0.543347</td>
+      <td>701</td>
     </tr>
     <tr>
-      <th>21222</th>
+      <th>21548</th>
       <td>2</td>
-      <td>purposes</td>
-      <td>0.300664</td>
-      <td>2766</td>
+      <td>inoculation</td>
+      <td>0.538037</td>
+      <td>319</td>
     </tr>
     <tr>
-      <th>21223</th>
+      <th>21549</th>
       <td>2</td>
-      <td>wrongthink</td>
-      <td>0.288576</td>
-      <td>251</td>
+      <td>jab</td>
+      <td>0.530465</td>
+      <td>850</td>
     </tr>
     <tr>
-      <th>21224</th>
+      <th>21550</th>
       <td>2</td>
-      <td>apologizes</td>
-      <td>0.284437</td>
-      <td>118</td>
+      <td>rubella</td>
+      <td>0.528231</td>
+      <td>333</td>
     </tr>
     <tr>
-      <th>21225</th>
+      <th>21551</th>
       <td>2</td>
-      <td>ardern</td>
-      <td>0.282216</td>
-      <td>141</td>
+      <td>vaccinated</td>
+      <td>0.526829</td>
+      <td>11762</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+#### biggest discrepancies in nearest neighbours for target lexemes
+
+```python
+nbs_model_1, nbs_model_2 = get_nearest_neighbours_models(
+    lex=LEX, 
+    freq_min=150,
+    model_1=model_1, 
+    model_2=model_2,
+    k=100_000
+)
+```
+
+```python
+nbs_diffs = pd.merge(
+    nbs_model_1, nbs_model_2, 
+    on='lex',
+    suffixes = ('_1', '_2')
+)
+```
+
+```python
+nbs_diffs = nbs_diffs\
+    .assign(sim_diff = abs(nbs_diffs['similarity_1'] - nbs_diffs['similarity_2']))\
+    .sort_values('sim_diff', ascending=False)\
+    .reset_index(drop=True)\
+    .query('lex.str.len() >= 4')
+```
+
+```python
+topn = 10
+
+subr_1_nbs = nbs_diffs\
+    .query('similarity_1 > similarity_2')\
+    .nlargest(topn, 'sim_diff')
+
+subr_2_nbs = nbs_diffs\
+    .query('similarity_2 > similarity_1')\
+    .nlargest(topn, 'sim_diff')
+
+display(subr_1_nbs, subr_2_nbs)
+```
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model_1</th>
+      <th>lex</th>
+      <th>similarity_1</th>
+      <th>freq_1</th>
+      <th>model_2</th>
+      <th>similarity_2</th>
+      <th>freq_2</th>
+      <th>sim_diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>100m</td>
+      <td>0.328007</td>
+      <td>439</td>
+      <td>2</td>
+      <td>0.039867</td>
+      <td>557</td>
+      <td>0.288140</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1</td>
+      <td>beta</td>
+      <td>0.352028</td>
+      <td>842</td>
+      <td>2</td>
+      <td>0.070071</td>
+      <td>999</td>
+      <td>0.281957</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1</td>
+      <td>vladimir</td>
+      <td>0.166982</td>
+      <td>279</td>
+      <td>2</td>
+      <td>-0.108522</td>
+      <td>375</td>
+      <td>0.275504</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>1</td>
+      <td>sputnik</td>
+      <td>0.367858</td>
+      <td>279</td>
+      <td>2</td>
+      <td>0.113972</td>
+      <td>376</td>
+      <td>0.253886</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>1</td>
+      <td>vanilla</td>
+      <td>0.104741</td>
+      <td>168</td>
+      <td>2</td>
+      <td>-0.147005</td>
+      <td>230</td>
+      <td>0.251746</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>1</td>
+      <td>lamp</td>
+      <td>0.179237</td>
+      <td>224</td>
+      <td>2</td>
+      <td>-0.070934</td>
+      <td>305</td>
+      <td>0.250171</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>1</td>
+      <td>fades</td>
+      <td>0.220316</td>
+      <td>153</td>
+      <td>2</td>
+      <td>-0.027544</td>
+      <td>211</td>
+      <td>0.247860</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>1</td>
+      <td>paintings</td>
+      <td>0.071031</td>
+      <td>230</td>
+      <td>2</td>
+      <td>-0.176508</td>
+      <td>312</td>
+      <td>0.247539</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>1</td>
+      <td>oxford</td>
+      <td>0.354030</td>
+      <td>4128</td>
+      <td>2</td>
+      <td>0.114557</td>
+      <td>4378</td>
+      <td>0.239473</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>1</td>
+      <td>fade</td>
+      <td>0.202643</td>
+      <td>490</td>
+      <td>2</td>
+      <td>-0.034802</td>
+      <td>610</td>
+      <td>0.237445</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model_1</th>
+      <th>lex</th>
+      <th>similarity_1</th>
+      <th>freq_1</th>
+      <th>model_2</th>
+      <th>similarity_2</th>
+      <th>freq_2</th>
+      <th>sim_diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>neuralink</td>
+      <td>-0.004440</td>
+      <td>210</td>
+      <td>2</td>
+      <td>0.341604</td>
+      <td>285</td>
+      <td>0.346044</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>optional</td>
+      <td>-0.055179</td>
+      <td>731</td>
+      <td>2</td>
+      <td>0.262431</td>
+      <td>871</td>
+      <td>0.317610</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>mandated</td>
+      <td>-0.074730</td>
+      <td>2455</td>
+      <td>2</td>
+      <td>0.226452</td>
+      <td>2730</td>
+      <td>0.301182</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>dysphoria</td>
+      <td>-0.081338</td>
+      <td>210</td>
+      <td>2</td>
+      <td>0.207875</td>
+      <td>286</td>
+      <td>0.289212</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1</td>
+      <td>coronavirus</td>
+      <td>0.004444</td>
+      <td>218095</td>
+      <td>2</td>
+      <td>0.289353</td>
+      <td>261193</td>
+      <td>0.284909</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>cv19</td>
+      <td>0.072748</td>
+      <td>539</td>
+      <td>2</td>
+      <td>0.357341</td>
+      <td>667</td>
+      <td>0.284593</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>untested</td>
+      <td>0.177692</td>
+      <td>796</td>
+      <td>2</td>
+      <td>0.462222</td>
+      <td>950</td>
+      <td>0.284530</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1</td>
+      <td>locale</td>
+      <td>-0.117035</td>
+      <td>575</td>
+      <td>2</td>
+      <td>0.165845</td>
+      <td>704</td>
+      <td>0.282880</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>1</td>
+      <td>disrespecting</td>
+      <td>-0.179820</td>
+      <td>231</td>
+      <td>2</td>
+      <td>0.097078</td>
+      <td>314</td>
+      <td>0.276898</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>1</td>
+      <td>pediatric</td>
+      <td>0.032584</td>
+      <td>357</td>
+      <td>2</td>
+      <td>0.307942</td>
+      <td>467</td>
+      <td>0.275358</td>
     </tr>
   </tbody>
 </table>

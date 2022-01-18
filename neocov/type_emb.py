@@ -136,7 +136,7 @@ def measure_distances(model_1, model_2):
 
 
 # Cell
-def get_nearest_neighbours_models(lex, freq_min, model_1, model_2, topn=100_000):
+def get_nearest_neighbours_models(lex, freq_min, model_1, model_2, topn=100_000, k=10):
     nbs = []
     for count, model in enumerate([model_1, model_2]):
         for nb, dist in model.wv.most_similar(lex, topn=topn):
@@ -151,7 +151,7 @@ def get_nearest_neighbours_models(lex, freq_min, model_1, model_2, topn=100_000)
     nbs_df = nbs_df\
         .query('freq > @freq_min')\
         .groupby('model', group_keys=False)\
-        .apply(lambda group: group.nlargest(10, 'similarity'))
+        .apply(lambda group: group.nlargest(k, 'similarity'))
     nbs_model_1 = nbs_df.query('model == 1')
     nbs_model_2 = nbs_df.query('model == 2')
     return nbs_model_1, nbs_model_2

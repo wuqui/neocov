@@ -3,6 +3,7 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"get_comments_paths_year": "00_read_data.ipynb",
+         "get_comments_paths_subr": "00_read_data.ipynb",
          "read_comm_csv": "00_read_data.ipynb",
          "read_comm_csvs": "00_read_data.ipynb",
          "log_step": "01_preproc.ipynb",

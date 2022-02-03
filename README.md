@@ -343,7 +343,7 @@ model.save(f'{OUT_DIR}models/{SUBR}.model')
 ### Load models
 
 ```python
-SUBRS = ['Coronavirus', 'LockdownSkepticism']
+SUBRS = ['Coronavirus', 'conspiracy']
 ```
 
 ```python
@@ -365,14 +365,14 @@ model_2_vocab = len(model_2.wv.key_to_index)
 smart_procrustes_align_gensim(model_1, model_2)
 ```
 
-    37317 37317
-    37317 37317
+    67181 67181
+    67181 67181
 
 
 
 
 
-    <gensim.models.word2vec.Word2Vec at 0x187dbcfa0>
+    <gensim.models.word2vec.Word2Vec at 0x187e17c40>
 
 
 
@@ -426,13 +426,13 @@ models_vocab
     </tr>
     <tr>
       <th>1</th>
-      <td>LockdownSkepticism</td>
-      <td>38926</td>
+      <td>conspiracy</td>
+      <td>112599</td>
     </tr>
     <tr>
       <th>2</th>
       <td>intersection</td>
-      <td>37317</td>
+      <td>67181</td>
     </tr>
   </tbody>
 </table>
@@ -500,143 +500,143 @@ sem_change_cands
   <tbody>
     <tr>
       <th>0</th>
-      <td>plandemic</td>
-      <td>0.892523</td>
-      <td>789</td>
-      <td>138</td>
+      <td>soliciting</td>
+      <td>0.989504</td>
+      <td>2233</td>
+      <td>2474</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>scams</td>
-      <td>0.889811</td>
-      <td>964</td>
-      <td>167</td>
+      <td>resubmit</td>
+      <td>0.944866</td>
+      <td>1763</td>
+      <td>1928</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>vigorous</td>
-      <td>0.866856</td>
-      <td>647</td>
-      <td>114</td>
+      <td>waiters</td>
+      <td>0.929376</td>
+      <td>149</td>
+      <td>206</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>likewise</td>
-      <td>0.843846</td>
-      <td>1444</td>
-      <td>251</td>
+      <td>curiously</td>
+      <td>0.928779</td>
+      <td>118</td>
+      <td>164</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>borderline</td>
-      <td>0.829629</td>
-      <td>34936</td>
-      <td>6561</td>
+      <td>subsequently</td>
+      <td>0.924492</td>
+      <td>12174</td>
+      <td>11956</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>examining</td>
-      <td>0.827804</td>
-      <td>1337</td>
-      <td>234</td>
+      <td>anons</td>
+      <td>0.920569</td>
+      <td>260</td>
+      <td>351</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>review</td>
-      <td>0.824861</td>
-      <td>20052</td>
-      <td>3647</td>
+      <td>blacklivesmatter</td>
+      <td>0.918460</td>
+      <td>107</td>
+      <td>150</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>improved</td>
-      <td>0.822236</td>
-      <td>17517</td>
-      <td>3032</td>
+      <td>redpill</td>
+      <td>0.914164</td>
+      <td>119</td>
+      <td>165</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>examination</td>
-      <td>0.813457</td>
-      <td>1314</td>
-      <td>229</td>
+      <td>derek</td>
+      <td>0.913568</td>
+      <td>211</td>
+      <td>287</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>blurred</td>
-      <td>0.807373</td>
-      <td>634</td>
-      <td>112</td>
+      <td>borderline</td>
+      <td>0.892894</td>
+      <td>21891</td>
+      <td>20974</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>approved</td>
-      <td>0.805417</td>
-      <td>39951</td>
-      <td>7422</td>
+      <td>submissions</td>
+      <td>0.890047</td>
+      <td>3777</td>
+      <td>4093</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>soliciting</td>
-      <td>0.805046</td>
-      <td>3903</td>
-      <td>692</td>
+      <td>promotional</td>
+      <td>0.887624</td>
+      <td>344</td>
+      <td>450</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>cargo</td>
-      <td>0.803016</td>
-      <td>616</td>
-      <td>108</td>
+      <td>mena</td>
+      <td>0.886735</td>
+      <td>196</td>
+      <td>267</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>choke</td>
-      <td>0.800872</td>
-      <td>1171</td>
-      <td>205</td>
+      <td>nicaraguan</td>
+      <td>0.885770</td>
+      <td>111</td>
+      <td>154</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>internally</td>
-      <td>0.799448</td>
-      <td>574</td>
-      <td>101</td>
+      <td>acorn</td>
+      <td>0.885177</td>
+      <td>105</td>
+      <td>147</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>coverage</td>
-      <td>0.794310</td>
-      <td>10972</td>
-      <td>1934</td>
+      <td>greer</td>
+      <td>0.883525</td>
+      <td>105</td>
+      <td>147</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>screened</td>
-      <td>0.791834</td>
-      <td>15463</td>
-      <td>2759</td>
+      <td>goyim</td>
+      <td>0.879430</td>
+      <td>287</td>
+      <td>386</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>mega</td>
-      <td>0.791515</td>
-      <td>2167</td>
-      <td>389</td>
+      <td>snowfall</td>
+      <td>0.873538</td>
+      <td>208</td>
+      <td>283</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>speculate</td>
-      <td>0.789921</td>
-      <td>13655</td>
-      <td>2379</td>
+      <td>goodyear</td>
+      <td>0.869714</td>
+      <td>101</td>
+      <td>141</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>reliable</td>
-      <td>0.787391</td>
-      <td>69524</td>
-      <td>13660</td>
+      <td>submitter</td>
+      <td>0.869147</td>
+      <td>260</td>
+      <td>352</td>
     </tr>
   </tbody>
 </table>
@@ -711,70 +711,70 @@ display(
       <td>1</td>
       <td>shutdown</td>
       <td>0.844873</td>
-      <td>8598</td>
+      <td>5413</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>lockdowns</td>
       <td>0.768522</td>
-      <td>50035</td>
+      <td>16637</td>
     </tr>
     <tr>
       <th>2</th>
       <td>1</td>
       <td>shutdowns</td>
       <td>0.661069</td>
-      <td>3037</td>
+      <td>1632</td>
     </tr>
     <tr>
       <th>3</th>
       <td>1</td>
       <td>curfew</td>
       <td>0.613175</td>
-      <td>1652</td>
+      <td>1079</td>
     </tr>
     <tr>
       <th>4</th>
       <td>1</td>
       <td>quarantine</td>
       <td>0.600933</td>
-      <td>40419</td>
+      <td>26502</td>
     </tr>
     <tr>
       <th>5</th>
       <td>1</td>
       <td>restrictions</td>
       <td>0.581443</td>
-      <td>31971</td>
+      <td>16482</td>
     </tr>
     <tr>
       <th>6</th>
       <td>1</td>
       <td>quarantines</td>
       <td>0.568791</td>
-      <td>2767</td>
+      <td>1634</td>
     </tr>
     <tr>
       <th>7</th>
       <td>1</td>
       <td>quarentine</td>
       <td>0.540457</td>
-      <td>454</td>
+      <td>255</td>
     </tr>
     <tr>
       <th>8</th>
       <td>1</td>
       <td>curfews</td>
       <td>0.536410</td>
-      <td>751</td>
+      <td>456</td>
     </tr>
     <tr>
       <th>9</th>
       <td>1</td>
       <td>containment</td>
       <td>0.515410</td>
-      <td>4363</td>
+      <td>2526</td>
     </tr>
   </tbody>
 </table>
@@ -811,71 +811,71 @@ display(
       <th>29861</th>
       <td>2</td>
       <td>lockdowns</td>
-      <td>0.737042</td>
-      <td>9460</td>
+      <td>0.794638</td>
+      <td>15881</td>
     </tr>
     <tr>
       <th>29862</th>
       <td>2</td>
       <td>shutdown</td>
-      <td>0.727802</td>
-      <td>1489</td>
+      <td>0.726183</td>
+      <td>5529</td>
     </tr>
     <tr>
       <th>29863</th>
       <td>2</td>
-      <td>lockdowners</td>
-      <td>0.599373</td>
-      <td>156</td>
+      <td>quarantine</td>
+      <td>0.723483</td>
+      <td>24948</td>
     </tr>
     <tr>
       <th>29864</th>
       <td>2</td>
       <td>shutdowns</td>
-      <td>0.584469</td>
-      <td>545</td>
+      <td>0.702284</td>
+      <td>1805</td>
     </tr>
     <tr>
       <th>29865</th>
       <td>2</td>
-      <td>maskers</td>
-      <td>0.572266</td>
-      <td>660</td>
+      <td>quarantines</td>
+      <td>0.622162</td>
+      <td>1806</td>
     </tr>
     <tr>
       <th>29866</th>
       <td>2</td>
-      <td>vaxxers</td>
-      <td>0.557066</td>
-      <td>465</td>
+      <td>curfew</td>
+      <td>0.595864</td>
+      <td>1236</td>
     </tr>
     <tr>
       <th>29867</th>
       <td>2</td>
-      <td>masker</td>
-      <td>0.541411</td>
-      <td>177</td>
+      <td>restrictions</td>
+      <td>0.583930</td>
+      <td>15817</td>
     </tr>
     <tr>
       <th>29868</th>
       <td>2</td>
-      <td>vax</td>
-      <td>0.522942</td>
-      <td>504</td>
+      <td>curfews</td>
+      <td>0.581970</td>
+      <td>577</td>
     </tr>
     <tr>
       <th>29869</th>
       <td>2</td>
-      <td>vaxx</td>
-      <td>0.508261</td>
-      <td>132</td>
+      <td>pandemic</td>
+      <td>0.580793</td>
+      <td>67364</td>
     </tr>
     <tr>
       <th>29870</th>
       <td>2</td>
-      <td>lock</td>
-      <td>0.490704</td>
-      <td>9527</td>
+      <td>quarentine</td>
+      <td>0.528733</td>
+      <td>346</td>
     </tr>
   </tbody>
 </table>
@@ -886,10 +886,8 @@ display(
 
 ```python
 from scipy import spatial
-```
-
-```python
 import altair as alt
+import numpy as np
 ```
 
 ```python
@@ -899,17 +897,36 @@ models.append({'subreddit': SUBRS[1], 'model': model_2})
 ```
 
 ```python
+def get_pole_avg(model, lex, k):
+	vecs = []
+	vecs.append(model.wv[lex])
+	for closest_word, similarity in model.wv.most_similar(positive=lex, topn=k):
+		vecs.append(model.wv[closest_word])
+	pole_avg = np.mean(vecs, axis=0)
+	return pole_avg
+```
+
+```python
 def make_sem_axis(model, pole_word_1: str, pole_word_2: str):
 	pole_1_vec = model_1.wv.get_vector(pole_1)
 	pole_2_vec = model_1.wv.get_vector(pole_2)
 	sem_axis = pole_1_vec - pole_2_vec
 	return sem_axis
+```
 
+```python
+def make_sem_axis_avg(model, pole_word_1: str, pole_word_2: str):
+	pole_1_vec = model_1.wv.get_vector(pole_1)
+	pole_2_vec = model_1.wv.get_vector(pole_2)
+	pole_1_avg = get_pole_avg(model_1, pole_word_1, k=10)
+	pole_2_avg = get_pole_avg(model_1, pole_word_2, k=10)
+	sem_axis = pole_1_avg - pole_2_avg
+	return sem_axis
 ```
 
 ```python
 def get_axis_sim(lex: str, pole_word_1: str, pole_word_2: str, model):
-	sem_axis = make_sem_axis(model, pole_word_1, pole_word_2)
+	sem_axis = make_sem_axis_avg(model, pole_word_1, pole_word_2)
 	lex_vec = model.wv.get_vector(lex)
 	sim_cos = 1 - spatial.distance.cosine(lex_vec, sem_axis)
 	return sim_cos
@@ -922,22 +939,15 @@ pole_2 = 'bad'
 ```
 
 ```python
-for model in models:
-	print(f'{model["subreddit"]}: {get_axis_sim(lex, pole_1, pole_2, model["model"])}')
-```
-
-    Coronavirus: -0.08022712916135788
-    LockdownSkepticism: -0.12990982830524445
-
-
-```python
 lexs = [
 	'lockdown', 'lockdowns', 
 	'shutdown', 'shutdowns', 
 	'vaccine', 'vaccines', 
 	'mask', 'masks',
-	'order', 'police',
-	'thing', 'tree', 'yellow', 'give'
+	'order', 'police', 'science', 'mandate',
+	'thing', 'tree', 
+	'give', 'take'
+	# 'happy', 'sad',
 	]
 ```
 
@@ -967,13 +977,13 @@ alt.Chart(sims_df).mark_line(point=True).encode(
 
 
 
-<div id="altair-viz-f24e3dd75fe24eb18ab424c719bb51b9"></div>
+<div id="altair-viz-b3abe0aaafb14650ac220c6fa898517c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f24e3dd75fe24eb18ab424c719bb51b9") {
-      outputDiv = document.getElementById("altair-viz-f24e3dd75fe24eb18ab424c719bb51b9");
+    if (outputDiv.id !== "altair-viz-b3abe0aaafb14650ac220c6fa898517c") {
+      outputDiv = document.getElementById("altair-viz-b3abe0aaafb14650ac220c6fa898517c");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1019,7 +1029,7 @@ alt.Chart(sims_df).mark_line(point=True).encode(
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-c9778c8940eb52a5fea98a46ae8ba2b0"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "type": "nominal"}, "x": {"field": "sim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "type": "nominal"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-c9778c8940eb52a5fea98a46ae8ba2b0": [{"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.08022712916135788}, {"subreddit": "LockdownSkepticism", "lex": "lockdown", "sim": -0.12990982830524445}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": -0.06833521276712418}, {"subreddit": "LockdownSkepticism", "lex": "lockdowns", "sim": -0.0952957272529602}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": -0.11067618429660797}, {"subreddit": "LockdownSkepticism", "lex": "shutdown", "sim": -0.14383257925510406}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.07748658210039139}, {"subreddit": "LockdownSkepticism", "lex": "shutdowns", "sim": -0.09972812980413437}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": -0.008722450584173203}, {"subreddit": "LockdownSkepticism", "lex": "vaccine", "sim": -0.008453463204205036}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": 0.030203502625226974}, {"subreddit": "LockdownSkepticism", "lex": "vaccines", "sim": 0.021412456408143044}, {"subreddit": "Coronavirus", "lex": "mask", "sim": 0.05741423740983009}, {"subreddit": "LockdownSkepticism", "lex": "mask", "sim": 0.03356524184346199}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.04498105123639107}, {"subreddit": "LockdownSkepticism", "lex": "masks", "sim": 0.025375308468937874}, {"subreddit": "Coronavirus", "lex": "order", "sim": 0.0858086347579956}, {"subreddit": "LockdownSkepticism", "lex": "order", "sim": 0.0058347503654658794}, {"subreddit": "Coronavirus", "lex": "police", "sim": 0.03616446256637573}, {"subreddit": "LockdownSkepticism", "lex": "police", "sim": -0.022389892488718033}, {"subreddit": "Coronavirus", "lex": "thing", "sim": -0.08811882138252258}, {"subreddit": "LockdownSkepticism", "lex": "thing", "sim": -0.10003308206796646}, {"subreddit": "Coronavirus", "lex": "tree", "sim": -0.01825425587594509}, {"subreddit": "LockdownSkepticism", "lex": "tree", "sim": -0.01272513810545206}, {"subreddit": "Coronavirus", "lex": "yellow", "sim": -0.13428929448127747}, {"subreddit": "LockdownSkepticism", "lex": "yellow", "sim": -0.15483997762203217}, {"subreddit": "Coronavirus", "lex": "give", "sim": 0.11482276022434235}, {"subreddit": "LockdownSkepticism", "lex": "give", "sim": 0.0988151878118515}]}}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-aab3a02273668f9c5dc01b4c2a123765"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "type": "nominal"}, "x": {"field": "sim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "type": "nominal"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-aab3a02273668f9c5dc01b4c2a123765": [{"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.020428422838449478}, {"subreddit": "conspiracy", "lex": "lockdown", "sim": -0.11954280734062195}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": -0.03195760399103165}, {"subreddit": "conspiracy", "lex": "lockdowns", "sim": -0.09696231037378311}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": -0.0030814199708402157}, {"subreddit": "conspiracy", "lex": "shutdown", "sim": -0.07952913641929626}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.061103351414203644}, {"subreddit": "conspiracy", "lex": "shutdowns", "sim": -0.09631608426570892}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.027036398649215698}, {"subreddit": "conspiracy", "lex": "vaccine", "sim": -0.057832762598991394}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": 0.02113475278019905}, {"subreddit": "conspiracy", "lex": "vaccines", "sim": -0.025540443137288094}, {"subreddit": "Coronavirus", "lex": "mask", "sim": 0.02409209869801998}, {"subreddit": "conspiracy", "lex": "mask", "sim": -0.06673668324947357}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.042272794991731644}, {"subreddit": "conspiracy", "lex": "masks", "sim": -0.022345764562487602}, {"subreddit": "Coronavirus", "lex": "order", "sim": 0.03343459591269493}, {"subreddit": "conspiracy", "lex": "order", "sim": -0.013651296496391296}, {"subreddit": "Coronavirus", "lex": "police", "sim": 0.05815239995718002}, {"subreddit": "conspiracy", "lex": "police", "sim": 0.009731519035995007}, {"subreddit": "Coronavirus", "lex": "science", "sim": -0.04062918573617935}, {"subreddit": "conspiracy", "lex": "science", "sim": -0.01712346449494362}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.050309017300605774}, {"subreddit": "conspiracy", "lex": "mandate", "sim": 0.023100711405277252}, {"subreddit": "Coronavirus", "lex": "thing", "sim": -0.09180065989494324}, {"subreddit": "conspiracy", "lex": "thing", "sim": -0.06663163006305695}, {"subreddit": "Coronavirus", "lex": "tree", "sim": -0.00044312604586593807}, {"subreddit": "conspiracy", "lex": "tree", "sim": 0.0230832789093256}, {"subreddit": "Coronavirus", "lex": "give", "sim": 0.04639571160078049}, {"subreddit": "conspiracy", "lex": "give", "sim": 0.029668521136045456}, {"subreddit": "Coronavirus", "lex": "take", "sim": -0.0009267961140722036}, {"subreddit": "conspiracy", "lex": "take", "sim": -0.025768481194972992}]}}, {"mode": "vega-lite"});
 </script>
 
 

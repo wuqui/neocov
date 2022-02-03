@@ -4,6 +4,7 @@
     "Read data": "read_data.html",
     "Preprocess comments": "preproc.html",
     "Type embeddings": "type_emb.html",
-    "Communities": "communities.html"
+    "Communities": "communities.html",
+    "Phrase detection for multigrams": "pool.html"
   }
 }

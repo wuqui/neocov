@@ -152,7 +152,38 @@ nb_path: "02_type_emb.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="train_model" class="doc_header"><code>train_model</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/type_emb.py#L23" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train_model</code>(<strong><code>corpus</code></strong>, <strong><code>MIN_COUNT</code></strong>=<em><code>5</code></em>, <strong><code>SIZE</code></strong>=<em><code>300</code></em>, <strong><code>WORKERS</code></strong>=<em><code>8</code></em>, <strong><code>WINDOW</code></strong>=<em><code>5</code></em>)</p>
+<h4 id="train_model" class="doc_header"><code>train_model</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/type_emb.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train_model</code>(<strong><code>corpus</code></strong>, <strong><code>MIN_COUNT</code></strong>=<em><code>5</code></em>, <strong><code>SIZE</code></strong>=<em><code>300</code></em>, <strong><code>WORKERS</code></strong>=<em><code>8</code></em>, <strong><code>WINDOW</code></strong>=<em><code>5</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="train_model" class="doc_header"><code>train_model</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/type_emb.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train_model</code>(<strong><code>corpus</code></strong>, <strong><code>MIN_COUNT</code></strong>=<em><code>5</code></em>, <strong><code>SIZE</code></strong>=<em><code>300</code></em>, <strong><code>WORKERS</code></strong>=<em><code>8</code></em>, <strong><code>WINDOW</code></strong>=<em><code>5</code></em>)</p>
 </blockquote>
 
 </div>
@@ -257,7 +288,7 @@ nb_path: "02_type_emb.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="intersection_align_gensim" class="doc_header"><code>intersection_align_gensim</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/type_emb.py#L39" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>intersection_align_gensim</code>(<strong><code>m1</code></strong>, <strong><code>m2</code></strong>, <strong><code>words</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="intersection_align_gensim" class="doc_header"><code>intersection_align_gensim</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/type_emb.py#L58" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>intersection_align_gensim</code>(<strong><code>m1</code></strong>, <strong><code>m2</code></strong>, <strong><code>words</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Intersect two gensim word2vec models, m1 and m2.
 Only the shared vocabulary between them is kept.
@@ -296,7 +327,7 @@ The .vocab dictionary is also updated for each model, preserving the count but u
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="smart_procrustes_align_gensim" class="doc_header"><code>smart_procrustes_align_gensim</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/type_emb.py#L91" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>smart_procrustes_align_gensim</code>(<strong><code>base_embed</code></strong>, <strong><code>other_embed</code></strong>, <strong><code>words</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="smart_procrustes_align_gensim" class="doc_header"><code>smart_procrustes_align_gensim</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/type_emb.py#L110" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>smart_procrustes_align_gensim</code>(<strong><code>base_embed</code></strong>, <strong><code>other_embed</code></strong>, <strong><code>words</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Original script: <a href="https://gist.github.com/quadrismegistus/09a93e219a6ffc4f216fb85235535faf">https://gist.github.com/quadrismegistus/09a93e219a6ffc4f216fb85235535faf</a>
 Procrustes align two gensim word2vec models (to allow for comparison between same word across models).
@@ -400,7 +431,7 @@ If <code>words</code> is set, intersect the two models' vocabulary with the voca
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="measure_distances" class="doc_header"><code>measure_distances</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/type_emb.py#L123" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>measure_distances</code>(<strong><code>model_1</code></strong>, <strong><code>model_2</code></strong>)</p>
+<h4 id="measure_distances" class="doc_header"><code>measure_distances</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/type_emb.py#L142" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>measure_distances</code>(<strong><code>model_1</code></strong>, <strong><code>model_2</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -535,7 +566,7 @@ If <code>words</code> is set, intersect the two models' vocabulary with the voca
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_nearest_neighbours_models" class="doc_header"><code>get_nearest_neighbours_models</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/type_emb.py#L139" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_nearest_neighbours_models</code>(<strong><code>lex</code></strong>, <strong><code>freq_min</code></strong>, <strong><code>model_1</code></strong>, <strong><code>model_2</code></strong>, <strong><code>topn</code></strong>=<em><code>100000</code></em>, <strong><code>k</code></strong>=<em><code>10</code></em>)</p>
+<h4 id="get_nearest_neighbours_models" class="doc_header"><code>get_nearest_neighbours_models</code><a href="https://github.com/wuqui/neocov/tree/master/neocov/type_emb.py#L158" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_nearest_neighbours_models</code>(<strong><code>lex</code></strong>, <strong><code>freq_min</code></strong>, <strong><code>model_1</code></strong>, <strong><code>model_2</code></strong>, <strong><code>topn</code></strong>=<em><code>100000</code></em>, <strong><code>k</code></strong>=<em><code>10</code></em>)</p>
 </blockquote>
 
 </div>

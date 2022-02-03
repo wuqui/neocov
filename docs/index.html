@@ -480,6 +480,31 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>190756 190756
+190756 190756
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;gensim.models.word2vec.Word2Vec at 0x110df3160&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -520,6 +545,61 @@ nb_path: "index.ipynb"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
+      <th>Words</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019</td>
+      <td>252564</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2020</td>
+      <td>277707</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>intersection</td>
+      <td>190756</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -580,18 +660,10 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">freq_min</span> <span class="o">=</span> <span class="mi">100</span>
-
-<span class="n">sem_change_cands</span> <span class="o">=</span> <span class="p">(</span><span class="n">distances</span>\
-    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;freq_1 &gt; @freq_min and freq_2 &gt; @freq_min&#39;</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;lex.str.isalpha() == True&#39;</span><span class="p">)</span>\
-    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;lex.str.len() &gt; 3&#39;</span><span class="p">)</span>\
-    <span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;dist_sem&#39;</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">blacklist_lex</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/blacklist_lex.csv&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;Excl == True&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Lex&#39;</span><span class="p">]</span>
 <span class="p">)</span>
-
-<span class="n">sem_change_cands</span>
 </pre></div>
 
     </div>
@@ -608,12 +680,224 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sem_change_cands_out</span> <span class="o">=</span> <span class="n">sem_change_cands</span>\
-    <span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;dist_sem&#39;</span><span class="p">)</span>\
-    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">index_1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>\
-    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">dist_sem</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist_sem&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>\
-    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">dist_sem</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist_sem&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">))</span>\
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">freq_min</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">sem_change_cands</span> <span class="o">=</span> <span class="p">(</span><span class="n">distances</span>\
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;freq_1 &gt; @freq_min and freq_2 &gt; @freq_min&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;lex.str.isalpha() == True&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;lex.str.len() &gt; 3&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;lex not in @blacklist_lex&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;dist_sem&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">sem_change_cands</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>lex</th>
+      <th>dist_sem</th>
+      <th>freq_1</th>
+      <th>freq_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>lockdowns</td>
+      <td>1.016951</td>
+      <td>940</td>
+      <td>991</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>maskless</td>
+      <td>0.996101</td>
+      <td>118</td>
+      <td>127</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>sunsetting</td>
+      <td>0.996084</td>
+      <td>111</td>
+      <td>120</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>childe</td>
+      <td>0.980564</td>
+      <td>209</td>
+      <td>222</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>megalodon</td>
+      <td>0.975273</td>
+      <td>752</td>
+      <td>792</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>newf</td>
+      <td>0.962381</td>
+      <td>107</td>
+      <td>115</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>corona</td>
+      <td>0.926739</td>
+      <td>3553</td>
+      <td>3684</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>filtrate</td>
+      <td>0.918609</td>
+      <td>102</td>
+      <td>110</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>chaz</td>
+      <td>0.899856</td>
+      <td>190</td>
+      <td>202</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>klee</td>
+      <td>0.888728</td>
+      <td>161</td>
+      <td>173</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>rona</td>
+      <td>0.886363</td>
+      <td>409</td>
+      <td>433</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>cerb</td>
+      <td>0.869179</td>
+      <td>315</td>
+      <td>333</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>rittenhouse</td>
+      <td>0.866206</td>
+      <td>181</td>
+      <td>194</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>vacuo</td>
+      <td>0.862142</td>
+      <td>170</td>
+      <td>181</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>moderna</td>
+      <td>0.843465</td>
+      <td>199</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>pandemic</td>
+      <td>0.837175</td>
+      <td>9504</td>
+      <td>9957</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>spreader</td>
+      <td>0.835257</td>
+      <td>164</td>
+      <td>175</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>distancing</td>
+      <td>0.833737</td>
+      <td>2910</td>
+      <td>3038</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>sars</td>
+      <td>0.827039</td>
+      <td>880</td>
+      <td>924</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>quarantines</td>
+      <td>0.820280</td>
+      <td>148</td>
+      <td>159</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sem_change_cands_out</span> <span class="o">=</span> <span class="p">(</span><span class="n">sem_change_cands</span>
+    <span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;dist_sem&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">index_1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">dist_sem</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist_sem&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">dist_sem</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist_sem&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">))</span>
     <span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;index_1&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;lex&#39;</span><span class="p">:</span> <span class="s1">&#39;Lexeme&#39;</span><span class="p">,</span> <span class="s1">&#39;dist_sem&#39;</span><span class="p">:</span> <span class="s1">&#39;SemDist&#39;</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 
     </div>
@@ -657,7 +941,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">LEX_NBS</span> <span class="o">=</span> <span class="s1">&#39;chaz&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">LEX_NBS</span> <span class="o">=</span> <span class="s1">&#39;ahahahah&#39;</span>
 </pre></div>
 
     </div>
@@ -692,9 +976,249 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model</th>
+      <th>lex</th>
+      <th>similarity</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>hahahha</td>
+      <td>0.455687</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>ahaha</td>
+      <td>0.455320</td>
+      <td>668</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>hahaha</td>
+      <td>0.441289</td>
+      <td>6690</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>ahha</td>
+      <td>0.436381</td>
+      <td>43</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>myyyy</td>
+      <td>0.434361</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>funni</td>
+      <td>0.433964</td>
+      <td>49</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>hahahah</td>
+      <td>0.432263</td>
+      <td>496</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>yeaaaa</td>
+      <td>0.429689</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1</td>
+      <td>yess</td>
+      <td>0.429398</td>
+      <td>320</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>woooow</td>
+      <td>0.427130</td>
+      <td>46</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>model</th>
+      <th>lex</th>
+      <th>similarity</th>
+      <th>freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>100000</th>
+      <td>2</td>
+      <td>wiki_rule_2</td>
+      <td>0.389549</td>
+      <td>127</td>
+    </tr>
+    <tr>
+      <th>100001</th>
+      <td>2</td>
+      <td>jk</td>
+      <td>0.381757</td>
+      <td>2248</td>
+    </tr>
+    <tr>
+      <th>100002</th>
+      <td>2</td>
+      <td>dqw4w9wgxcq</td>
+      <td>0.348253</td>
+      <td>763</td>
+    </tr>
+    <tr>
+      <th>100003</th>
+      <td>2</td>
+      <td>wiki_rule_b</td>
+      <td>0.346046</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>100004</th>
+      <td>2</td>
+      <td>20enabled</td>
+      <td>0.326490</td>
+      <td>476</td>
+    </tr>
+    <tr>
+      <th>100005</th>
+      <td>2</td>
+      <td>20questions</td>
+      <td>0.314265</td>
+      <td>513</td>
+    </tr>
+    <tr>
+      <th>100006</th>
+      <td>2</td>
+      <td>flowerboy</td>
+      <td>0.309573</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>100007</th>
+      <td>2</td>
+      <td>_love_</td>
+      <td>0.307687</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>100008</th>
+      <td>2</td>
+      <td>subed</td>
+      <td>0.306114</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>100009</th>
+      <td>2</td>
+      <td>420th</td>
+      <td>0.303107</td>
+      <td>22</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Not related to Covid:</p>
+<ul>
+<li>sunsetting: &gt; gaming-related meaning in 2020</li>
+<li>childe: &gt; gaming-related proper name in 2020</li>
+<li>megalodon: &gt; gaming-related proper name in 2020</li>
+<li>newf: (derogatory) slang term for people from Newfoundland (Canada)</li>
+<li>chaz: &gt; Capitol Hill Autonomous Zone (CHAZ)</li>
+<li>klee: &gt; computer game character, proper name</li>
+<li>rittenhouse: whiskey brand &gt; proper name, involved in shooting related to BLM protests</li>
+</ul>
+<p>Related to Covid:</p>
+<ul>
+<li>cerb: &gt; Canada Emergency Response Benefit for Covid</li>
+<li>vacuo: &gt; medical term, 'vacuum'</li>
+<li>moderna: &gt; vaccine</li>
+</ul>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Social-semantic-variation">Social semantic variation<a class="anchor-link" href="#Social-semantic-variation"> </a></h2>

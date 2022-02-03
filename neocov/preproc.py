@@ -47,7 +47,7 @@ def count_toks(comments):
 
 # Cell
 @log_step
-def rem_short_comments(comments, min_toks=5):
+def rem_short_comments(comments, min_toks=10):
 	return comments\
             .pipe(count_toks)\
             .query('toks > @min_toks')\

@@ -2,7 +2,7 @@
 
 __all__ = ['Corpus', 'train_model', 'train_model', 'intersection_align_gensim', 'smart_procrustes_align_gensim',
            'measure_distances', 'get_nearest_neighbours_models', 'get_pole_avg', 'make_sem_axis_avg', 'get_axis_sim',
-           'get_axis_sims']
+           'get_axis_sims', 'get_nbs_vecs', 'dim_red_nbs_vecs', 'plot_nbs_vecs']
 
 # Cell
 from gensim.models import Word2Vec
@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 from scipy import spatial
 import altair as alt
+from sklearn.manifold import TSNE
 
 # Cell
 class Corpus:
@@ -212,3 +213,70 @@ def get_axis_sims(lexs: list, models, pole_words: list, k=10):
 			sims.append(sim)
 	sims_df = pd.DataFrame(sims)
 	return sims_df
+
+
+# Cell
+def get_nbs_vecs(lex, model, k=50):
+	lex_vecs = []
+	lex_d = {}
+	lex_d['lex'] = lex
+	lex_d['type'] = 'center'
+	lex_d['subreddit'] = model['name']
+	lex_d['vec'] = model['model'].wv.get_vector(lex)
+	lex_vecs.append(lex_d)
+	for nb, sim in model['model'].wv.most_similar(lex, topn=k):
+		lex_d = {}
+		lex_d['lex'] = nb
+		lex_d['type'] = 'nb'
+		lex_d['subreddit'] = model['name']
+		lex_d['vec'] =  model['model'].wv.get_vector(nb)
+		lex_vecs.append(lex_d)
+	lex_vecs_df = pd.DataFrame(lex_vecs)
+	return lex_vecs_df
+
+# Cell
+def dim_red_nbs_vecs(nbs_vecs, perplexity=50):
+    Y_tsne = TSNE(
+        perplexity=70,
+        method='exact',
+        init='pca',
+        verbose=True
+        )\
+        .fit_transform(list(nbs_vecs['vec']))
+
+    nbs_vecs['x_tsne'] = Y_tsne[:, [0]]
+    nbs_vecs['y_tsne'] = Y_tsne[:, [1]]
+
+    return nbs_vecs
+
+
+# Cell
+def plot_nbs_vecs(lex, nbs_vecs, perplexity=50):
+	brush = alt.selection(
+		type="interval",
+		on="[mousedown[event.altKey], mouseup] > mousemove",
+		translate="[mousedown[event.altKey], mouseup] > mousemove!",
+		zoom="wheel![event.altKey]",
+	)
+
+	interaction = alt.selection(
+		type="interval",
+		bind="scales",
+		on="[mousedown[!event.altKey], mouseup] > mousemove",
+		translate="[mousedown[!event.altKey], mouseup] > mousemove!",
+		zoom="wheel![!event.altKey]",
+	)
+
+	chart = (alt.Chart(nbs_vecs).mark_text(point=True).encode(
+		x = 'x_tsne:Q',
+		y = 'y_tsne:Q',
+		text = 'lex:O',
+		size = alt.condition("datum.type == 'center'", alt.value(25), alt.value(10)),
+		color = alt.condition(brush, 'subreddit', alt.value('lightgray')),
+		column = 'subreddit'
+		)
+		.properties(title=f"Social semantic variation for the word '{lex}'.")
+		.add_selection(brush, interaction)
+	)
+
+	return chart

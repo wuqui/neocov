@@ -359,10 +359,10 @@ models
 
     [{'name': 'Coronavirus',
       'path': '../out/models/Coronavirus.model',
-      'model': <gensim.models.word2vec.Word2Vec at 0x16d3aa1d0>},
+      'model': <gensim.models.word2vec.Word2Vec at 0x16624e800>},
      {'name': 'conspiracy',
       'path': '../out/models/conspiracy.model',
-      'model': <gensim.models.word2vec.Word2Vec at 0x16df29f90>}]
+      'model': <gensim.models.word2vec.Word2Vec at 0x17359ffd0>}]
 
 
 
@@ -376,6 +376,17 @@ for model in models:
 ```python
 smart_procrustes_align_gensim(models[0]['model'], models[1]['model'])
 ```
+
+    67181 67181
+    67181 67181
+
+
+
+
+
+    <gensim.models.word2vec.Word2Vec at 0x17359ffd0>
+
+
 
 ```python
 assert len(models[0]['model'].wv.key_to_index) == len(models[1]['model'].wv.key_to_index)
@@ -498,7 +509,7 @@ subr_2_nbs = nbs_diffs\
 display(subr_1_nbs, subr_2_nbs)
 ```
 
-### Project embeddings into subspaces
+### Project embeddings on semantix axes
 
 ```python
 lexs = [
@@ -532,67 +543,6 @@ proj_sims_pos_chart = alt.Chart(proj_sims_pos).mark_line(point=True).encode(
 proj_sims_pos_chart
 ```
 
-
-
-
-
-<div id="altair-viz-8ad2c9436f6b40d799395faeeffd9362"></div>
-<script type="text/javascript">
-  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
-  (function(spec, embedOpt){
-    let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8ad2c9436f6b40d799395faeeffd9362") {
-      outputDiv = document.getElementById("altair-viz-8ad2c9436f6b40d799395faeeffd9362");
-    }
-    const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
-    };
-
-    function maybeLoadScript(lib, version) {
-      var key = `${lib.replace("-", "")}_version`;
-      return (VEGA_DEBUG[key] == version) ?
-        Promise.resolve(paths[lib]) :
-        new Promise(function(resolve, reject) {
-          var s = document.createElement('script');
-          document.getElementsByTagName("head")[0].appendChild(s);
-          s.async = true;
-          s.onload = () => {
-            VEGA_DEBUG[key] = version;
-            return resolve(paths[lib]);
-          };
-          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
-          s.src = paths[lib];
-        });
-    }
-
-    function showError(err) {
-      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
-      throw err;
-    }
-
-    function displayChart(vegaEmbed) {
-      vegaEmbed(outputDiv, spec, embedOpt)
-        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
-    }
-
-    if(typeof define === "function" && define.amd) {
-      requirejs.config({paths});
-      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
-    } else {
-      maybeLoadScript("vega", "5")
-        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
-        .then(() => maybeLoadScript("vega-embed", "6"))
-        .catch(showError)
-        .then(() => displayChart(vegaEmbed));
-    }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-1a78cc22062c17f38e269d5b12ea1a56"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "title": "Community", "type": "nominal"}, "x": {"field": "sim", "title": "SemSim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "title": "", "type": "nominal"}}, "title": "good vs bad", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-1a78cc22062c17f38e269d5b12ea1a56": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": -0.003947508055716753}, {"subreddit": "conspiracy", "lex": "regulations", "sim": -0.01160381082445383}, {"subreddit": "Coronavirus", "lex": "politics", "sim": -0.03446148335933685}, {"subreddit": "conspiracy", "lex": "politics", "sim": -0.029591688886284828}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.038461834192276}, {"subreddit": "conspiracy", "lex": "government", "sim": -0.11527545005083084}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.050309017300605774}, {"subreddit": "conspiracy", "lex": "mandate", "sim": -0.055884093046188354}, {"subreddit": "Coronavirus", "lex": "science", "sim": -0.04062918573617935}, {"subreddit": "conspiracy", "lex": "science", "sim": -0.08194878697395325}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.1142130121588707}, {"subreddit": "conspiracy", "lex": "research", "sim": 0.016525428742170334}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": -0.0030814199708402157}, {"subreddit": "conspiracy", "lex": "shutdown", "sim": -0.06672345101833344}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.061103351414203644}, {"subreddit": "conspiracy", "lex": "shutdowns", "sim": -0.12201405316591263}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.020428422838449478}, {"subreddit": "conspiracy", "lex": "lockdown", "sim": -0.08437266945838928}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": -0.03195760399103165}, {"subreddit": "conspiracy", "lex": "lockdowns", "sim": -0.1352110058069229}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.027036398649215698}, {"subreddit": "conspiracy", "lex": "vaccine", "sim": -0.08384032547473907}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": 0.02113475278019905}, {"subreddit": "conspiracy", "lex": "vaccines", "sim": -0.1082899421453476}, {"subreddit": "Coronavirus", "lex": "mask", "sim": 0.02409209869801998}, {"subreddit": "conspiracy", "lex": "mask", "sim": -0.1027720645070076}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.042272794991731644}, {"subreddit": "conspiracy", "lex": "masks", "sim": -0.1298702210187912}]}}, {"mode": "vega-lite"});
-</script>
-
-
-
 ```python
 proj_sims_pos_chart.save(f'../out/proj-emb_pos_{models[0]["name"]}--{models[1]["name"]}.pdf')
 ```
@@ -617,67 +567,6 @@ proj_sims_subj_chart = alt.Chart(proj_sims_subj).mark_line(point=True).encode(
 proj_sims_subj_chart
 ```
 
-
-
-
-
-<div id="altair-viz-2a8d060abbb9452ca2c2ad6fa17b50ed"></div>
-<script type="text/javascript">
-  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
-  (function(spec, embedOpt){
-    let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2a8d060abbb9452ca2c2ad6fa17b50ed") {
-      outputDiv = document.getElementById("altair-viz-2a8d060abbb9452ca2c2ad6fa17b50ed");
-    }
-    const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
-    };
-
-    function maybeLoadScript(lib, version) {
-      var key = `${lib.replace("-", "")}_version`;
-      return (VEGA_DEBUG[key] == version) ?
-        Promise.resolve(paths[lib]) :
-        new Promise(function(resolve, reject) {
-          var s = document.createElement('script');
-          document.getElementsByTagName("head")[0].appendChild(s);
-          s.async = true;
-          s.onload = () => {
-            VEGA_DEBUG[key] = version;
-            return resolve(paths[lib]);
-          };
-          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
-          s.src = paths[lib];
-        });
-    }
-
-    function showError(err) {
-      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
-      throw err;
-    }
-
-    function displayChart(vegaEmbed) {
-      vegaEmbed(outputDiv, spec, embedOpt)
-        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
-    }
-
-    if(typeof define === "function" && define.amd) {
-      requirejs.config({paths});
-      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
-    } else {
-      maybeLoadScript("vega", "5")
-        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
-        .then(() => maybeLoadScript("vega-embed", "6"))
-        .catch(showError)
-        .then(() => displayChart(vegaEmbed));
-    }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-27efa4ea3b003e075978d236c6104d6c"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "title": "Community", "type": "nominal"}, "x": {"field": "sim", "title": "SemSim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "title": "", "type": "nominal"}}, "title": "good vs bad", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-27efa4ea3b003e075978d236c6104d6c": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": -0.03523268178105354}, {"subreddit": "conspiracy", "lex": "regulations", "sim": -0.0850471556186676}, {"subreddit": "Coronavirus", "lex": "politics", "sim": 0.028386631980538368}, {"subreddit": "conspiracy", "lex": "politics", "sim": 0.04286647215485573}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.06713764369487762}, {"subreddit": "conspiracy", "lex": "government", "sim": 0.018489519134163857}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.056924622505903244}, {"subreddit": "conspiracy", "lex": "mandate", "sim": 0.019045833498239517}, {"subreddit": "Coronavirus", "lex": "science", "sim": 0.11393926292657852}, {"subreddit": "conspiracy", "lex": "science", "sim": 0.06988414376974106}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.10565640777349472}, {"subreddit": "conspiracy", "lex": "research", "sim": 0.12913458049297333}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": 0.032770637422800064}, {"subreddit": "conspiracy", "lex": "shutdown", "sim": 0.011807543225586414}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.04867933690547943}, {"subreddit": "conspiracy", "lex": "shutdowns", "sim": -0.06140518561005592}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.005724509246647358}, {"subreddit": "conspiracy", "lex": "lockdown", "sim": -0.06890334188938141}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": -0.006858906242996454}, {"subreddit": "conspiracy", "lex": "lockdowns", "sim": -0.09060239791870117}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.08758274465799332}, {"subreddit": "conspiracy", "lex": "vaccine", "sim": 0.020923782140016556}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": -0.005105141084641218}, {"subreddit": "conspiracy", "lex": "vaccines", "sim": -0.03825490549206734}, {"subreddit": "Coronavirus", "lex": "mask", "sim": -0.027438262477517128}, {"subreddit": "conspiracy", "lex": "mask", "sim": -0.10273145884275436}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.0008544788579456508}, {"subreddit": "conspiracy", "lex": "masks", "sim": -0.0715503990650177}]}}, {"mode": "vega-lite"});
-</script>
-
-
-
 ```python
 proj_sims_subj_chart.save(f'../out/proj-emb_subj_{models[0]["name"]}--{models[1]["name"]}.pdf')
 ```
@@ -685,89 +574,64 @@ proj_sims_subj_chart.save(f'../out/proj-emb_subj_{models[0]["name"]}--{models[1]
 ### Plot embedding space
 
 ```python
-lex_vecs = []
-for lex in lexs:
-	for model in models:
-		lex_d = {}
-		lex_d['lex'] = lex
-		lex_d['subreddit'] = model['subreddit']
-		lex_d['vec'] = model['model'].wv.get_vector(lex)
-		lex_vecs.append(lex_d)
+lex = 'vaccine'
 ```
 
 ```python
-lex = 'lockdown'
-lex_vecs = []
-
-for model in models:
-	lex_d = {}
-	lex_d['lex'] = lex
-	lex_d['type'] = 'center'
-	lex_d['subreddit'] = model['subreddit']
-	lex_d['vec'] = model['model'].wv.get_vector(lex)
-	lex_vecs.append(lex_d)
-	for nb, sim in model['model'].wv.most_similar(lex, topn=50):
-		lex_d = {}
-		lex_d['lex'] = nb
-		lex_d['type'] = 'nb'
-		lex_d['subreddit'] = model['subreddit']
-		lex_d['vec'] =  model['model'].wv.get_vector(nb)
-		lex_vecs.append(lex_d)
+#data
+nbs_vecs = pd.concat([get_nbs_vecs(lex, model) for model in models])
 ```
 
 ```python
-vecs_df = pd.DataFrame(lex_vecs)
-vecs_df
+#data
+nbs_vecs = dim_red_nbs_vecs(nbs_vecs)
 ```
 
+    /Users/quirin/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/sklearn/manifold/_t_sne.py:790: FutureWarning: The default learning rate in TSNE will change from 200.0 to 'auto' in 1.2.
+      warnings.warn(
+    /Users/quirin/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/sklearn/manifold/_t_sne.py:982: FutureWarning: The PCA initialization in TSNE will change to have the standard deviation of PC1 equal to 1e-4 in 1.2. This will ensure better convergence.
+      warnings.warn(
+
+
+    [t-SNE] Computing pairwise distances...
+    [t-SNE] Computed conditional probabilities for sample 102 / 102
+    [t-SNE] Mean sigma: 11.515156
+    [t-SNE] KL divergence after 250 iterations with early exaggeration: 48.863581
+    [t-SNE] KL divergence after 550 iterations: 0.069542
+
+
 ```python
-from sklearn.manifold import TSNE
+#data
+nbs_vecs_chart = plot_nbs_vecs(lex, nbs_vecs)
+nbs_vecs_chart
 ```
 
+
+    ---------------------------------------------------------------------------
+
+    NameError                                 Traceback (most recent call last)
+
+    /var/folders/gp/dw55jb3d3gl6jn22rscvxjm40000gn/T/ipykernel_23795/1278045993.py in <module>
+          1 #data
+    ----> 2 nbs_vecs_chart = plot_nbs_vecs(nbs_vecs)
+          3 nbs_vecs_chart
+
+
+    ~/promo/NeoCov/neocov/neocov/type_emb.py in plot_nbs_vecs(nbs_vecs, perplexity)
+        276                 column = 'subreddit'
+        277 		)
+    --> 278                 .properties(title=f"Social semantic variation for the word '{lex}'.")
+        279                 .add_selection(brush, interaction)
+        280 	)
+
+
+    NameError: name 'lex' is not defined
+
+
 ```python
-
-Y_tsne = TSNE(
-    perplexity=70,
-    method='exact',
-    init='pca',
-    verbose=True
-    )\
-    .fit_transform(list(vecs_df['vec']))
-
-vecs_df['x_tsne'] = Y_tsne[:, [0]]
-vecs_df['y_tsne'] = Y_tsne[:, [1]]
-
-```
-
-```python
-brush = alt.selection(
-    type="interval",
-    on="[mousedown[event.altKey], mouseup] > mousemove",
-    translate="[mousedown[event.altKey], mouseup] > mousemove!",
-    zoom="wheel![event.altKey]",
-)
-
-interaction = alt.selection(
-    type="interval",
-    bind="scales",
-    on="[mousedown[!event.altKey], mouseup] > mousemove",
-    translate="[mousedown[!event.altKey], mouseup] > mousemove!",
-    zoom="wheel![!event.altKey]",
-)
-
-chart = (alt.Chart(vecs_df).mark_text(point=True).encode(
-	x = 'x_tsne',
-	y = 'y_tsne',
-	text = 'lex',
-	size = alt.condition("datum.type == 'center'", alt.value(25), alt.value(10)),
-	color = alt.condition(brush, 'subreddit', alt.value('lightgray')),
-	column = 'subreddit'
-	)
-	.properties(title=f"Social semantic variation for the word '{lex}'.")
-	.add_selection(brush, interaction)
-)
-
-chart
+#data
+nbs_vecs_chart.save(f'../out/map-sem-space_{lex}_{models[0]["name"]}--{models[1]["name"]}.pdf')
+nbs_vecs_chart.save(f'../out/map-sem-space_{lex}_{models[0]["name"]}--{models[1]["name"]}.html')
 ```
 
 Link to interactive chart: https://wuqui.github.io/neocov/#Plot-embedding-space.

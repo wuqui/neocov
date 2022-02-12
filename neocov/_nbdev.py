@@ -24,6 +24,9 @@ index = {"get_comments_paths_year": "00_read_data.ipynb",
          "make_sem_axis_avg": "02_type_emb.ipynb",
          "get_axis_sim": "02_type_emb.ipynb",
          "get_axis_sims": "02_type_emb.ipynb",
+         "get_nbs_vecs": "02_type_emb.ipynb",
+         "dim_red_nbs_vecs": "02_type_emb.ipynb",
+         "plot_nbs_vecs": "02_type_emb.ipynb",
          "get_subr_counts": "03_communities.ipynb",
          "plot_subr_counts": "03_communities.ipynb"}
 

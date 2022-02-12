@@ -1192,10 +1192,10 @@ nb_path: "index.ipynb"
 <div class="output_text output_subarea output_execute_result">
 <pre>[{&#39;name&#39;: &#39;Coronavirus&#39;,
   &#39;path&#39;: &#39;../out/models/Coronavirus.model&#39;,
-  &#39;model&#39;: &lt;gensim.models.word2vec.Word2Vec at 0x16d3aa1d0&gt;},
+  &#39;model&#39;: &lt;gensim.models.word2vec.Word2Vec at 0x16624e800&gt;},
  {&#39;name&#39;: &#39;conspiracy&#39;,
   &#39;path&#39;: &#39;../out/models/conspiracy.model&#39;,
-  &#39;model&#39;: &lt;gensim.models.word2vec.Word2Vec at 0x16df29f90&gt;}]</pre>
+  &#39;model&#39;: &lt;gensim.models.word2vec.Word2Vec at 0x17359ffd0&gt;}]</pre>
 </div>
 
 </div>
@@ -1241,6 +1241,31 @@ nb_path: "index.ipynb"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>67181 67181
+67181 67181
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;gensim.models.word2vec.Word2Vec at 0x17359ffd0&gt;</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -1542,7 +1567,7 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Project-embeddings-into-subspaces">Project embeddings into subspaces<a class="anchor-link" href="#Project-embeddings-into-subspaces"> </a></h3>
+<h3 id="Project-embeddings-on-semantix-axes">Project embeddings on semantix axes<a class="anchor-link" href="#Project-embeddings-on-semantix-axes"> </a></h3>
 </div>
 </div>
 </div>
@@ -1631,75 +1656,6 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-
-<div id="altair-viz-8ad2c9436f6b40d799395faeeffd9362"></div>
-<script type="text/javascript">
-  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
-  (function(spec, embedOpt){
-    let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8ad2c9436f6b40d799395faeeffd9362") {
-      outputDiv = document.getElementById("altair-viz-8ad2c9436f6b40d799395faeeffd9362");
-    }
-    const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
-    };
-
-    function maybeLoadScript(lib, version) {
-      var key = `${lib.replace("-", "")}_version`;
-      return (VEGA_DEBUG[key] == version) ?
-        Promise.resolve(paths[lib]) :
-        new Promise(function(resolve, reject) {
-          var s = document.createElement('script');
-          document.getElementsByTagName("head")[0].appendChild(s);
-          s.async = true;
-          s.onload = () => {
-            VEGA_DEBUG[key] = version;
-            return resolve(paths[lib]);
-          };
-          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
-          s.src = paths[lib];
-        });
-    }
-
-    function showError(err) {
-      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
-      throw err;
-    }
-
-    function displayChart(vegaEmbed) {
-      vegaEmbed(outputDiv, spec, embedOpt)
-        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
-    }
-
-    if(typeof define === "function" && define.amd) {
-      requirejs.config({paths});
-      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
-    } else {
-      maybeLoadScript("vega", "5")
-        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
-        .then(() => maybeLoadScript("vega-embed", "6"))
-        .catch(showError)
-        .then(() => displayChart(vegaEmbed));
-    }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-1a78cc22062c17f38e269d5b12ea1a56"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "title": "Community", "type": "nominal"}, "x": {"field": "sim", "title": "SemSim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "title": "", "type": "nominal"}}, "title": "good vs bad", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-1a78cc22062c17f38e269d5b12ea1a56": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": -0.003947508055716753}, {"subreddit": "conspiracy", "lex": "regulations", "sim": -0.01160381082445383}, {"subreddit": "Coronavirus", "lex": "politics", "sim": -0.03446148335933685}, {"subreddit": "conspiracy", "lex": "politics", "sim": -0.029591688886284828}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.038461834192276}, {"subreddit": "conspiracy", "lex": "government", "sim": -0.11527545005083084}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.050309017300605774}, {"subreddit": "conspiracy", "lex": "mandate", "sim": -0.055884093046188354}, {"subreddit": "Coronavirus", "lex": "science", "sim": -0.04062918573617935}, {"subreddit": "conspiracy", "lex": "science", "sim": -0.08194878697395325}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.1142130121588707}, {"subreddit": "conspiracy", "lex": "research", "sim": 0.016525428742170334}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": -0.0030814199708402157}, {"subreddit": "conspiracy", "lex": "shutdown", "sim": -0.06672345101833344}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.061103351414203644}, {"subreddit": "conspiracy", "lex": "shutdowns", "sim": -0.12201405316591263}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.020428422838449478}, {"subreddit": "conspiracy", "lex": "lockdown", "sim": -0.08437266945838928}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": -0.03195760399103165}, {"subreddit": "conspiracy", "lex": "lockdowns", "sim": -0.1352110058069229}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.027036398649215698}, {"subreddit": "conspiracy", "lex": "vaccine", "sim": -0.08384032547473907}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": 0.02113475278019905}, {"subreddit": "conspiracy", "lex": "vaccines", "sim": -0.1082899421453476}, {"subreddit": "Coronavirus", "lex": "mask", "sim": 0.02409209869801998}, {"subreddit": "conspiracy", "lex": "mask", "sim": -0.1027720645070076}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.042272794991731644}, {"subreddit": "conspiracy", "lex": "masks", "sim": -0.1298702210187912}]}}, {"mode": "vega-lite"});
-</script>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -1780,75 +1736,6 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-
-<div id="altair-viz-2a8d060abbb9452ca2c2ad6fa17b50ed"></div>
-<script type="text/javascript">
-  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
-  (function(spec, embedOpt){
-    let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2a8d060abbb9452ca2c2ad6fa17b50ed") {
-      outputDiv = document.getElementById("altair-viz-2a8d060abbb9452ca2c2ad6fa17b50ed");
-    }
-    const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
-    };
-
-    function maybeLoadScript(lib, version) {
-      var key = `${lib.replace("-", "")}_version`;
-      return (VEGA_DEBUG[key] == version) ?
-        Promise.resolve(paths[lib]) :
-        new Promise(function(resolve, reject) {
-          var s = document.createElement('script');
-          document.getElementsByTagName("head")[0].appendChild(s);
-          s.async = true;
-          s.onload = () => {
-            VEGA_DEBUG[key] = version;
-            return resolve(paths[lib]);
-          };
-          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
-          s.src = paths[lib];
-        });
-    }
-
-    function showError(err) {
-      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
-      throw err;
-    }
-
-    function displayChart(vegaEmbed) {
-      vegaEmbed(outputDiv, spec, embedOpt)
-        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
-    }
-
-    if(typeof define === "function" && define.amd) {
-      requirejs.config({paths});
-      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
-    } else {
-      maybeLoadScript("vega", "5")
-        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
-        .then(() => maybeLoadScript("vega-embed", "6"))
-        .catch(showError)
-        .then(() => displayChart(vegaEmbed));
-    }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-27efa4ea3b003e075978d236c6104d6c"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "title": "Community", "type": "nominal"}, "x": {"field": "sim", "title": "SemSim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "title": "", "type": "nominal"}}, "title": "good vs bad", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-27efa4ea3b003e075978d236c6104d6c": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": -0.03523268178105354}, {"subreddit": "conspiracy", "lex": "regulations", "sim": -0.0850471556186676}, {"subreddit": "Coronavirus", "lex": "politics", "sim": 0.028386631980538368}, {"subreddit": "conspiracy", "lex": "politics", "sim": 0.04286647215485573}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.06713764369487762}, {"subreddit": "conspiracy", "lex": "government", "sim": 0.018489519134163857}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.056924622505903244}, {"subreddit": "conspiracy", "lex": "mandate", "sim": 0.019045833498239517}, {"subreddit": "Coronavirus", "lex": "science", "sim": 0.11393926292657852}, {"subreddit": "conspiracy", "lex": "science", "sim": 0.06988414376974106}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.10565640777349472}, {"subreddit": "conspiracy", "lex": "research", "sim": 0.12913458049297333}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": 0.032770637422800064}, {"subreddit": "conspiracy", "lex": "shutdown", "sim": 0.011807543225586414}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.04867933690547943}, {"subreddit": "conspiracy", "lex": "shutdowns", "sim": -0.06140518561005592}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.005724509246647358}, {"subreddit": "conspiracy", "lex": "lockdown", "sim": -0.06890334188938141}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": -0.006858906242996454}, {"subreddit": "conspiracy", "lex": "lockdowns", "sim": -0.09060239791870117}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.08758274465799332}, {"subreddit": "conspiracy", "lex": "vaccine", "sim": 0.020923782140016556}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": -0.005105141084641218}, {"subreddit": "conspiracy", "lex": "vaccines", "sim": -0.03825490549206734}, {"subreddit": "Coronavirus", "lex": "mask", "sim": -0.027438262477517128}, {"subreddit": "conspiracy", "lex": "mask", "sim": -0.10273145884275436}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.0008544788579456508}, {"subreddit": "conspiracy", "lex": "masks", "sim": -0.0715503990650177}]}}, {"mode": "vega-lite"});
-</script>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -1882,14 +1769,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lex_vecs</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">lex</span> <span class="ow">in</span> <span class="n">lexs</span><span class="p">:</span>
-	<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
-		<span class="n">lex_d</span> <span class="o">=</span> <span class="p">{}</span>
-		<span class="n">lex_d</span><span class="p">[</span><span class="s1">&#39;lex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lex</span>
-		<span class="n">lex_d</span><span class="p">[</span><span class="s1">&#39;subreddit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;subreddit&#39;</span><span class="p">]</span>
-		<span class="n">lex_d</span><span class="p">[</span><span class="s1">&#39;vec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vector</span><span class="p">(</span><span class="n">lex</span><span class="p">)</span>
-		<span class="n">lex_vecs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lex_d</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lex</span> <span class="o">=</span> <span class="s1">&#39;vaccine&#39;</span>
 </pre></div>
 
     </div>
@@ -1906,23 +1786,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lex</span> <span class="o">=</span> <span class="s1">&#39;lockdown&#39;</span>
-<span class="n">lex_vecs</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
-	<span class="n">lex_d</span> <span class="o">=</span> <span class="p">{}</span>
-	<span class="n">lex_d</span><span class="p">[</span><span class="s1">&#39;lex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lex</span>
-	<span class="n">lex_d</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span>
-	<span class="n">lex_d</span><span class="p">[</span><span class="s1">&#39;subreddit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;subreddit&#39;</span><span class="p">]</span>
-	<span class="n">lex_d</span><span class="p">[</span><span class="s1">&#39;vec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vector</span><span class="p">(</span><span class="n">lex</span><span class="p">)</span>
-	<span class="n">lex_vecs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lex_d</span><span class="p">)</span>
-	<span class="k">for</span> <span class="n">nb</span><span class="p">,</span> <span class="n">sim</span> <span class="ow">in</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">lex</span><span class="p">,</span> <span class="n">topn</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
-		<span class="n">lex_d</span> <span class="o">=</span> <span class="p">{}</span>
-		<span class="n">lex_d</span><span class="p">[</span><span class="s1">&#39;lex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nb</span>
-		<span class="n">lex_d</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nb&#39;</span>
-		<span class="n">lex_d</span><span class="p">[</span><span class="s1">&#39;subreddit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;subreddit&#39;</span><span class="p">]</span>
-		<span class="n">lex_d</span><span class="p">[</span><span class="s1">&#39;vec&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">model</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">get_vector</span><span class="p">(</span><span class="n">nb</span><span class="p">)</span>
-		<span class="n">lex_vecs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lex_d</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nbs_vecs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">get_nbs_vecs</span><span class="p">(</span><span class="n">lex</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -1939,11 +1803,39 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vecs_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lex_vecs</span><span class="p">)</span>
-<span class="n">vecs_df</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nbs_vecs</span> <span class="o">=</span> <span class="n">dim_red_nbs_vecs</span><span class="p">(</span><span class="n">nbs_vecs</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/Users/quirin/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/sklearn/manifold/_t_sne.py:790: FutureWarning: The default learning rate in TSNE will change from 200.0 to &#39;auto&#39; in 1.2.
+  warnings.warn(
+/Users/quirin/opt/miniconda3/envs/neocov/lib/python3.10/site-packages/sklearn/manifold/_t_sne.py:982: FutureWarning: The PCA initialization in TSNE will change to have the standard deviation of PC1 equal to 1e-4 in 1.2. This will ensure better convergence.
+  warnings.warn(
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[t-SNE] Computing pairwise distances...
+[t-SNE] Computed conditional probabilities for sample 102 / 102
+[t-SNE] Mean sigma: 11.515156
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 48.863581
+[t-SNE] KL divergence after 550 iterations: 0.069542
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1957,10 +1849,39 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nbs_vecs_chart</span> <span class="o">=</span> <span class="n">plot_nbs_vecs</span><span class="p">(</span><span class="n">lex</span><span class="p">,</span> <span class="n">nbs_vecs</span><span class="p">)</span>
+<span class="n">nbs_vecs_chart</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">/var/folders/gp/dw55jb3d3gl6jn22rscvxjm40000gn/T/ipykernel_23795/1278045993.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg">#data</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>nbs_vecs_chart <span class="ansi-blue-fg">=</span> plot_nbs_vecs<span class="ansi-blue-fg">(</span>nbs_vecs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> nbs_vecs_chart
+
+<span class="ansi-green-fg">~/promo/NeoCov/neocov/neocov/type_emb.py</span> in <span class="ansi-cyan-fg">plot_nbs_vecs</span><span class="ansi-blue-fg">(nbs_vecs, perplexity)</span>
+<span class="ansi-green-intense-fg ansi-bold">    276</span>                 column <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;subreddit&#39;</span>
+<span class="ansi-green-intense-fg ansi-bold">    277</span> 		)
+<span class="ansi-green-fg">--&gt; 278</span><span class="ansi-red-fg">                 </span><span class="ansi-blue-fg">.</span>properties<span class="ansi-blue-fg">(</span>title<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">f&#34;Social semantic variation for the word &#39;{lex}&#39;.&#34;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    279</span>                 <span class="ansi-blue-fg">.</span>add_selection<span class="ansi-blue-fg">(</span>brush<span class="ansi-blue-fg">,</span> interaction<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    280</span> 	)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;lex&#39; is not defined</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1974,60 +1895,8 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Y_tsne</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span>
-    <span class="n">perplexity</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
-    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">,</span>
-    <span class="n">init</span><span class="o">=</span><span class="s1">&#39;pca&#39;</span><span class="p">,</span>
-    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span>
-    <span class="p">)</span>\
-    <span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">vecs_df</span><span class="p">[</span><span class="s1">&#39;vec&#39;</span><span class="p">]))</span>
-
-<span class="n">vecs_df</span><span class="p">[</span><span class="s1">&#39;x_tsne&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y_tsne</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="n">vecs_df</span><span class="p">[</span><span class="s1">&#39;y_tsne&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y_tsne</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">brush</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection</span><span class="p">(</span>
-    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;interval&quot;</span><span class="p">,</span>
-    <span class="n">on</span><span class="o">=</span><span class="s2">&quot;[mousedown[event.altKey], mouseup] &gt; mousemove&quot;</span><span class="p">,</span>
-    <span class="n">translate</span><span class="o">=</span><span class="s2">&quot;[mousedown[event.altKey], mouseup] &gt; mousemove!&quot;</span><span class="p">,</span>
-    <span class="n">zoom</span><span class="o">=</span><span class="s2">&quot;wheel![event.altKey]&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">interaction</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection</span><span class="p">(</span>
-    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;interval&quot;</span><span class="p">,</span>
-    <span class="n">bind</span><span class="o">=</span><span class="s2">&quot;scales&quot;</span><span class="p">,</span>
-    <span class="n">on</span><span class="o">=</span><span class="s2">&quot;[mousedown[!event.altKey], mouseup] &gt; mousemove&quot;</span><span class="p">,</span>
-    <span class="n">translate</span><span class="o">=</span><span class="s2">&quot;[mousedown[!event.altKey], mouseup] &gt; mousemove!&quot;</span><span class="p">,</span>
-    <span class="n">zoom</span><span class="o">=</span><span class="s2">&quot;wheel![!event.altKey]&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">chart</span> <span class="o">=</span> <span class="p">(</span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">vecs_df</span><span class="p">)</span><span class="o">.</span><span class="n">mark_text</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-	<span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;x_tsne&#39;</span><span class="p">,</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;y_tsne&#39;</span><span class="p">,</span>
-	<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;lex&#39;</span><span class="p">,</span>
-	<span class="n">size</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="s2">&quot;datum.type == &#39;center&#39;&quot;</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span>
-	<span class="n">color</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">brush</span><span class="p">,</span> <span class="s1">&#39;subreddit&#39;</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)),</span>
-	<span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;subreddit&#39;</span>
-	<span class="p">)</span>
-	<span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Social semantic variation for the word &#39;</span><span class="si">{</span><span class="n">lex</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
-	<span class="o">.</span><span class="n">add_selection</span><span class="p">(</span><span class="n">brush</span><span class="p">,</span> <span class="n">interaction</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="n">chart</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nbs_vecs_chart</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../out/map-sem-space_</span><span class="si">{</span><span class="n">lex</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">.pdf&#39;</span><span class="p">)</span>
+<span class="n">nbs_vecs_chart</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../out/map-sem-space_</span><span class="si">{</span><span class="n">lex</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">.html&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>

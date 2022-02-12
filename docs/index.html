@@ -44,21 +44,6 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>The autoreload extension is already loaded. To reload it, use:
-  %reload_ext autoreload
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -110,6 +95,7 @@ nb_path: "index.ipynb"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+<span class="kn">from</span> <span class="nn">altair_saver</span> <span class="kn">import</span> <span class="n">save</span>
 <span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">Word2Vec</span>
 </pre></div>
 
@@ -1206,10 +1192,10 @@ nb_path: "index.ipynb"
 <div class="output_text output_subarea output_execute_result">
 <pre>[{&#39;name&#39;: &#39;Coronavirus&#39;,
   &#39;path&#39;: &#39;../out/models/Coronavirus.model&#39;,
-  &#39;model&#39;: &lt;gensim.models.word2vec.Word2Vec at 0x10d0575e0&gt;},
+  &#39;model&#39;: &lt;gensim.models.word2vec.Word2Vec at 0x16d3aa1d0&gt;},
  {&#39;name&#39;: &#39;conspiracy&#39;,
   &#39;path&#39;: &#39;../out/models/conspiracy.model&#39;,
-  &#39;model&#39;: &lt;gensim.models.word2vec.Word2Vec at 0x16f08cb20&gt;}]</pre>
+  &#39;model&#39;: &lt;gensim.models.word2vec.Word2Vec at 0x16df29f90&gt;}]</pre>
 </div>
 
 </div>
@@ -1258,31 +1244,6 @@ nb_path: "index.ipynb"
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>67181 67181
-67181 67181
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;gensim.models.word2vec.Word2Vec at 0x16f08cb20&gt;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -1319,56 +1280,6 @@ nb_path: "index.ipynb"
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Model</th>
-      <th>Words</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Coronavirus</td>
-      <td>94816</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>conspiracy</td>
-      <td>112599</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -1673,7 +1584,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pole_words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;bad&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pole_words_pos</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;bad&#39;</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -1690,15 +1601,30 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims</span> <span class="o">=</span> <span class="n">get_axis_sims</span><span class="p">(</span><span class="n">lexs</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">pole_words</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_pos</span> <span class="o">=</span> <span class="n">get_axis_sims</span><span class="p">(</span><span class="n">lexs</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">pole_words_pos</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
 
-<span class="n">proj_sims_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">proj_sims</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_pos_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">proj_sims_pos</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
 	<span class="n">x</span><span class="o">=</span><span class="s1">&#39;sim&#39;</span><span class="p">,</span>
 	<span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;lex&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
 	<span class="n">color</span><span class="o">=</span><span class="s1">&#39;subreddit&#39;</span>
-<span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pole_words_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">pole_words_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="n">proj_sims_chart</span>
+<span class="n">proj_sims_pos_chart</span>
 </pre></div>
 
     </div>
@@ -1713,13 +1639,13 @@ nb_path: "index.ipynb"
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-cf8656a131534590ab7aadc33971e29a"></div>
+<div id="altair-viz-65145761518044dfb35eec28249af5b2"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-cf8656a131534590ab7aadc33971e29a") {
-      outputDiv = document.getElementById("altair-viz-cf8656a131534590ab7aadc33971e29a");
+    if (outputDiv.id !== "altair-viz-65145761518044dfb35eec28249af5b2") {
+      outputDiv = document.getElementById("altair-viz-65145761518044dfb35eec28249af5b2");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1765,12 +1691,29 @@ nb_path: "index.ipynb"
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-42999d1694d55e2ed0bb1c28bd6bb014"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "type": "nominal"}, "x": {"field": "sim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "type": "nominal"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-42999d1694d55e2ed0bb1c28bd6bb014": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": -0.003947508055716753}, {"subreddit": "conspiracy", "lex": "regulations", "sim": -0.011603784747421741}, {"subreddit": "Coronavirus", "lex": "politics", "sim": -0.03446148335933685}, {"subreddit": "conspiracy", "lex": "politics", "sim": -0.02959168516099453}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.038461834192276}, {"subreddit": "conspiracy", "lex": "government", "sim": -0.11527542024850845}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.050309017300605774}, {"subreddit": "conspiracy", "lex": "mandate", "sim": -0.055884070694446564}, {"subreddit": "Coronavirus", "lex": "science", "sim": -0.04062918573617935}, {"subreddit": "conspiracy", "lex": "science", "sim": -0.08194876462221146}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.1142130121588707}, {"subreddit": "conspiracy", "lex": "research", "sim": 0.016525449231266975}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": -0.0030814199708402157}, {"subreddit": "conspiracy", "lex": "shutdown", "sim": -0.06672345101833344}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.061103351414203644}, {"subreddit": "conspiracy", "lex": "shutdowns", "sim": -0.12201403826475143}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.020428422838449478}, {"subreddit": "conspiracy", "lex": "lockdown", "sim": -0.08437265455722809}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": -0.03195760399103165}, {"subreddit": "conspiracy", "lex": "lockdowns", "sim": -0.13521099090576172}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.027036398649215698}, {"subreddit": "conspiracy", "lex": "vaccine", "sim": -0.08384035527706146}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": 0.02113475278019905}, {"subreddit": "conspiracy", "lex": "vaccines", "sim": -0.10828987509012222}, {"subreddit": "Coronavirus", "lex": "mask", "sim": 0.02409209869801998}, {"subreddit": "conspiracy", "lex": "mask", "sim": -0.10277207940816879}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.042272794991731644}, {"subreddit": "conspiracy", "lex": "masks", "sim": -0.1298701912164688}]}}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-1a78cc22062c17f38e269d5b12ea1a56"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "type": "nominal"}, "x": {"field": "sim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "type": "nominal"}}, "title": "good vs bad", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-1a78cc22062c17f38e269d5b12ea1a56": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": -0.003947508055716753}, {"subreddit": "conspiracy", "lex": "regulations", "sim": -0.01160381082445383}, {"subreddit": "Coronavirus", "lex": "politics", "sim": -0.03446148335933685}, {"subreddit": "conspiracy", "lex": "politics", "sim": -0.029591688886284828}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.038461834192276}, {"subreddit": "conspiracy", "lex": "government", "sim": -0.11527545005083084}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.050309017300605774}, {"subreddit": "conspiracy", "lex": "mandate", "sim": -0.055884093046188354}, {"subreddit": "Coronavirus", "lex": "science", "sim": -0.04062918573617935}, {"subreddit": "conspiracy", "lex": "science", "sim": -0.08194878697395325}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.1142130121588707}, {"subreddit": "conspiracy", "lex": "research", "sim": 0.016525428742170334}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": -0.0030814199708402157}, {"subreddit": "conspiracy", "lex": "shutdown", "sim": -0.06672345101833344}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.061103351414203644}, {"subreddit": "conspiracy", "lex": "shutdowns", "sim": -0.12201405316591263}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.020428422838449478}, {"subreddit": "conspiracy", "lex": "lockdown", "sim": -0.08437266945838928}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": -0.03195760399103165}, {"subreddit": "conspiracy", "lex": "lockdowns", "sim": -0.1352110058069229}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.027036398649215698}, {"subreddit": "conspiracy", "lex": "vaccine", "sim": -0.08384032547473907}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": 0.02113475278019905}, {"subreddit": "conspiracy", "lex": "vaccines", "sim": -0.1082899421453476}, {"subreddit": "Coronavirus", "lex": "mask", "sim": 0.02409209869801998}, {"subreddit": "conspiracy", "lex": "mask", "sim": -0.1027720645070076}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.042272794991731644}, {"subreddit": "conspiracy", "lex": "masks", "sim": -0.1298702210187912}]}}, {"mode": "vega-lite"});
 </script>
 </div>
 
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_pos_chart</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../out/proj-emb_pos_</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">.pdf&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
@@ -1790,7 +1733,7 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pole_words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;objective&#39;</span><span class="p">,</span> <span class="s1">&#39;subjective&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pole_words_subj</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;objective&#39;</span><span class="p">,</span> <span class="s1">&#39;subjective&#39;</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -1807,15 +1750,30 @@ nb_path: "index.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims</span> <span class="o">=</span> <span class="n">get_axis_sims</span><span class="p">(</span><span class="n">lexs</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">pole_words</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_subj</span> <span class="o">=</span> <span class="n">get_axis_sims</span><span class="p">(</span><span class="n">lexs</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">pole_words_subj</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
 
-<span class="n">proj_sims_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">proj_sims</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_subj_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">proj_sims_subj</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
 	<span class="n">x</span><span class="o">=</span><span class="s1">&#39;sim&#39;</span><span class="p">,</span>
 	<span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;lex&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
 	<span class="n">color</span><span class="o">=</span><span class="s1">&#39;subreddit&#39;</span>
-<span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pole_words_subj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">pole_words_subj</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="n">proj_sims_chart</span>
+<span class="n">proj_sims_subj_chart</span>
 </pre></div>
 
     </div>
@@ -1830,13 +1788,13 @@ nb_path: "index.ipynb"
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-dbae6d5e5ca144ff8e7c1ddd3990e69b"></div>
+<div id="altair-viz-bb5f61e9c6954b48a01e35fae0782a47"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-dbae6d5e5ca144ff8e7c1ddd3990e69b") {
-      outputDiv = document.getElementById("altair-viz-dbae6d5e5ca144ff8e7c1ddd3990e69b");
+    if (outputDiv.id !== "altair-viz-bb5f61e9c6954b48a01e35fae0782a47") {
+      outputDiv = document.getElementById("altair-viz-bb5f61e9c6954b48a01e35fae0782a47");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1882,12 +1840,29 @@ nb_path: "index.ipynb"
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-e55b97b1001d1e7c73b505459fc4c90d"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "type": "nominal"}, "x": {"field": "sim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "type": "nominal"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-e55b97b1001d1e7c73b505459fc4c90d": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": -0.03523268178105354}, {"subreddit": "conspiracy", "lex": "regulations", "sim": -0.08504713326692581}, {"subreddit": "Coronavirus", "lex": "politics", "sim": 0.028386631980538368}, {"subreddit": "conspiracy", "lex": "politics", "sim": 0.04286649823188782}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.06713764369487762}, {"subreddit": "conspiracy", "lex": "government", "sim": 0.01848958246409893}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.056924622505903244}, {"subreddit": "conspiracy", "lex": "mandate", "sim": 0.019045785069465637}, {"subreddit": "Coronavirus", "lex": "science", "sim": 0.11393926292657852}, {"subreddit": "conspiracy", "lex": "science", "sim": 0.06988415122032166}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.10565640777349472}, {"subreddit": "conspiracy", "lex": "research", "sim": 0.12913458049297333}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": 0.032770637422800064}, {"subreddit": "conspiracy", "lex": "shutdown", "sim": 0.011807557195425034}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.04867933690547943}, {"subreddit": "conspiracy", "lex": "shutdowns", "sim": -0.06140519678592682}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.005724509246647358}, {"subreddit": "conspiracy", "lex": "lockdown", "sim": -0.0689033567905426}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": -0.006858906242996454}, {"subreddit": "conspiracy", "lex": "lockdowns", "sim": -0.09060239046812057}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.08758274465799332}, {"subreddit": "conspiracy", "lex": "vaccine", "sim": 0.020923763513565063}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": -0.005105141084641218}, {"subreddit": "conspiracy", "lex": "vaccines", "sim": -0.03825485333800316}, {"subreddit": "Coronavirus", "lex": "mask", "sim": -0.027438262477517128}, {"subreddit": "conspiracy", "lex": "mask", "sim": -0.10273142904043198}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.0008544788579456508}, {"subreddit": "conspiracy", "lex": "masks", "sim": -0.0715503916144371}]}}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-27efa4ea3b003e075978d236c6104d6c"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "type": "nominal"}, "x": {"field": "sim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "type": "nominal"}}, "title": "objective vs subjective", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-27efa4ea3b003e075978d236c6104d6c": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": -0.03523268178105354}, {"subreddit": "conspiracy", "lex": "regulations", "sim": -0.0850471556186676}, {"subreddit": "Coronavirus", "lex": "politics", "sim": 0.028386631980538368}, {"subreddit": "conspiracy", "lex": "politics", "sim": 0.04286647215485573}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.06713764369487762}, {"subreddit": "conspiracy", "lex": "government", "sim": 0.018489519134163857}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.056924622505903244}, {"subreddit": "conspiracy", "lex": "mandate", "sim": 0.019045833498239517}, {"subreddit": "Coronavirus", "lex": "science", "sim": 0.11393926292657852}, {"subreddit": "conspiracy", "lex": "science", "sim": 0.06988414376974106}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.10565640777349472}, {"subreddit": "conspiracy", "lex": "research", "sim": 0.12913458049297333}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": 0.032770637422800064}, {"subreddit": "conspiracy", "lex": "shutdown", "sim": 0.011807543225586414}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.04867933690547943}, {"subreddit": "conspiracy", "lex": "shutdowns", "sim": -0.06140518561005592}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.005724509246647358}, {"subreddit": "conspiracy", "lex": "lockdown", "sim": -0.06890334188938141}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": -0.006858906242996454}, {"subreddit": "conspiracy", "lex": "lockdowns", "sim": -0.09060239791870117}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.08758274465799332}, {"subreddit": "conspiracy", "lex": "vaccine", "sim": 0.020923782140016556}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": -0.005105141084641218}, {"subreddit": "conspiracy", "lex": "vaccines", "sim": -0.03825490549206734}, {"subreddit": "Coronavirus", "lex": "mask", "sim": -0.027438262477517128}, {"subreddit": "conspiracy", "lex": "mask", "sim": -0.10273145884275436}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.0008544788579456508}, {"subreddit": "conspiracy", "lex": "masks", "sim": -0.0715503990650177}]}}, {"mode": "vega-lite"});
 </script>
 </div>
 
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_subj_chart</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../out/proj-emb_subj_</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">.pdf&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 

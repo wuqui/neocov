@@ -623,7 +623,7 @@ proj_sims_subj_chart = alt.Chart(proj_sims_subj).mark_line(point=True).encode(
 	x=alt.X('sim', title='SemSim'),
 	y=alt.Y('lex', title='', sort=None),
 	color=alt.Color('subreddit', title='Community')
-).properties(title=f'{pole_words_pos[0]} vs {pole_words_pos[1]}')
+).properties(title=f'{pole_words_subj[0]} vs {pole_words_subj[1]}')
 
 proj_sims_subj_chart
 ```

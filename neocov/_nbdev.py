@@ -20,6 +20,10 @@ index = {"get_comments_paths_year": "00_read_data.ipynb",
          "smart_procrustes_align_gensim": "02_type_emb.ipynb",
          "measure_distances": "02_type_emb.ipynb",
          "get_nearest_neighbours_models": "02_type_emb.ipynb",
+         "get_pole_avg": "02_type_emb.ipynb",
+         "make_sem_axis_avg": "02_type_emb.ipynb",
+         "get_axis_sim": "02_type_emb.ipynb",
+         "get_axis_sims": "02_type_emb.ipynb",
          "get_subr_counts": "03_communities.ipynb",
          "plot_subr_counts": "03_communities.ipynb"}
 

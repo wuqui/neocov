@@ -216,7 +216,7 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pre-process-comments">Pre-process comments<a class="anchor-link" href="#Pre-process-comments"> </a></h3>
+<h3 id="Preprocessing">Preprocessing<a class="anchor-link" href="#Preprocessing"> </a></h3>
 </div>
 </div>
 </div>
@@ -649,7 +649,7 @@ nb_path: "index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Inspect-nearest-neighbours-of-lexemes">Inspect nearest neighbours of lexemes<a class="anchor-link" href="#Inspect-nearest-neighbours-of-lexemes"> </a></h3>
+<h3 id="Inspect-neighbourhood">Inspect neighbourhood<a class="anchor-link" href="#Inspect-neighbourhood"> </a></h3>
 </div>
 </div>
 </div>
@@ -728,7 +728,7 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Inspect-subreddits">Inspect subreddits<a class="anchor-link" href="#Inspect-subreddits"> </a></h3>
+<h3 id="Covid-related-communities">Covid-related communities<a class="anchor-link" href="#Covid-related-communities"> </a></h3>
 </div>
 </div>
 </div>
@@ -1440,7 +1440,7 @@ Wall time: 4min 44s
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Measure-distances">Measure distances<a class="anchor-link" href="#Measure-distances"> </a></h3>
+<h3 id="Semantic-neighbourhoods">Semantic neighbourhoods<a class="anchor-link" href="#Semantic-neighbourhoods"> </a></h3>
 </div>
 </div>
 </div>
@@ -2016,318 +2016,7 @@ Wall time: 4min 44s
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Project-embeddings-on-semantix-axes">Project embeddings on semantix axes<a class="anchor-link" href="#Project-embeddings-on-semantix-axes"> </a></h3>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lexs</span> <span class="o">=</span> <span class="p">[</span>
-	<span class="s1">&#39;regulations&#39;</span><span class="p">,</span> <span class="s1">&#39;politics&#39;</span><span class="p">,</span>
-	<span class="s1">&#39;government&#39;</span><span class="p">,</span> <span class="s1">&#39;mandate&#39;</span><span class="p">,</span> 
-	<span class="s1">&#39;science&#39;</span><span class="p">,</span> <span class="s1">&#39;research&#39;</span><span class="p">,</span>
-	<span class="s1">&#39;shutdown&#39;</span><span class="p">,</span> <span class="s1">&#39;shutdowns&#39;</span><span class="p">,</span> 
-	<span class="s1">&#39;lockdown&#39;</span><span class="p">,</span> <span class="s1">&#39;lockdowns&#39;</span><span class="p">,</span> 
-	<span class="s1">&#39;vaccine&#39;</span><span class="p">,</span> <span class="s1">&#39;vaccines&#39;</span><span class="p">,</span> 
-	<span class="s1">&#39;mask&#39;</span><span class="p">,</span> <span class="s1">&#39;masks&#39;</span><span class="p">,</span>
-	<span class="c1"># &#39;good&#39;, &#39;bad&#39;,</span>
-	<span class="c1"># &#39;objective&#39;, &#39;subjective&#39;</span>
-	<span class="p">]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="good-vs-bad"><em>good</em> vs <em>bad</em><a class="anchor-link" href="#good-vs-bad"> </a></h4>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pole_words_pos</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;bad&#39;</span><span class="p">]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_pos</span> <span class="o">=</span> <span class="n">get_axis_sims</span><span class="p">(</span><span class="n">lexs</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">pole_words_pos</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_pos_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">proj_sims_pos</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-	<span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;sim&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;SemSim&#39;</span><span class="p">),</span>
-	<span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;lex&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-	<span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Community&#39;</span><span class="p">)</span>
-<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pole_words_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">pole_words_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="n">proj_sims_pos_chart</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-
-<div id="altair-viz-1915a15f559e4ae6aadec842eef19e92"></div>
-<script type="text/javascript">
-  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
-  (function(spec, embedOpt){
-    let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-1915a15f559e4ae6aadec842eef19e92") {
-      outputDiv = document.getElementById("altair-viz-1915a15f559e4ae6aadec842eef19e92");
-    }
-    const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
-    };
-
-    function maybeLoadScript(lib, version) {
-      var key = `${lib.replace("-", "")}_version`;
-      return (VEGA_DEBUG[key] == version) ?
-        Promise.resolve(paths[lib]) :
-        new Promise(function(resolve, reject) {
-          var s = document.createElement('script');
-          document.getElementsByTagName("head")[0].appendChild(s);
-          s.async = true;
-          s.onload = () => {
-            VEGA_DEBUG[key] = version;
-            return resolve(paths[lib]);
-          };
-          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
-          s.src = paths[lib];
-        });
-    }
-
-    function showError(err) {
-      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
-      throw err;
-    }
-
-    function displayChart(vegaEmbed) {
-      vegaEmbed(outputDiv, spec, embedOpt)
-        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
-    }
-
-    if(typeof define === "function" && define.amd) {
-      requirejs.config({paths});
-      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
-    } else {
-      maybeLoadScript("vega", "5")
-        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
-        .then(() => maybeLoadScript("vega-embed", "6"))
-        .catch(showError)
-        .then(() => displayChart(vegaEmbed));
-    }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-ff1c71155474af57051f58a1f2b125b6"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "title": "Community", "type": "nominal"}, "x": {"field": "sim", "title": "SemSim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "title": "", "type": "nominal"}}, "title": "good vs bad", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-ff1c71155474af57051f58a1f2b125b6": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": 0.03294740617275238}, {"subreddit": "LockdownSkepticism", "lex": "regulations", "sim": -0.09306281805038452}, {"subreddit": "Coronavirus", "lex": "politics", "sim": -0.05217945948243141}, {"subreddit": "LockdownSkepticism", "lex": "politics", "sim": -0.10147155076265335}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.0668613612651825}, {"subreddit": "LockdownSkepticism", "lex": "government", "sim": -0.06788706034421921}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.07579868286848068}, {"subreddit": "LockdownSkepticism", "lex": "mandate", "sim": 0.071579709649086}, {"subreddit": "Coronavirus", "lex": "science", "sim": -0.008252025581896305}, {"subreddit": "LockdownSkepticism", "lex": "science", "sim": -0.07284800708293915}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.12641744315624237}, {"subreddit": "LockdownSkepticism", "lex": "research", "sim": 0.13834832608699799}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": 0.07014060020446777}, {"subreddit": "LockdownSkepticism", "lex": "shutdown", "sim": -0.005124818999320269}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.010588633827865124}, {"subreddit": "LockdownSkepticism", "lex": "shutdowns", "sim": -0.08092067390680313}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": 0.034117065370082855}, {"subreddit": "LockdownSkepticism", "lex": "lockdown", "sim": -0.042131394147872925}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": 0.023748569190502167}, {"subreddit": "LockdownSkepticism", "lex": "lockdowns", "sim": -0.07874520868062973}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.08138630539178848}, {"subreddit": "LockdownSkepticism", "lex": "vaccine", "sim": 0.01739058643579483}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": 0.08083311468362808}, {"subreddit": "LockdownSkepticism", "lex": "vaccines", "sim": -0.03830081224441528}, {"subreddit": "Coronavirus", "lex": "mask", "sim": 0.05446961894631386}, {"subreddit": "LockdownSkepticism", "lex": "mask", "sim": -0.016933348029851913}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.07336952537298203}, {"subreddit": "LockdownSkepticism", "lex": "masks", "sim": -0.06833287328481674}]}}, {"mode": "vega-lite"});
-</script>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>proj_sims_pos_chart.save(f'../out/proj-emb<em>pos</em>{models[0]["name"]}--{models[1]["name"]}.pdf')</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="objective-vs-subjective"><em>objective</em> vs <em>subjective</em><a class="anchor-link" href="#objective-vs-subjective"> </a></h4>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pole_words_subj</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;objective&#39;</span><span class="p">,</span> <span class="s1">&#39;subjective&#39;</span><span class="p">]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_subj</span> <span class="o">=</span> <span class="n">get_axis_sims</span><span class="p">(</span><span class="n">lexs</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">pole_words_subj</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_subj_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">proj_sims_subj</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-	<span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;sim&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;SemSim&#39;</span><span class="p">),</span>
-	<span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;lex&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-	<span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Community&#39;</span><span class="p">)</span>
-<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pole_words_subj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">pole_words_subj</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="n">proj_sims_subj_chart</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-
-<div id="altair-viz-6a4460ef0ef94d99992caefafe2fcdb8"></div>
-<script type="text/javascript">
-  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
-  (function(spec, embedOpt){
-    let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6a4460ef0ef94d99992caefafe2fcdb8") {
-      outputDiv = document.getElementById("altair-viz-6a4460ef0ef94d99992caefafe2fcdb8");
-    }
-    const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
-    };
-
-    function maybeLoadScript(lib, version) {
-      var key = `${lib.replace("-", "")}_version`;
-      return (VEGA_DEBUG[key] == version) ?
-        Promise.resolve(paths[lib]) :
-        new Promise(function(resolve, reject) {
-          var s = document.createElement('script');
-          document.getElementsByTagName("head")[0].appendChild(s);
-          s.async = true;
-          s.onload = () => {
-            VEGA_DEBUG[key] = version;
-            return resolve(paths[lib]);
-          };
-          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
-          s.src = paths[lib];
-        });
-    }
-
-    function showError(err) {
-      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
-      throw err;
-    }
-
-    function displayChart(vegaEmbed) {
-      vegaEmbed(outputDiv, spec, embedOpt)
-        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
-    }
-
-    if(typeof define === "function" && define.amd) {
-      requirejs.config({paths});
-      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
-    } else {
-      maybeLoadScript("vega", "5")
-        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
-        .then(() => maybeLoadScript("vega-embed", "6"))
-        .catch(showError)
-        .then(() => displayChart(vegaEmbed));
-    }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-396a532b527835bcadf065c8ae58025f"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "title": "Community", "type": "nominal"}, "x": {"field": "sim", "title": "SemSim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "title": "", "type": "nominal"}}, "title": "objective vs subjective", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-396a532b527835bcadf065c8ae58025f": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": 0.036803487688302994}, {"subreddit": "LockdownSkepticism", "lex": "regulations", "sim": 0.026317626237869263}, {"subreddit": "Coronavirus", "lex": "politics", "sim": 0.12810716032981873}, {"subreddit": "LockdownSkepticism", "lex": "politics", "sim": 0.03402623534202576}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.14896170794963837}, {"subreddit": "LockdownSkepticism", "lex": "government", "sim": 0.12299025803804398}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.0032925221603363752}, {"subreddit": "LockdownSkepticism", "lex": "mandate", "sim": 0.026931026950478554}, {"subreddit": "Coronavirus", "lex": "science", "sim": 0.35689404606819153}, {"subreddit": "LockdownSkepticism", "lex": "science", "sim": 0.19475765526294708}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.23729760944843292}, {"subreddit": "LockdownSkepticism", "lex": "research", "sim": 0.18140950798988342}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": 0.0014888636069372296}, {"subreddit": "LockdownSkepticism", "lex": "shutdown", "sim": 0.0820389911532402}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.00814331229776144}, {"subreddit": "LockdownSkepticism", "lex": "shutdowns", "sim": 0.07414048165082932}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.0023245711345225573}, {"subreddit": "LockdownSkepticism", "lex": "lockdown", "sim": 0.08239030838012695}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": 0.05210113525390625}, {"subreddit": "LockdownSkepticism", "lex": "lockdowns", "sim": 0.05337350815534592}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.12188472598791122}, {"subreddit": "LockdownSkepticism", "lex": "vaccine", "sim": 0.012688853777945042}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": 0.08601615577936172}, {"subreddit": "LockdownSkepticism", "lex": "vaccines", "sim": -0.014604986645281315}, {"subreddit": "Coronavirus", "lex": "mask", "sim": -0.008477694354951382}, {"subreddit": "LockdownSkepticism", "lex": "mask", "sim": 0.023087216541171074}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.04734383150935173}, {"subreddit": "LockdownSkepticism", "lex": "masks", "sim": 0.026360277086496353}]}}, {"mode": "vega-lite"});
-</script>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>proj_sims_subj_chart.save(f'../out/proj-emb<em>subj</em>{models[0]["name"]}--{models[1]["name"]}.pdf')</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Plot-embedding-space">Plot embedding space<a class="anchor-link" href="#Plot-embedding-space"> </a></h3>
+<h3 id="Maps-of-social-semantic-variation">Maps of social semantic variation<a class="anchor-link" href="#Maps-of-social-semantic-variation"> </a></h3>
 </div>
 </div>
 </div>
@@ -2433,7 +2122,7 @@ Wall time: 4min 44s
 <div class="output_area">
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
+<div class="output_html rendered_html output_subarea ">
 
 <div id="altair-viz-055efa923500452da82259f15a40a00f"></div>
 <script type="text/javascript">
@@ -2508,6 +2197,337 @@ Wall time: 4min 44s
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">nbs_vecs_chart</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../out/map-sem-space_</span><span class="si">{</span><span class="n">lex</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">.pdf&#39;</span><span class="p">)</span>
 <span class="n">nbs_vecs_chart</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../out/map-sem-space_</span><span class="si">{</span><span class="n">lex</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">.html&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Dimensions-of-social-semantic-variation">Dimensions of social semantic variation<a class="anchor-link" href="#Dimensions-of-social-semantic-variation"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lexs</span> <span class="o">=</span> <span class="p">[</span>
+	<span class="s1">&#39;regulations&#39;</span><span class="p">,</span> <span class="s1">&#39;politics&#39;</span><span class="p">,</span>
+	<span class="s1">&#39;government&#39;</span><span class="p">,</span> <span class="s1">&#39;mandate&#39;</span><span class="p">,</span> 
+	<span class="s1">&#39;science&#39;</span><span class="p">,</span> <span class="s1">&#39;research&#39;</span><span class="p">,</span>
+	<span class="s1">&#39;shutdown&#39;</span><span class="p">,</span> <span class="s1">&#39;shutdowns&#39;</span><span class="p">,</span> 
+	<span class="s1">&#39;lockdown&#39;</span><span class="p">,</span> <span class="s1">&#39;lockdowns&#39;</span><span class="p">,</span> 
+	<span class="s1">&#39;vaccine&#39;</span><span class="p">,</span> <span class="s1">&#39;vaccines&#39;</span><span class="p">,</span> 
+	<span class="s1">&#39;mask&#39;</span><span class="p">,</span> <span class="s1">&#39;masks&#39;</span><span class="p">,</span>
+	<span class="c1"># &#39;good&#39;, &#39;bad&#39;,</span>
+	<span class="c1"># &#39;objective&#39;, &#39;subjective&#39;</span>
+	<span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="good-vs-bad"><em>good</em> vs <em>bad</em><a class="anchor-link" href="#good-vs-bad"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pole_words_pos</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;bad&#39;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_pos</span> <span class="o">=</span> <span class="n">get_axis_sims</span><span class="p">(</span><span class="n">lexs</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">pole_words_pos</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_pos_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">proj_sims_pos</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+	<span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;sim&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;SemSim&#39;</span><span class="p">),</span>
+	<span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;lex&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+	<span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Community&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pole_words_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">pole_words_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">proj_sims_pos_chart</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-98bf1e67c73441c3b17801ee4a2dadb6"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-98bf1e67c73441c3b17801ee4a2dadb6") {
+      outputDiv = document.getElementById("altair-viz-98bf1e67c73441c3b17801ee4a2dadb6");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-0844afd894a81029f9aec017e6f85f6d"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "title": "Community", "type": "nominal"}, "x": {"field": "sim", "title": "SemSim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "title": "", "type": "nominal"}}, "title": "good vs bad", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-0844afd894a81029f9aec017e6f85f6d": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": 0.03294740617275238}, {"subreddit": "conspiracy", "lex": "regulations", "sim": 0.0345868356525898}, {"subreddit": "Coronavirus", "lex": "politics", "sim": -0.05217945948243141}, {"subreddit": "conspiracy", "lex": "politics", "sim": -0.03146485984325409}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.0668613612651825}, {"subreddit": "conspiracy", "lex": "government", "sim": -0.04985647648572922}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.07579868286848068}, {"subreddit": "conspiracy", "lex": "mandate", "sim": 0.003911263309419155}, {"subreddit": "Coronavirus", "lex": "science", "sim": -0.008252025581896305}, {"subreddit": "conspiracy", "lex": "science", "sim": -0.04790765792131424}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.12641744315624237}, {"subreddit": "conspiracy", "lex": "research", "sim": 0.03304024040699005}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": 0.07014060020446777}, {"subreddit": "conspiracy", "lex": "shutdown", "sim": -0.0023463875986635685}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.010588633827865124}, {"subreddit": "conspiracy", "lex": "shutdowns", "sim": -0.01648612506687641}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": 0.034117065370082855}, {"subreddit": "conspiracy", "lex": "lockdown", "sim": -0.0220158863812685}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": 0.023748569190502167}, {"subreddit": "conspiracy", "lex": "lockdowns", "sim": -0.0604320727288723}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.08138630539178848}, {"subreddit": "conspiracy", "lex": "vaccine", "sim": -0.02346714399755001}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": 0.08083311468362808}, {"subreddit": "conspiracy", "lex": "vaccines", "sim": -0.03164318576455116}, {"subreddit": "Coronavirus", "lex": "mask", "sim": 0.05446961894631386}, {"subreddit": "conspiracy", "lex": "mask", "sim": -0.06065327301621437}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.07336952537298203}, {"subreddit": "conspiracy", "lex": "masks", "sim": -0.07284245640039444}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_pos_chart</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../out/proj-emb_pos_</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">.pdf&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="objective-vs-subjective"><em>objective</em> vs <em>subjective</em><a class="anchor-link" href="#objective-vs-subjective"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pole_words_subj</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;objective&#39;</span><span class="p">,</span> <span class="s1">&#39;subjective&#39;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_subj</span> <span class="o">=</span> <span class="n">get_axis_sims</span><span class="p">(</span><span class="n">lexs</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">pole_words_subj</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_subj_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">proj_sims_subj</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+	<span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;sim&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;SemSim&#39;</span><span class="p">),</span>
+	<span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;lex&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+	<span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s1">&#39;subreddit&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Community&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pole_words_subj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">pole_words_subj</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">proj_sims_subj_chart</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-7dcaf2b5eff04fd181ca33b638bae793"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-7dcaf2b5eff04fd181ca33b638bae793") {
+      outputDiv = document.getElementById("altair-viz-7dcaf2b5eff04fd181ca33b638bae793");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.17.0?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "4.17.0"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-c6378fc545cdb49c0bea5d2a0653144d"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "subreddit", "title": "Community", "type": "nominal"}, "x": {"field": "sim", "title": "SemSim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "title": "", "type": "nominal"}}, "title": "objective vs subjective", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-c6378fc545cdb49c0bea5d2a0653144d": [{"subreddit": "Coronavirus", "lex": "regulations", "sim": 0.036803487688302994}, {"subreddit": "conspiracy", "lex": "regulations", "sim": -0.008547422476112843}, {"subreddit": "Coronavirus", "lex": "politics", "sim": 0.12810716032981873}, {"subreddit": "conspiracy", "lex": "politics", "sim": 0.038563571870326996}, {"subreddit": "Coronavirus", "lex": "government", "sim": 0.14896170794963837}, {"subreddit": "conspiracy", "lex": "government", "sim": 0.09157254546880722}, {"subreddit": "Coronavirus", "lex": "mandate", "sim": 0.0032925221603363752}, {"subreddit": "conspiracy", "lex": "mandate", "sim": 0.0234351996332407}, {"subreddit": "Coronavirus", "lex": "science", "sim": 0.35689404606819153}, {"subreddit": "conspiracy", "lex": "science", "sim": 0.014754808507859707}, {"subreddit": "Coronavirus", "lex": "research", "sim": 0.23729760944843292}, {"subreddit": "conspiracy", "lex": "research", "sim": 0.0746178850531578}, {"subreddit": "Coronavirus", "lex": "shutdown", "sim": 0.0014888636069372296}, {"subreddit": "conspiracy", "lex": "shutdown", "sim": 0.06149535998702049}, {"subreddit": "Coronavirus", "lex": "shutdowns", "sim": -0.00814331229776144}, {"subreddit": "conspiracy", "lex": "shutdowns", "sim": 0.03212869539856911}, {"subreddit": "Coronavirus", "lex": "lockdown", "sim": -0.0023245711345225573}, {"subreddit": "conspiracy", "lex": "lockdown", "sim": 0.01006019301712513}, {"subreddit": "Coronavirus", "lex": "lockdowns", "sim": 0.05210113525390625}, {"subreddit": "conspiracy", "lex": "lockdowns", "sim": -0.01665596105158329}, {"subreddit": "Coronavirus", "lex": "vaccine", "sim": 0.12188472598791122}, {"subreddit": "conspiracy", "lex": "vaccine", "sim": -0.016297686845064163}, {"subreddit": "Coronavirus", "lex": "vaccines", "sim": 0.08601615577936172}, {"subreddit": "conspiracy", "lex": "vaccines", "sim": -0.046296376734972}, {"subreddit": "Coronavirus", "lex": "mask", "sim": -0.008477694354951382}, {"subreddit": "conspiracy", "lex": "mask", "sim": -0.030812527984380722}, {"subreddit": "Coronavirus", "lex": "masks", "sim": 0.04734383150935173}, {"subreddit": "conspiracy", "lex": "masks", "sim": -0.003555137664079666}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">proj_sims_subj_chart</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../out/proj-emb_subj_</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="n">models</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">.pdf&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>

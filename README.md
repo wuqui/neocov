@@ -982,6 +982,8 @@ nbs_vecs_chart
 </script>
 
 
+You can __zoom__ in, and you can __highlight__ an area using the <kbd>alt</kbd> key.
+
 ```python
 #data
 nbs_vecs_chart.save(f'../out/map-sem-space_{lex}_{models[0]["name"]}--{models[1]["name"]}.pdf')

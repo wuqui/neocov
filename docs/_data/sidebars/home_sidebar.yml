@@ -21,9 +21,6 @@ entries:
     - output: web,pdf
       title: Communities
       url: communities.html
-    - output: web,pdf
-      title: Phrase detection for multigrams
-      url: pool.html
     output: web
     title: neocov
   output: web

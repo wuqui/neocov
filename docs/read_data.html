@@ -568,6 +568,541 @@ Length: 66885, dtype: int64</pre>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Inspect-comments">Inspect comments<a class="anchor-link" href="#Inspect-comments"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">COMMENTS_DIR</span> <span class="o">=</span> <span class="s1">&#39;../data/comments/by_date/&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">YEAR</span> <span class="o">=</span> <span class="mi">2019</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fpaths</span> <span class="o">=</span> <span class="n">get_comments_paths_year</span><span class="p">(</span><span class="n">COMMENTS_DIR</span><span class="p">,</span> <span class="s1">&#39;2019&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">comments</span> <span class="o">=</span> <span class="n">read_comm_csvs</span><span class="p">(</span><span class="n">fpaths</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_colwidth</span> <span class="o">=</span> <span class="mi">200</span>
+
+
+<span class="n">hits</span> <span class="o">=</span> <span class="p">(</span><span class="n">comments</span>
+	<span class="o">.</span><span class="n">filter</span><span class="p">([</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
+	<span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;body.str.contains(&quot;spreader&quot;)&#39;</span><span class="p">)</span>
+	<span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">hits</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_properties</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;text-align&#39;</span><span class="p">:</span> <span class="s1">&#39;left&#39;</span><span class="p">})</span>
+<span class="n">hits</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>233362</th>
+      <td>No, record two separate takes of the same vocals. Copying and pasting vocals to two tracks will only make it louder. Recording two separate takes and making one lower in volume will give the ‘Doub...</td>
+    </tr>
+    <tr>
+      <th>316629</th>
+      <td>I am not familiar with that brand, but I own a couple of pieces of bare anodized aluminum cookware. I would not recommend them.
+
+Bare anodized aluminum is easily the most stick-prone material I ha...</td>
+    </tr>
+    <tr>
+      <th>382123</th>
+      <td>And here I was going to ask if it fitted into your garage or did you have to take the salt spreader off ...🤣</td>
+    </tr>
+    <tr>
+      <th>423532</th>
+      <td>Yeah as I said, I assume that the temperature readings may be higher then I expected because of the way the dies are connected to the heatspreader. I think der8auer, the German overclocker, [concl...</td>
+    </tr>
+    <tr>
+      <th>456937</th>
+      <td>They definitely don’t “age”—I had one running for my entire Interactions run and it worked like a champ the entire time.
+
+When you say they aren’t producing much mana, what do you mean? Do they fi...</td>
+    </tr>
+    <tr>
+      <th>626784</th>
+      <td>I have yet to see a monohull without a backstay. The swept back spreader puts a slight bend in the mast which helps in performance. Downwind does suck which is why you use a spinnaker instead.</td>
+    </tr>
+    <tr>
+      <th>761122</th>
+      <td>Even better, that's actually Bodvarr Ribspreader</td>
+    </tr>
+    <tr>
+      <th>999738</th>
+      <td>That is in this case part of the chastity belt. But based on speculation I think it might just be called a 'butt spreader' or 'cheek spreader'</td>
+    </tr>
+    <tr>
+      <th>1228940</th>
+      <td>But imagine cooling something with a heatspreader/chip size of Threadripper. When you have more surface area, you can get bigger/beefier coolers and you can use something like the Silver Arrow for...</td>
+    </tr>
+    <tr>
+      <th>1281884</th>
+      <td>System agent chip is under palmrest and covered by the heat spreader on the left side so likely its that.</td>
+    </tr>
+    <tr>
+      <th>1484418</th>
+      <td>Monitor has a Cooper heat spreader on it.</td>
+    </tr>
+    <tr>
+      <th>1499246</th>
+      <td>It does have one. It has a copper heat spreader</td>
+    </tr>
+    <tr>
+      <th>1691379</th>
+      <td>As a snow plow and spreader operator, I could buy a mansion and yacht after working one Russian winter.</td>
+    </tr>
+    <tr>
+      <th>1744659</th>
+      <td>Don't you love the quality of consumer quality spreaders?  Over the last 10 years, I've had 3 fail in the 2nd or 3rd season.
+
+Now I usually broadcast with a shovel.</td>
+    </tr>
+    <tr>
+      <th>2018392</th>
+      <td>Disease-spreader.</td>
+    </tr>
+    <tr>
+      <th>2124354</th>
+      <td>“Biological warfare is about to happen” says the disease spreader......</td>
+    </tr>
+    <tr>
+      <th>2252424</th>
+      <td>I slipped in it and it spreader everywhere</td>
+    </tr>
+    <tr>
+      <th>2418764</th>
+      <td>Toast nerd here. I only toast one slice at a time. Butter must be slightly pre-softened. Toaster must be on ideal setting. Must use special wide  spreader (narrow "butter knife" will not do. ) whe...</td>
+    </tr>
+    <tr>
+      <th>2687192</th>
+      <td>Maybe there's some deformation either with the motherboard or the CPU's heatspreader and it adds 1 mm of height.</td>
+    </tr>
+    <tr>
+      <th>2699951</th>
+      <td>Well thank you good C R O N C H, now we both can be supreme bearers and spreaders of our religion</td>
+    </tr>
+    <tr>
+      <th>2960711</th>
+      <td>Saryn=cancer spreader</td>
+    </tr>
+    <tr>
+      <th>2961483</th>
+      <td>An electrical insulator of some sort. Perhaps a wire spreader to keep  house or barn electrical service entrance wires with long runs from shorting during high wind. Pretty small wire size . Maybe...</td>
+    </tr>
+    <tr>
+      <th>3066997</th>
+      <td>I think you mean spatula. Specula is the plural of speculum, which a tool used to open vaginas for examination. 
+
+
+But hey, if you wanna use a cooch spreader to smooth your mousse, go for it.</td>
+    </tr>
+    <tr>
+      <th>3130657</th>
+      <td>Interested in:
+
+
+
+- Goyo Guardian
+
+
+
+- Knightmare Phoenix
+
+
+
+- Triple Burst Dragon
+
+
+
+- Plaguespreader Zombie
+
+
+
+- Guardragon Pisty
+
+
+
+- Gold Series Ghost rare Solemn Judgment
+
+
+
+- Number 81 Super...</td>
+    </tr>
+    <tr>
+      <th>3247787</th>
+      <td>Homemade butter separator dish. You would pour homemade butter in the dish and the spout strains off the excess liquid from the solids. You could use it as a butter dish afterwards. The hole would...</td>
+    </tr>
+    <tr>
+      <th>3310585</th>
+      <td>That’s horrible news!  This means you need to find a new wife!!  Let this be a valuable lesson to everyone...  always cover all your ass spreader bases before nuptials.</td>
+    </tr>
+    <tr>
+      <th>3373228</th>
+      <td>Hi /u/Hazmataz13,
+
+Unfortunately your submission has been removed for the following reason(s):
+
+* **All selling and swapping posts must have a timestamp - see [here](https://www.reddit.com/r/Hardw...</td>
+    </tr>
+    <tr>
+      <th>3538647</th>
+      <td>I think we may have covered this in another thread? (I had the emergency leaking-tarp situation that lead to a shitty night of double hammocking.) 
+
+I have heard a few stories of people that do th...</td>
+    </tr>
+    <tr>
+      <th>3560160</th>
+      <td>Saw these notes at the bottom should I be concerned by either of these? 
+
+* **Note:**The motherboard M.2 slot #1 shares bandwidth with a SATA 6.0 Gb/s port. When the M.2 slot is populated, one SAT...</td>
+    </tr>
+    <tr>
+      <th>3603064</th>
+      <td>I’ll use this for the pushing
+
+[pussy spreader](https://imgur.com/a/KVgEiqx)</td>
+    </tr>
+    <tr>
+      <th>3664815</th>
+      <td>This was on [https://me.me/i/hello-soon-to-be-pedroitus-spreader-first-a-big-thank-ec355216e47a4f0db640f5d3899e7cfc](https://me.me/i/hello-soon-to-be-pedroitus-spreader-first-a-big-thank-ec355216e...</td>
+    </tr>
+    <tr>
+      <th>3824448</th>
+      <td>Neo is a newer series with a similar design for the heat spreaders, but often higher rated speeds. Also, they test it on zen 2 cpus iirc, but that doesn't really make a ton of difference.</td>
+    </tr>
+    <tr>
+      <th>3944765</th>
+      <td>If I need some low cost equipment, I start off with some old Deutz Fahr tractors that are on ModHub.  There's a couple that are admittedly low horsepower, but cost under $20k.  Then get a small ti...</td>
+    </tr>
+    <tr>
+      <th>4134563</th>
+      <td>Reinstall the heating system, doing it properly.
+
+The radiant loop in the kitchen needs work...heat spreader plates installed, a proper radiant barrier \[not just foil underlayment\], insulation, ...</td>
+    </tr>
+    <tr>
+      <th>4246710</th>
+      <td>what cpu are you using? 
+
+I wouldn't recommend removing the heatspreaders on the Ripjaws as G.Skill (and Corsair) have a lifetime warranty on RAM.</td>
+    </tr>
+    <tr>
+      <th>4281134</th>
+      <td>Pls someone help! Sinspreader88 is harassing me :(</td>
+    </tr>
+    <tr>
+      <th>4374340</th>
+      <td>Def give BRD a try.  I ran Shira to KoG this month as well and it is really satisfying to wipe the field with BRD then recover your field from the grave.
+
+If you want to get spicy, replace a Samur...</td>
+    </tr>
+    <tr>
+      <th>4719849</th>
+      <td>&amp;gt; *"Tell the boys not to wrap the straps around the gussets."*
+
+How bout' that rigging angle?  
+
+Or maybe a spreader bar?
+
+Jesus this sub is just turning into place for wood framers to post the...</td>
+    </tr>
+    <tr>
+      <th>4746314</th>
+      <td>If you think you cleaned it thoroughly, it’ll be fine. Thermal paste can sometimes stain heat spreaders and/or coolers a fair bit, just make sure you’ve cleaned until nothing’s coming off any more...</td>
+    </tr>
+    <tr>
+      <th>4913683</th>
+      <td>Any component is more stable the cooler it runs.
+
+And I personally can confirm that I get an error in MemTestPro as soon as the heatspreaders reach ~47°c for my 2x8GB micron e-die (measured with a...</td>
+    </tr>
+    <tr>
+      <th>4954249</th>
+      <td>Cheers for this. Just a quick Q: I've seen that some people have to remove the heat spreader on their RAM modules for the heatsink to fit so did you have to remove yours too? If not it did it have...</td>
+    </tr>
+    <tr>
+      <th>4969163</th>
+      <td>My bottom barrel is a 10 gauge spreader. Idk what that says about me</td>
+    </tr>
+    <tr>
+      <th>5030090</th>
+      <td>Manure spreader</td>
+    </tr>
+    <tr>
+      <th>5118403</th>
+      <td>oh yeah? lol how so oh false rumor spreader and facebook harasser of a guy that parents that just got divorced</td>
+    </tr>
+    <tr>
+      <th>5146190</th>
+      <td>For example, I use tape saturation and compressor on the master bus nearly every mix. Sometimes I use frequency-based stereo spreader kind of thing. Sometimes I use an EQ. In a nutshell, everythin...</td>
+    </tr>
+    <tr>
+      <th>5169356</th>
+      <td>Someone at DE is probably feeling sad that despite their efforts the community hasn't caught on yet. My Gaze has actually become my go-to secondary for a couple of months ever since the chain buff...</td>
+    </tr>
+    <tr>
+      <th>5252483</th>
+      <td>I understand what you are saying. If I was single again for whatever reason I'd probably want the exact same thing as you are talking about. I agree that swingers are not for me, neither would be ...</td>
+    </tr>
+    <tr>
+      <th>5391463</th>
+      <td>Ok herpes spreader. We all don’t want what you have. Just let us have our straws.</td>
+    </tr>
+    <tr>
+      <th>5630415</th>
+      <td>Where did you get the manure spreader?</td>
+    </tr>
+    <tr>
+      <th>5633344</th>
+      <td>Which manure spreader and map is this?</td>
+    </tr>
+    <tr>
+      <th>5662848</th>
+      <td>Oh that makes sence. But pairing a ryzen with ecc doesn't.
+I thought it was DDR2, for the lack of a heatspreader and [it looks similar](https://ae01.alicdn.com/kf/HTB1s3cjdEUIL1JjSZFrq6z3xFXaW/For...</td>
+    </tr>
+    <tr>
+      <th>5673139</th>
+      <td>The reason delidding helps so much on Intel chips is not actually changing the paste; despite popular opinion/belief.
+
+The glue that is used to hold the IHS (heat spreader) on makes a small gap th...</td>
+    </tr>
+    <tr>
+      <th>5986957</th>
+      <td>B rank
+These stages use their concepts well, but are held back by either poor stage design or lackluster concepts in general.
+
+17. Fancy Spew
+This stage would be the first to introduce spreaders, ...</td>
+    </tr>
+    <tr>
+      <th>6105961</th>
+      <td>the ridgerunner isn't an UL rig at all, no, but it's also not ridiculously heavy.   it's still well under 2 lbs for the double layer with spreader bars (i think)
+
+if you want ultra light, hit up t...</td>
+    </tr>
+    <tr>
+      <th>6940080</th>
+      <td>tzlibre is a spreader of FUD, scammer of decent XTZ holders.</td>
+    </tr>
+    <tr>
+      <th>6992196</th>
+      <td>My primary surgeon destroyed my nose. I went to David Hacker (Toronto Rhinoplasty Clinic) and my nose was ruined. I couldn't breathe at all and it was collapsing. He left me with various issues (I...</td>
+    </tr>
+    <tr>
+      <th>7040925</th>
+      <td>Ultimately, I think he's the best candidate who is viable. I like Buttigieg a lot, but I think he needs more experience. Bennet had some great ideas, but he just doesn't have the right charisma.
+
+...</td>
+    </tr>
+    <tr>
+      <th>7083726</th>
+      <td>I remember when Synchros came out, I was one of those people who did not like the change and considered them cheap and ruined the game. Then I came back to the game when Xyz came out and started p...</td>
+    </tr>
+    <tr>
+      <th>7108326</th>
+      <td>Most likely, although that goes back to this really only should be done by someone who actually knows what they're doing and therefore knows if it's a soldered heatspreader or not. Based on the de...</td>
+    </tr>
+    <tr>
+      <th>7157612</th>
+      <td>Well if you’re more then 30 feet, yes you are bad with shottys, they spread and the mastiff spreader left-right</td>
+    </tr>
+    <tr>
+      <th>7361677</th>
+      <td>Plenty of bats eat insects, but plenty of bats eat fruit instead. They're great pollinators and seed-spreaders: [http://www.batcon.org/why-bats/bats-are/bats-are-important](http://www.batcon.org/w...</td>
+    </tr>
+    <tr>
+      <th>7462018</th>
+      <td>And I've been building computers for 20+ years and overclocking for as long so in the nicest possible way, you are teaching grandma to suck eggs. That is irrelevant though, just like comparing TIM...</td>
+    </tr>
+    <tr>
+      <th>7514889</th>
+      <td>That looks like a great deal, but I am height-constrained and need my RAM to be 31mm to less. So far I have only found that the Corsair Vengeance fits, but I had also heard about removing the heat...</td>
+    </tr>
+    <tr>
+      <th>7858724</th>
+      <td>The porn industry is, like, the biggest spreader of misoginy worldwide.
+
+
+But our community overlaps with channer culture, therefore, we are up to no good — rite?</td>
+    </tr>
+    <tr>
+      <th>7888253</th>
+      <td>Have this very setup. My case is large enough that I was able to just place the 2nd noctua fan on top of the RAM w/heat spreaders intact. Would there be any beneficial/negative aspect to removing ...</td>
+    </tr>
+    <tr>
+      <th>8064183</th>
+      <td>The box needs to be either on a spreader bracket OR have a support wire (314.23 (D) 1;2) and as long as the mc has an insulated ground and its continuous through the box theres no problem using th...</td>
+    </tr>
+    <tr>
+      <th>8212472</th>
+      <td>So very evil... "Here is your cancer medicine, and here is your cancer spreader *points at Fallout 76* free now with every purchase!"</td>
+    </tr>
+    <tr>
+      <th>8232320</th>
+      <td>That bumper could've been saved if you wanted to get extremely involved. We would have to do that from time to time when used car managers wanted to save some money on a beater car. If you're inte...</td>
+    </tr>
+    <tr>
+      <th>8337842</th>
+      <td>99.99% sure fertilizer doesn't effect trees, but if I grow grass there as well, it would help that. Might need to use a solid fertilizer spreader though as all the boom arms on liquid spreaders wo...</td>
+    </tr>
+    <tr>
+      <th>8395777</th>
+      <td>Not everyone has spreader bars on hand.  
+
+Personally, knowing that we don't have them with our rotator I would have ran a line from a light duty to the front of that truck, lift it up the exact s...</td>
+    </tr>
+    <tr>
+      <th>8488179</th>
+      <td>The person who was a large spreader of this photo is this guy, who posted the caption:   
+"Here's a photo of Jason Mamoa getting arrested while defending sacred land in Hawaii."
+
+He has since resp...</td>
+    </tr>
+    <tr>
+      <th>8586031</th>
+      <td>She is a sight to behold. I’ve never been aboard, but the crew have extended me an open invitation to sail with them whenever I want. I will def post a video from the deck and maybe the spreaders ...</td>
+    </tr>
+    <tr>
+      <th>8701328</th>
+      <td>I was set to agree with you but your post history is 100% negative, easy questions that have been answered 500 times in the past or complaining about other games.  You are a negativity spreader wh...</td>
+    </tr>
+    <tr>
+      <th>8769885</th>
+      <td>Wide ope. Is the only setting I’ve ever used for lime, pulverized or pelletized. 
+
+BTW, you should’ve seen the look on my neighbor’s face when I was putting down whit powder on my lawn with my dro...</td>
+    </tr>
+    <tr>
+      <th>9313624</th>
+      <td>I’d say too late to now.  Getting pretty cold and probably even colder in MI.
+
+But in the spring after the freezing temperature get seed and starter fertilizer.  
+
+Use a metal rake (not a leaf rak...</td>
+    </tr>
+    <tr>
+      <th>9566584</th>
+      <td>I made my own spreader bar using rods, nuts and bolts from Home Depot.</td>
+    </tr>
+    <tr>
+      <th>9583899</th>
+      <td>spreader bar? may i ask what that is?</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 </div>
  
 

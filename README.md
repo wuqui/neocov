@@ -433,7 +433,7 @@ LEX_NBS = 'distancing'
 ```python
 nbs_model_1, nbs_model_2 = get_nearest_neighbours_models(
     lex=LEX_NBS, 
-    freq_min=10,
+    freq_min=25,
     model_1=model_2019, 
     model_2=model_2020,
     k=10
@@ -530,16 +530,16 @@ display(
     <tr>
       <th>8</th>
       <td>1</td>
-      <td>ingratiate</td>
-      <td>0.43</td>
-      <td>25</td>
+      <td>detach</td>
+      <td>0.44</td>
+      <td>245</td>
     </tr>
     <tr>
       <th>9</th>
       <td>1</td>
-      <td>perjure</td>
-      <td>0.43</td>
-      <td>19</td>
+      <td>distract</td>
+      <td>0.45</td>
+      <td>1553</td>
     </tr>
   </tbody>
 </table>
@@ -573,70 +573,70 @@ display(
   </thead>
   <tbody>
     <tr>
-      <th>80346</th>
+      <th>50601</th>
       <td>2</td>
       <td>distanced</td>
       <td>0.46</td>
       <td>326</td>
     </tr>
     <tr>
-      <th>80347</th>
+      <th>50602</th>
       <td>2</td>
       <td>isolation</td>
       <td>0.46</td>
       <td>2037</td>
     </tr>
     <tr>
-      <th>80348</th>
+      <th>50603</th>
       <td>2</td>
       <td>gatherings</td>
       <td>0.47</td>
       <td>921</td>
     </tr>
     <tr>
-      <th>80349</th>
+      <th>50604</th>
       <td>2</td>
       <td>distance</td>
       <td>0.48</td>
       <td>11355</td>
     </tr>
     <tr>
-      <th>80350</th>
+      <th>50605</th>
       <td>2</td>
       <td>lockdowns</td>
       <td>0.50</td>
       <td>990</td>
     </tr>
     <tr>
-      <th>80351</th>
+      <th>50606</th>
       <td>2</td>
       <td>quarantine</td>
       <td>0.53</td>
       <td>5225</td>
     </tr>
     <tr>
-      <th>80352</th>
+      <th>50607</th>
       <td>2</td>
       <td>masks</td>
       <td>0.53</td>
       <td>8997</td>
     </tr>
     <tr>
-      <th>80353</th>
+      <th>50608</th>
       <td>2</td>
       <td>quarantining</td>
       <td>0.53</td>
       <td>279</td>
     </tr>
     <tr>
-      <th>80354</th>
+      <th>50609</th>
       <td>2</td>
       <td>quarantines</td>
       <td>0.53</td>
       <td>160</td>
     </tr>
     <tr>
-      <th>80355</th>
+      <th>50610</th>
       <td>2</td>
       <td>lockdown</td>
       <td>0.53</td>

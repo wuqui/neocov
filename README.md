@@ -821,7 +821,7 @@ smart_procrustes_align_gensim(models[0]['model'], models[1]['model'])
 
 
 
-    <gensim.models.word2vec.Word2Vec at 0x171f979d0>
+    <gensim.models.word2vec.Word2Vec at 0x17545bf40>
 
 
 
@@ -1239,7 +1239,7 @@ sem_change_cands_out.to_csv(
 #### nearest neighbours for target lexemes in both communities
 
 ```python
-LEX_NBS = 'plandemic'
+LEX_NBS = 'masks'
 ```
 
 ```python
@@ -1257,12 +1257,216 @@ display(
 )
 ```
 
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
+      <th>Word</th>
+      <th>SemDist</th>
+      <th>Freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>facemasks</td>
+      <td>0.18</td>
+      <td>595</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>mask</td>
+      <td>0.24</td>
+      <td>106790</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>coverings</td>
+      <td>0.31</td>
+      <td>1038</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>maks</td>
+      <td>0.35</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>n95s</td>
+      <td>0.36</td>
+      <td>1105</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>facemask</td>
+      <td>0.38</td>
+      <td>340</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>ppe</td>
+      <td>0.42</td>
+      <td>8960</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>shields</td>
+      <td>0.43</td>
+      <td>1046</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1</td>
+      <td>respirators</td>
+      <td>0.44</td>
+      <td>1650</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1</td>
+      <td>seatbelts</td>
+      <td>0.45</td>
+      <td>574</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
+      <th>Word</th>
+      <th>SemDist</th>
+      <th>Freq</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>60747</th>
+      <td>2</td>
+      <td>mask</td>
+      <td>0.28</td>
+      <td>108342</td>
+    </tr>
+    <tr>
+      <th>60748</th>
+      <td>2</td>
+      <td>facemasks</td>
+      <td>0.30</td>
+      <td>728</td>
+    </tr>
+    <tr>
+      <th>60749</th>
+      <td>2</td>
+      <td>n95s</td>
+      <td>0.37</td>
+      <td>1267</td>
+    </tr>
+    <tr>
+      <th>60750</th>
+      <td>2</td>
+      <td>coverings</td>
+      <td>0.37</td>
+      <td>1199</td>
+    </tr>
+    <tr>
+      <th>60751</th>
+      <td>2</td>
+      <td>maks</td>
+      <td>0.40</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <th>60752</th>
+      <td>2</td>
+      <td>respirators</td>
+      <td>0.42</td>
+      <td>1817</td>
+    </tr>
+    <tr>
+      <th>60753</th>
+      <td>2</td>
+      <td>ppe</td>
+      <td>0.44</td>
+      <td>8794</td>
+    </tr>
+    <tr>
+      <th>60754</th>
+      <td>2</td>
+      <td>bandanas</td>
+      <td>0.44</td>
+      <td>316</td>
+    </tr>
+    <tr>
+      <th>60755</th>
+      <td>2</td>
+      <td>lockdowns</td>
+      <td>0.44</td>
+      <td>15881</td>
+    </tr>
+    <tr>
+      <th>60756</th>
+      <td>2</td>
+      <td>facemask</td>
+      <td>0.44</td>
+      <td>445</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 #### biggest discrepancies in nearest neighbours for target lexemes
 
 ```python
+lex = 'distancing'
+
 nbs_model_1, nbs_model_2 = get_nearest_neighbours_models(
-    lex='vaccine', 
-    freq_min=150,
+    lex=lex, 
+    freq_min=100,
     model_1=models[0]['model'], 
     model_2=models[1]['model'],
     k=100_000
@@ -1272,32 +1476,322 @@ nbs_model_1, nbs_model_2 = get_nearest_neighbours_models(
 ```python
 nbs_diffs = pd.merge(
     nbs_model_1, nbs_model_2, 
-    on='lex',
+    on='Word',
     suffixes = ('_1', '_2')
 )
 ```
 
 ```python
 nbs_diffs = nbs_diffs\
-    .assign(sim_diff = abs(nbs_diffs['similarity_1'] - nbs_diffs['similarity_2']))\
-    .sort_values('sim_diff', ascending=False)\
+    .assign(sim_diff = abs(nbs_diffs['SemDist_1'] - nbs_diffs['SemDist_2']))\
+    .sort_values('sim_diff', ascending=True)\
     .reset_index(drop=True)\
-    .query('lex.str.len() >= 4')
+    .query('Word.str.len() >= 4')
 ```
 
 ```python
 topn = 10
 
 subr_1_nbs = nbs_diffs\
-    .query('similarity_1 > similarity_2')\
+    .query('SemDist_1 < SemDist_2')\
     .nlargest(topn, 'sim_diff')
 
 subr_2_nbs = nbs_diffs\
-    .query('similarity_2 > similarity_1')\
+    .query('SemDist_2 < SemDist_1')\
     .nlargest(topn, 'sim_diff')
 
 display(subr_1_nbs, subr_2_nbs)
 ```
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model_1</th>
+      <th>Word</th>
+      <th>SemDist_1</th>
+      <th>Freq_1</th>
+      <th>Model_2</th>
+      <th>SemDist_2</th>
+      <th>Freq_2</th>
+      <th>sim_diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>21541</th>
+      <td>1</td>
+      <td>contestants</td>
+      <td>0.70</td>
+      <td>159</td>
+      <td>2</td>
+      <td>1.00</td>
+      <td>219</td>
+      <td>0.30</td>
+    </tr>
+    <tr>
+      <th>21539</th>
+      <td>1</td>
+      <td>distant</td>
+      <td>0.56</td>
+      <td>1095</td>
+      <td>2</td>
+      <td>0.84</td>
+      <td>1257</td>
+      <td>0.28</td>
+    </tr>
+    <tr>
+      <th>21533</th>
+      <td>1</td>
+      <td>productions</td>
+      <td>0.84</td>
+      <td>197</td>
+      <td>2</td>
+      <td>1.09</td>
+      <td>268</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <th>21521</th>
+      <td>1</td>
+      <td>distances</td>
+      <td>0.46</td>
+      <td>597</td>
+      <td>2</td>
+      <td>0.69</td>
+      <td>730</td>
+      <td>0.23</td>
+    </tr>
+    <tr>
+      <th>21513</th>
+      <td>1</td>
+      <td>halls</td>
+      <td>0.85</td>
+      <td>451</td>
+      <td>2</td>
+      <td>1.07</td>
+      <td>570</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <th>21514</th>
+      <td>1</td>
+      <td>handshakes</td>
+      <td>0.70</td>
+      <td>139</td>
+      <td>2</td>
+      <td>0.92</td>
+      <td>191</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <th>21515</th>
+      <td>1</td>
+      <td>cooper</td>
+      <td>0.89</td>
+      <td>1085</td>
+      <td>2</td>
+      <td>1.11</td>
+      <td>1243</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <th>21516</th>
+      <td>1</td>
+      <td>austin</td>
+      <td>0.89</td>
+      <td>1757</td>
+      <td>2</td>
+      <td>1.11</td>
+      <td>1921</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <th>21511</th>
+      <td>1</td>
+      <td>spacing</td>
+      <td>0.54</td>
+      <td>187</td>
+      <td>2</td>
+      <td>0.76</td>
+      <td>256</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <th>21499</th>
+      <td>1</td>
+      <td>enforcement</td>
+      <td>0.69</td>
+      <td>5220</td>
+      <td>2</td>
+      <td>0.90</td>
+      <td>5377</td>
+      <td>0.21</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model_1</th>
+      <th>Word</th>
+      <th>SemDist_1</th>
+      <th>Freq_1</th>
+      <th>Model_2</th>
+      <th>SemDist_2</th>
+      <th>Freq_2</th>
+      <th>sim_diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>21540</th>
+      <td>1</td>
+      <td>paramedic</td>
+      <td>1.09</td>
+      <td>228</td>
+      <td>2</td>
+      <td>0.81</td>
+      <td>310</td>
+      <td>0.28</td>
+    </tr>
+    <tr>
+      <th>21538</th>
+      <td>1</td>
+      <td>euthanasia</td>
+      <td>1.05</td>
+      <td>133</td>
+      <td>2</td>
+      <td>0.78</td>
+      <td>183</td>
+      <td>0.27</td>
+    </tr>
+    <tr>
+      <th>21536</th>
+      <td>1</td>
+      <td>vaxers</td>
+      <td>1.13</td>
+      <td>217</td>
+      <td>2</td>
+      <td>0.87</td>
+      <td>297</td>
+      <td>0.26</td>
+    </tr>
+    <tr>
+      <th>21537</th>
+      <td>1</td>
+      <td>sdny</td>
+      <td>1.13</td>
+      <td>276</td>
+      <td>2</td>
+      <td>0.87</td>
+      <td>372</td>
+      <td>0.26</td>
+    </tr>
+    <tr>
+      <th>21534</th>
+      <td>1</td>
+      <td>berman</td>
+      <td>1.10</td>
+      <td>535</td>
+      <td>2</td>
+      <td>0.85</td>
+      <td>662</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <th>21532</th>
+      <td>1</td>
+      <td>scamdemic</td>
+      <td>1.05</td>
+      <td>215</td>
+      <td>2</td>
+      <td>0.80</td>
+      <td>292</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <th>21528</th>
+      <td>1</td>
+      <td>covid19</td>
+      <td>0.97</td>
+      <td>13369</td>
+      <td>2</td>
+      <td>0.73</td>
+      <td>12955</td>
+      <td>0.24</td>
+    </tr>
+    <tr>
+      <th>21529</th>
+      <td>1</td>
+      <td>counting</td>
+      <td>0.99</td>
+      <td>6048</td>
+      <td>2</td>
+      <td>0.75</td>
+      <td>6115</td>
+      <td>0.24</td>
+    </tr>
+    <tr>
+      <th>21526</th>
+      <td>1</td>
+      <td>ctvnews</td>
+      <td>1.08</td>
+      <td>213</td>
+      <td>2</td>
+      <td>0.85</td>
+      <td>290</td>
+      <td>0.23</td>
+    </tr>
+    <tr>
+      <th>21527</th>
+      <td>1</td>
+      <td>enjoys</td>
+      <td>1.10</td>
+      <td>414</td>
+      <td>2</td>
+      <td>0.87</td>
+      <td>533</td>
+      <td>0.23</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 
 ### Maps of social semantic variation
 
@@ -1433,25 +1927,43 @@ lexs = [
 
 ```python
 lexs = [
+    # left out:
+    # unrelated to Covid: 'rittenhouse', 'chaz',
+    # no tokens: 'klee', 'vacuo', 'filtrate', 'sunsetting', 'childe', 'megalodon', 'newf',
+
+    # 'cerb',
     'corona',
     'rona',
     'moderna',
     'sars',
-    'pandemic',
     'spreader',
-    'cerb',
     'maskless',
     'distancing',
     'quarantines',
-    'lockdowns'
-    # unrelated to Covid: 'rittenhouse', 'chaz',
-    # no tokens: 'klee', 'vacuo', 'filtrate', 'sunsetting', 'childe', 'megalodon', 'newf',
+    'pandemic',
+
+	# 'regulations', # add / gen
+    # 'politics', # add / gen
+    # 'government', # add / gen
+    # 'mandate', # add / gen
+	'science', 'research',# add / gen
+	# 'shutdown', 'shutdowns', # add / gen
+	# 'mask', # add / gen
+    'masks',# add / gen
+	# 'lockdown', # add / gen
+    'lockdowns', # add / gen
+	# 'vaccine', # add / gen
+    'vaccines', # add / gen
+
+    # word forms
+    # 'quarantine',
+    # 'lockdown',
 ]
 ```
 
 ```python
-# pole_words = ['good', 'bad']
-pole_words = ['objective', 'subjective']
+pole_words = ['good', 'bad']
+# pole_words = ['objective', 'subjective']
 # pole_words = ['general', 'specific']
 # pole_words = ['abstract', 'concrete']
 ```
@@ -1461,7 +1973,158 @@ proj_sims = get_axis_sims(lexs, models, pole_words, k=10)
 ```
 
 ```python
-proj_sims_chart = plot_emb_proj(proj_sims, pole_words)
+proj_sims = (proj_sims
+	.pivot(index='lex', columns='model', values='sim')
+	.assign(SimDiff = lambda df: df['Coronavirus'] - df['conspiracy'])
+	.sort_values('SimDiff', ascending=False)
+	.reset_index()
+)
+proj_sims
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>lex</th>
+      <th>Coronavirus</th>
+      <th>conspiracy</th>
+      <th>SimDiff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>masks</td>
+      <td>0.073370</td>
+      <td>-0.072842</td>
+      <td>0.146212</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>vaccines</td>
+      <td>0.080833</td>
+      <td>-0.031643</td>
+      <td>0.112476</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>distancing</td>
+      <td>0.050652</td>
+      <td>-0.058048</td>
+      <td>0.108700</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>quarantines</td>
+      <td>0.030721</td>
+      <td>-0.062775</td>
+      <td>0.093495</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>research</td>
+      <td>0.126417</td>
+      <td>0.033040</td>
+      <td>0.093377</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>lockdowns</td>
+      <td>0.023749</td>
+      <td>-0.060432</td>
+      <td>0.084181</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>rona</td>
+      <td>-0.014205</td>
+      <td>-0.085218</td>
+      <td>0.071013</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>science</td>
+      <td>-0.008252</td>
+      <td>-0.047908</td>
+      <td>0.039656</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>pandemic</td>
+      <td>-0.022379</td>
+      <td>-0.059530</td>
+      <td>0.037152</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>moderna</td>
+      <td>0.082821</td>
+      <td>0.050236</td>
+      <td>0.032585</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>maskless</td>
+      <td>-0.031929</td>
+      <td>-0.062953</td>
+      <td>0.031023</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>spreader</td>
+      <td>-0.142505</td>
+      <td>-0.128024</td>
+      <td>-0.014481</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>sars</td>
+      <td>-0.070477</td>
+      <td>-0.055212</td>
+      <td>-0.015264</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>corona</td>
+      <td>-0.162078</td>
+      <td>-0.143997</td>
+      <td>-0.018081</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+```python
+base = alt.Chart(proj_sims).encode(
+    y=alt.Y('lex', sort=alt.SortField("SimDiff"))
+    )
+
+proj_sims_chart = alt.layer(
+    base.mark_line(point=alt.OverlayMarkDef(color='blue'), color='blue')
+        .encode(alt.X('Coronavirus', title='Coronavirus (blue)')),
+    base.mark_line(point=alt.OverlayMarkDef(color='red'), color='red').encode(alt.X('conspiracy', title='conspiracy (blue)'))
+).properties(title=f'{pole_words[0]} vs {pole_words[1]}')
+
 proj_sims_chart
 ```
 
@@ -1469,13 +2132,13 @@ proj_sims_chart
 
 
 
-<div id="altair-viz-fa3c08bd98ac49e0b939c924d82978a7"></div>
+<div id="altair-viz-7a299461761e4634a16c14810a9569d0"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-fa3c08bd98ac49e0b939c924d82978a7") {
-      outputDiv = document.getElementById("altair-viz-fa3c08bd98ac49e0b939c924d82978a7");
+    if (outputDiv.id !== "altair-viz-7a299461761e4634a16c14810a9569d0") {
+      outputDiv = document.getElementById("altair-viz-7a299461761e4634a16c14810a9569d0");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1521,58 +2184,15 @@ proj_sims_chart
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-79f0c5e0b761b5e2416bbb5186fe3f10"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "model", "title": "Model", "type": "nominal"}, "x": {"field": "sim", "title": "SemSim", "type": "quantitative"}, "y": {"field": "lex", "sort": null, "title": "", "type": "nominal"}}, "title": "objective vs subjective", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-79f0c5e0b761b5e2416bbb5186fe3f10": [{"model": "Coronavirus", "lex": "regulations", "sim": 0.036803487688302994}, {"model": "conspiracy", "lex": "regulations", "sim": -0.008547438308596611}, {"model": "Coronavirus", "lex": "politics", "sim": 0.12810716032981873}, {"model": "conspiracy", "lex": "politics", "sim": 0.03856359422206879}, {"model": "Coronavirus", "lex": "government", "sim": 0.14896170794963837}, {"model": "conspiracy", "lex": "government", "sim": 0.09157249331474304}, {"model": "Coronavirus", "lex": "mandate", "sim": 0.0032925221603363752}, {"model": "conspiracy", "lex": "mandate", "sim": 0.023435097187757492}, {"model": "Coronavirus", "lex": "science", "sim": 0.35689404606819153}, {"model": "conspiracy", "lex": "science", "sim": 0.014754798263311386}, {"model": "Coronavirus", "lex": "research", "sim": 0.23729760944843292}, {"model": "conspiracy", "lex": "research", "sim": 0.0746178850531578}, {"model": "Coronavirus", "lex": "shutdown", "sim": 0.0014888636069372296}, {"model": "conspiracy", "lex": "shutdown", "sim": 0.06149532273411751}, {"model": "Coronavirus", "lex": "shutdowns", "sim": -0.00814331229776144}, {"model": "conspiracy", "lex": "shutdowns", "sim": 0.03212862089276314}, {"model": "Coronavirus", "lex": "lockdown", "sim": -0.0023245711345225573}, {"model": "conspiracy", "lex": "lockdown", "sim": 0.010060135275125504}, {"model": "Coronavirus", "lex": "lockdowns", "sim": 0.05210113525390625}, {"model": "conspiracy", "lex": "lockdowns", "sim": -0.01665598154067993}, {"model": "Coronavirus", "lex": "vaccine", "sim": 0.12188472598791122}, {"model": "conspiracy", "lex": "vaccine", "sim": -0.01629769802093506}, {"model": "Coronavirus", "lex": "vaccines", "sim": 0.08601615577936172}, {"model": "conspiracy", "lex": "vaccines", "sim": -0.04629635810852051}, {"model": "Coronavirus", "lex": "mask", "sim": -0.008477694354951382}, {"model": "conspiracy", "lex": "mask", "sim": -0.03081255964934826}, {"model": "Coronavirus", "lex": "masks", "sim": 0.04734383150935173}, {"model": "conspiracy", "lex": "masks", "sim": -0.0035551474429666996}]}}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": {"type": "line", "color": "blue", "point": {"color": "blue"}}, "encoding": {"x": {"field": "Coronavirus", "title": "Coronavirus (blue)", "type": "quantitative"}, "y": {"field": "lex", "sort": {"field": "SimDiff"}, "type": "nominal"}}}, {"mark": {"type": "line", "color": "red", "point": {"color": "red"}}, "encoding": {"x": {"field": "conspiracy", "title": "conspiracy (blue)", "type": "quantitative"}, "y": {"field": "lex", "sort": {"field": "SimDiff"}, "type": "nominal"}}}], "data": {"name": "data-26a2254705172e8753d946de328b464b"}, "title": "good vs bad", "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-26a2254705172e8753d946de328b464b": [{"lex": "masks", "Coronavirus": 0.07336952537298203, "conspiracy": -0.07284241169691086, "SimDiff": 0.14621193706989288}, {"lex": "vaccines", "Coronavirus": 0.08083311468362808, "conspiracy": -0.03164297342300415, "SimDiff": 0.11247608810663223}, {"lex": "distancing", "Coronavirus": 0.050652213394641876, "conspiracy": -0.058048103004693985, "SimDiff": 0.10870031639933586}, {"lex": "quarantines", "Coronavirus": 0.0307206679135561, "conspiracy": -0.06277473270893097, "SimDiff": 0.09349540062248707}, {"lex": "research", "Coronavirus": 0.12641744315624237, "conspiracy": 0.033040281385183334, "SimDiff": 0.09337716177105904}, {"lex": "lockdowns", "Coronavirus": 0.023748569190502167, "conspiracy": -0.06043197214603424, "SimDiff": 0.08418054133653641}, {"lex": "rona", "Coronavirus": -0.014205201528966427, "conspiracy": -0.08521802723407745, "SimDiff": 0.07101282570511103}, {"lex": "science", "Coronavirus": -0.008252025581896305, "conspiracy": -0.047907572239637375, "SimDiff": 0.03965554665774107}, {"lex": "pandemic", "Coronavirus": -0.02237873524427414, "conspiracy": -0.059530459344387054, "SimDiff": 0.037151724100112915}, {"lex": "moderna", "Coronavirus": 0.08282074332237244, "conspiracy": 0.050235722213983536, "SimDiff": 0.0325850211083889}, {"lex": "maskless", "Coronavirus": -0.031929414719343185, "conspiracy": -0.06295285373926163, "SimDiff": 0.031023439019918442}, {"lex": "spreader", "Coronavirus": -0.14250540733337402, "conspiracy": -0.1280241161584854, "SimDiff": -0.01448129117488861}, {"lex": "sars", "Coronavirus": -0.07047674059867859, "conspiracy": -0.05521235242486, "SimDiff": -0.015264388173818588}, {"lex": "corona", "Coronavirus": -0.16207775473594666, "conspiracy": -0.14399713277816772, "SimDiff": -0.01808062195777893}]}}, {"mode": "vega-lite"});
 </script>
 
 
 
 ```python
-proj_sims.groupby('model').agg({'sim': 'mean'})
+proj_sims_chart.save(f'../out/proj-emb_{models[0]["name"]}--{models[1]["name"]}___{pole_words[0]}--{pole_words[1]}.pdf')
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>sim</th>
-    </tr>
-    <tr>
-      <th>model</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Coronavirus</th>
-      <td>0.085803</td>
-    </tr>
-    <tr>
-      <th>conspiracy</th>
-      <td>0.016033</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
 ```python
-proj_sims_chart.save(f'../out/proj-emb_{models[0]["name"]}--{models[1]["name"]}___{pole_words[0]}--{pole_words[1]}.pdf')
+proj_sims.groupby('model').agg({'sim': 'mean'})
 ```

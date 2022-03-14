@@ -176,7 +176,7 @@ def get_pole_avg(model, lex: str, k=10):
 	vecs.append(model.wv[lex])
 	for closest_word, similarity in model.wv.most_similar(positive=lex, topn=k):
 		vecs.append(model.wv[closest_word])
-		print(closest_word)
+		# print(closest_word)
 	pole_avg = np.mean(vecs, axis=0)
 	return pole_avg
 

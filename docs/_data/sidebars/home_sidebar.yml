@@ -21,6 +21,9 @@ entries:
     - output: web,pdf
       title: Communities
       url: communities.html
+    - output: web,pdf
+      title: NeoCov
+      url: results.html
     output: web
     title: neocov
   output: web

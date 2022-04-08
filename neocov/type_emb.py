@@ -157,9 +157,9 @@ def get_nearest_neighbours_models(lex, freq_min, model_1, model_2, topn=100_000,
                 d = {}
                 d['Model'] = count + 1
                 d['Word'] = nb
-                # d['similarity'] = dist
                 d['SemDist'] = round(1 - sim, 2)
                 d['Freq'] = model.wv.get_vecattr(nb, "count")
+                d['vec'] = model.wv.get_vector(lex)
                 nbs.append(d)
     nbs_df = pd.DataFrame(nbs)
     nbs_df = nbs_df\
@@ -229,8 +229,10 @@ def get_nbs_vecs(lex, model, k=50):
 		lex_d = {}
 		lex_d['lex'] = nb
 		lex_d['type'] = 'nb'
+		lex_d['sim'] = sim
 		lex_d['subreddit'] = model['name']
 		lex_d['vec'] =  model['model'].wv.get_vector(nb)
+		lex_d['freq'] = model['model'].wv.get_vecattr(nb, "count")
 		lex_vecs.append(lex_d)
 	lex_vecs_df = pd.DataFrame(lex_vecs)
 	return lex_vecs_df
@@ -238,12 +240,14 @@ def get_nbs_vecs(lex, model, k=50):
 # Cell
 def dim_red_nbs_vecs(nbs_vecs, perplexity=50):
     Y_tsne = TSNE(
-        perplexity=70,
-        method='exact',
-        init='pca',
-        verbose=True
+            perplexity=perplexity,
+            method='exact',
+            init='pca',
+            verbose=False,
+            learning_rate='auto'
         )\
-        .fit_transform(list(nbs_vecs['vec']))
+        .fit_transform(np.array(list(nbs_vecs['vec'])))
+        # .fit_transform(list(nbs_vecs['vec']))
 
     nbs_vecs['x_tsne'] = Y_tsne[:, [0]]
     nbs_vecs['y_tsne'] = Y_tsne[:, [1]]

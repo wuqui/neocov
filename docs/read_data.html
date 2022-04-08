@@ -652,15 +652,37 @@ Length: 66885, dtype: int64</pre>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_colwidth</span> <span class="o">=</span> <span class="mi">200</span>
 
+<span class="n">lex</span> <span class="o">=</span> <span class="s1">&#39;spreader&#39;</span>
 
 <span class="n">hits</span> <span class="o">=</span> <span class="p">(</span><span class="n">comments</span>
 	<span class="o">.</span><span class="n">filter</span><span class="p">([</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
-	<span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;body.str.contains(&quot;spreader&quot;)&#39;</span><span class="p">)</span>
+	<span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;body.str.contains(@lex)&#39;</span><span class="p">)</span>
 	<span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="p">)</span>
 
-<span class="n">hits</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_properties</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;text-align&#39;</span><span class="p">:</span> <span class="s1">&#39;left&#39;</span><span class="p">})</span>
-<span class="n">hits</span>
+<span class="c1"># hits.style.set_properties(**{&#39;text-align&#39;: &#39;left&#39;})</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hits_tok</span> <span class="o">=</span> <span class="p">[</span><span class="n">hit</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">hits</span><span class="o">.</span><span class="n">body</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">comm</span> <span class="ow">in</span> <span class="n">hits_tok</span><span class="p">:</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tok</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">comm</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">tok</span> <span class="o">==</span> <span class="n">lex</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">comm</span><span class="p">))</span>
+			<span class="c1"># print(comm[i-1], tok, comm[i+1])</span>
 </pre></div>
 
     </div>
@@ -672,429 +694,252 @@ Length: 66885, dtype: int64</pre>
 
 <div class="output_area">
 
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>No, record two separate takes of the same vocals. Copying and pasting vocals to two tracks will only make it louder. Recording two separate takes and making one lower in volume will give the ‘Doubler’ effect that is widely used and adds width and depth to vocals. Have both separate tracks go to a vocal mix bus and add the spreader in that.
+And here I was going to ask if it fitted into your garage or did you have to take the salt spreader off ...🤣
+They definitely don’t “age”—I had one running for my entire Interactions run and it worked like a champ the entire time.
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>body</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>233362</th>
-      <td>No, record two separate takes of the same vocals. Copying and pasting vocals to two tracks will only make it louder. Recording two separate takes and making one lower in volume will give the ‘Doub...</td>
-    </tr>
-    <tr>
-      <th>316629</th>
-      <td>I am not familiar with that brand, but I own a couple of pieces of bare anodized aluminum cookware. I would not recommend them.
-
-Bare anodized aluminum is easily the most stick-prone material I ha...</td>
-    </tr>
-    <tr>
-      <th>382123</th>
-      <td>And here I was going to ask if it fitted into your garage or did you have to take the salt spreader off ...🤣</td>
-    </tr>
-    <tr>
-      <th>423532</th>
-      <td>Yeah as I said, I assume that the temperature readings may be higher then I expected because of the way the dies are connected to the heatspreader. I think der8auer, the German overclocker, [concl...</td>
-    </tr>
-    <tr>
-      <th>456937</th>
-      <td>They definitely don’t “age”—I had one running for my entire Interactions run and it worked like a champ the entire time.
-
-When you say they aren’t producing much mana, what do you mean? Do they fi...</td>
-    </tr>
-    <tr>
-      <th>626784</th>
-      <td>I have yet to see a monohull without a backstay. The swept back spreader puts a slight bend in the mast which helps in performance. Downwind does suck which is why you use a spinnaker instead.</td>
-    </tr>
-    <tr>
-      <th>761122</th>
-      <td>Even better, that's actually Bodvarr Ribspreader</td>
-    </tr>
-    <tr>
-      <th>999738</th>
-      <td>That is in this case part of the chastity belt. But based on speculation I think it might just be called a 'butt spreader' or 'cheek spreader'</td>
-    </tr>
-    <tr>
-      <th>1228940</th>
-      <td>But imagine cooling something with a heatspreader/chip size of Threadripper. When you have more surface area, you can get bigger/beefier coolers and you can use something like the Silver Arrow for...</td>
-    </tr>
-    <tr>
-      <th>1281884</th>
-      <td>System agent chip is under palmrest and covered by the heat spreader on the left side so likely its that.</td>
-    </tr>
-    <tr>
-      <th>1484418</th>
-      <td>Monitor has a Cooper heat spreader on it.</td>
-    </tr>
-    <tr>
-      <th>1499246</th>
-      <td>It does have one. It has a copper heat spreader</td>
-    </tr>
-    <tr>
-      <th>1691379</th>
-      <td>As a snow plow and spreader operator, I could buy a mansion and yacht after working one Russian winter.</td>
-    </tr>
-    <tr>
-      <th>1744659</th>
-      <td>Don't you love the quality of consumer quality spreaders?  Over the last 10 years, I've had 3 fail in the 2nd or 3rd season.
-
-Now I usually broadcast with a shovel.</td>
-    </tr>
-    <tr>
-      <th>2018392</th>
-      <td>Disease-spreader.</td>
-    </tr>
-    <tr>
-      <th>2124354</th>
-      <td>“Biological warfare is about to happen” says the disease spreader......</td>
-    </tr>
-    <tr>
-      <th>2252424</th>
-      <td>I slipped in it and it spreader everywhere</td>
-    </tr>
-    <tr>
-      <th>2418764</th>
-      <td>Toast nerd here. I only toast one slice at a time. Butter must be slightly pre-softened. Toaster must be on ideal setting. Must use special wide  spreader (narrow "butter knife" will not do. ) whe...</td>
-    </tr>
-    <tr>
-      <th>2687192</th>
-      <td>Maybe there's some deformation either with the motherboard or the CPU's heatspreader and it adds 1 mm of height.</td>
-    </tr>
-    <tr>
-      <th>2699951</th>
-      <td>Well thank you good C R O N C H, now we both can be supreme bearers and spreaders of our religion</td>
-    </tr>
-    <tr>
-      <th>2960711</th>
-      <td>Saryn=cancer spreader</td>
-    </tr>
-    <tr>
-      <th>2961483</th>
-      <td>An electrical insulator of some sort. Perhaps a wire spreader to keep  house or barn electrical service entrance wires with long runs from shorting during high wind. Pretty small wire size . Maybe...</td>
-    </tr>
-    <tr>
-      <th>3066997</th>
-      <td>I think you mean spatula. Specula is the plural of speculum, which a tool used to open vaginas for examination. 
+When you say they aren’t producing much mana, what do you mean? Do they fill up when you check them with the wand after they eat a bucket? I would look into the rest of your Botania chain after the petropetunia to see if there’s an issue elsewhere... at one point I had put a tank in the line of sight of my mana spreader and it caused me to waste a bunch of mana, so my experience is that there may be issues elsewhere.
+I have yet to see a monohull without a backstay. The swept back spreader puts a slight bend in the mast which helps in performance. Downwind does suck which is why you use a spinnaker instead.
+System agent chip is under palmrest and covered by the heat spreader on the left side so likely its that.
+Monitor has a Cooper heat spreader on it.
+It does have one. It has a copper heat spreader
+As a snow plow and spreader operator, I could buy a mansion and yacht after working one Russian winter.
+I slipped in it and it spreader everywhere
+Toast nerd here. I only toast one slice at a time. Butter must be slightly pre-softened. Toaster must be on ideal setting. Must use special wide  spreader (narrow &#34;butter knife&#34; will not do. ) when the toast pops up, it&#39;s CRITICAL to spread butter promptly. Also helps if plate is warmed. Mmmmm... toast.. 
+Saryn=cancer spreader
+An electrical insulator of some sort. Perhaps a wire spreader to keep  house or barn electrical service entrance wires with long runs from shorting during high wind. Pretty small wire size . Maybe a barn or water well pump electrical feed. Intriguing
+I think you mean spatula. Specula is the plural of speculum, which a tool used to open vaginas for examination. 
 
 
-But hey, if you wanna use a cooch spreader to smooth your mousse, go for it.</td>
-    </tr>
-    <tr>
-      <th>3130657</th>
-      <td>Interested in:
+But hey, if you wanna use a cooch spreader to smooth your mousse, go for it.
+Homemade butter separator dish. You would pour homemade butter in the dish and the spout strains off the excess liquid from the solids. You could use it as a butter dish afterwards. The hole would have been a place to put a spreader knife.
 
-
-
-- Goyo Guardian
-
-
-
-- Knightmare Phoenix
-
-
-
-- Triple Burst Dragon
-
-
-
-- Plaguespreader Zombie
-
-
-
-- Guardragon Pisty
-
-
-
-- Gold Series Ghost rare Solemn Judgment
-
-
-
-- Number 81 Super...</td>
-    </tr>
-    <tr>
-      <th>3247787</th>
-      <td>Homemade butter separator dish. You would pour homemade butter in the dish and the spout strains off the excess liquid from the solids. You could use it as a butter dish afterwards. The hole would...</td>
-    </tr>
-    <tr>
-      <th>3310585</th>
-      <td>That’s horrible news!  This means you need to find a new wife!!  Let this be a valuable lesson to everyone...  always cover all your ass spreader bases before nuptials.</td>
-    </tr>
-    <tr>
-      <th>3373228</th>
-      <td>Hi /u/Hazmataz13,
+I remember my grandmother having something similar. The mini butter knife had a small cork on the end that fit into the hole. The hole was closer to the handle if I recall. That&#39;s the only thing I can think of.
+That’s horrible news!  This means you need to find a new wife!!  Let this be a valuable lesson to everyone...  always cover all your ass spreader bases before nuptials.
+Hi /u/Hazmataz13,
 
 Unfortunately your submission has been removed for the following reason(s):
 
-* **All selling and swapping posts must have a timestamp - see [here](https://www.reddit.com/r/Hardw...</td>
-    </tr>
-    <tr>
-      <th>3538647</th>
-      <td>I think we may have covered this in another thread? (I had the emergency leaking-tarp situation that lead to a shitty night of double hammocking.) 
+* **All selling and swapping posts must have a timestamp - see [here](https://www.reddit.com/r/HardwareSwapUK/wiki/timestamps). These must be dated within 5 days.**
 
-I have heard a few stories of people that do th...</td>
-    </tr>
-    <tr>
-      <th>3560160</th>
-      <td>Saw these notes at the bottom should I be concerned by either of these? 
+If you feel this was removed in error or are unsure about why this was removed then please [modmail](https://www.reddit.com/message/compose?to=%2Fr%2FHardwareSwapUK) us.
 
-* **Note:**The motherboard M.2 slot #1 shares bandwidth with a SATA 6.0 Gb/s port. When the M.2 slot is populated, one SAT...</td>
-    </tr>
-    <tr>
-      <th>3603064</th>
-      <td>I’ll use this for the pushing
+                                   
+**Please don&#39;t comment with the timestamps or edit the post as the mods won&#39;t see this. Please make a new post.**    
 
-[pussy spreader](https://imgur.com/a/KVgEiqx)</td>
-    </tr>
-    <tr>
-      <th>3664815</th>
-      <td>This was on [https://me.me/i/hello-soon-to-be-pedroitus-spreader-first-a-big-thank-ec355216e47a4f0db640f5d3899e7cfc](https://me.me/i/hello-soon-to-be-pedroitus-spreader-first-a-big-thank-ec355216e...</td>
-    </tr>
-    <tr>
-      <th>3824448</th>
-      <td>Neo is a newer series with a similar design for the heat spreaders, but often higher rated speeds. Also, they test it on zen 2 cpus iirc, but that doesn't really make a ton of difference.</td>
-    </tr>
-    <tr>
-      <th>3944765</th>
-      <td>If I need some low cost equipment, I start off with some old Deutz Fahr tractors that are on ModHub.  There's a couple that are admittedly low horsepower, but cost under $20k.  Then get a small ti...</td>
-    </tr>
-    <tr>
-      <th>4134563</th>
-      <td>Reinstall the heating system, doing it properly.
+---
 
-The radiant loop in the kitchen needs work...heat spreader plates installed, a proper radiant barrier \[not just foil underlayment\], insulation, ...</td>
-    </tr>
-    <tr>
-      <th>4246710</th>
-      <td>what cpu are you using? 
+**Title:** [[SG] [H] 8gb ddr4 2800[W] £30 PayPal](/r/HardwareSwapUK/comments/bf4tjo/sg_h_8gb_ddr4_2800w_30_paypal/)              
+**Username:** /u/Hazmataz13        
+**Original Post:**          
+it is single channel and overclocked easily from 2400 to 2800.
 
-I wouldn't recommend removing the heatspreaders on the Ripjaws as G.Skill (and Corsair) have a lifetime warranty on RAM.</td>
-    </tr>
-    <tr>
-      <th>4281134</th>
-      <td>Pls someone help! Sinspreader88 is harassing me :(</td>
-    </tr>
-    <tr>
-      <th>4374340</th>
-      <td>Def give BRD a try.  I ran Shira to KoG this month as well and it is really satisfying to wipe the field with BRD then recover your field from the grave.
+also comes with a custom heat spreader that can be removed if wanted.       
+   
 
-If you want to get spicy, replace a Samur...</td>
-    </tr>
-    <tr>
-      <th>4719849</th>
-      <td>&amp;gt; *"Tell the boys not to wrap the straps around the gussets."*
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/HardwareSwapUK) if you have any questions or concerns.*
+I think we may have covered this in another thread? (I had the emergency leaking-tarp situation that lead to a shitty night of double hammocking.) 
 
-How bout' that rigging angle?  
+I have heard a few stories of people that do this on purpose, but I cannot imagine it working well. The spreader bars are a good option, however, if you want to fit two hammocks under one large tarp, which is something I honestly do want to try. 
+
+Hammocks are so comfortable because you&#39;re not on the ground, and because you have free range to kick/roll/stretch etc and all you have to worry about is not tipping out. The one time I slept in a hammock with my S/O, it was awful. Our shoulders were shoved against the other, an elbow always below you or jabbing into the other, and oh...don&#39;t try to get out to use the bathroom! 
+
+Tl;DR: Invest in separate hammocks and camp together with them. If you do this the first few nights you may want to venture into solo hammocks, and from there you have tons of options!
+If I need some low cost equipment, I start off with some old Deutz Fahr tractors that are on ModHub.  There&#39;s a couple that are admittedly low horsepower, but cost under $20k.  Then get a small tipper, Amazone seeder... there&#39;s a cheap fertilizer spreader on ModHub as well.  I forget the brand but it&#39;s white and spreads via a small pipe on the bottom that goes back and forth quickly.  For a harvester, I&#39;ll usually go with the small Rostelmash or the old Case.
+
+If I play a map with large fields like Marwell, I&#39;ll usually use the government subsidy sign to afford some big stuff to start with
+Reinstall the heating system, doing it properly.
+
+The radiant loop in the kitchen needs work...heat spreader plates installed, a proper radiant barrier \[not just foil underlayment\], insulation, etc.  Doing so would save a fortune on heating costs, to the point it&#39;ll pay for itself in a year or two.
+&amp;gt; *&#34;Tell the boys not to wrap the straps around the gussets.&#34;*
+
+How bout&#39; that rigging angle?  
 
 Or maybe a spreader bar?
 
-Jesus this sub is just turning into place for wood framers to post the...</td>
-    </tr>
-    <tr>
-      <th>4746314</th>
-      <td>If you think you cleaned it thoroughly, it’ll be fine. Thermal paste can sometimes stain heat spreaders and/or coolers a fair bit, just make sure you’ve cleaned until nothing’s coming off any more...</td>
-    </tr>
-    <tr>
-      <th>4913683</th>
-      <td>Any component is more stable the cooler it runs.
+Jesus this sub is just turning into place for wood framers to post their favorite ways to kill people.
 
-And I personally can confirm that I get an error in MemTestPro as soon as the heatspreaders reach ~47°c for my 2x8GB micron e-die (measured with a...</td>
-    </tr>
-    <tr>
-      <th>4954249</th>
-      <td>Cheers for this. Just a quick Q: I've seen that some people have to remove the heat spreader on their RAM modules for the heatsink to fit so did you have to remove yours too? If not it did it have...</td>
-    </tr>
-    <tr>
-      <th>4969163</th>
-      <td>My bottom barrel is a 10 gauge spreader. Idk what that says about me</td>
-    </tr>
-    <tr>
-      <th>5030090</th>
-      <td>Manure spreader</td>
-    </tr>
-    <tr>
-      <th>5118403</th>
-      <td>oh yeah? lol how so oh false rumor spreader and facebook harasser of a guy that parents that just got divorced</td>
-    </tr>
-    <tr>
-      <th>5146190</th>
-      <td>For example, I use tape saturation and compressor on the master bus nearly every mix. Sometimes I use frequency-based stereo spreader kind of thing. Sometimes I use an EQ. In a nutshell, everythin...</td>
-    </tr>
-    <tr>
-      <th>5169356</th>
-      <td>Someone at DE is probably feeling sad that despite their efforts the community hasn't caught on yet. My Gaze has actually become my go-to secondary for a couple of months ever since the chain buff...</td>
-    </tr>
-    <tr>
-      <th>5252483</th>
-      <td>I understand what you are saying. If I was single again for whatever reason I'd probably want the exact same thing as you are talking about. I agree that swingers are not for me, neither would be ...</td>
-    </tr>
-    <tr>
-      <th>5391463</th>
-      <td>Ok herpes spreader. We all don’t want what you have. Just let us have our straws.</td>
-    </tr>
-    <tr>
-      <th>5630415</th>
-      <td>Where did you get the manure spreader?</td>
-    </tr>
-    <tr>
-      <th>5633344</th>
-      <td>Which manure spreader and map is this?</td>
-    </tr>
-    <tr>
-      <th>5662848</th>
-      <td>Oh that makes sence. But pairing a ryzen with ecc doesn't.
-I thought it was DDR2, for the lack of a heatspreader and [it looks similar](https://ae01.alicdn.com/kf/HTB1s3cjdEUIL1JjSZFrq6z3xFXaW/For...</td>
-    </tr>
-    <tr>
-      <th>5673139</th>
-      <td>The reason delidding helps so much on Intel chips is not actually changing the paste; despite popular opinion/belief.
+Reminder guys, you keep doing shit like this that you don&#39;t know how to do right and, 
 
-The glue that is used to hold the IHS (heat spreader) on makes a small gap th...</td>
-    </tr>
-    <tr>
-      <th>5986957</th>
-      <td>B rank
+&#34;Welp, we&#39;ve always done it this way and this is the first time we killed anybody&#34;. 
+
+Isn&#39;t  a good defense in court.
+Cheers for this. Just a quick Q: I&#39;ve seen that some people have to remove the heat spreader on their RAM modules for the heatsink to fit so did you have to remove yours too? If not it did it have to do with the mobo that you used?
+Manure spreader
+oh yeah? lol how so oh false rumor spreader and facebook harasser of a guy that parents that just got divorced
+For example, I use tape saturation and compressor on the master bus nearly every mix. Sometimes I use frequency-based stereo spreader kind of thing. Sometimes I use an EQ. In a nutshell, everything you can imagine. Actually, I don&#39;t want to let things to the mastering engineer. He just fixes me, balances the master volume and brings his own color a little bit but doesn&#39;t try to change the song.
+Someone at DE is probably feeling sad that despite their efforts the community hasn&#39;t caught on yet. My Gaze has actually become my go-to secondary for a couple of months ever since the chain buff. I built it to be a status spreader for CO and anti-nullifier, but it&#39;s more effective than I expected. Corrosive straight up kills specific targets while gas deletes crowds
+I understand what you are saying. If I was single again for whatever reason I&#39;d probably want the exact same thing as you are talking about. I agree that swingers are not for me, neither would be polyamory. With swingers, there are too many permutations for me to keep track of to be comfortable, because from a bacteria and body chemistry standpoint, you&#39;re not just having sex with them, you&#39;re also having sex with everyone they&#39;ve had sex with. 
+
+This is going to be a really weird mentality for people to grasp, but let me put it this way. If bacteria from a third party is transmitted to me sexually, that feels like a violation. If I were to get involved in something like an orgy, that&#39;s different, because that&#39;s with the understanding that anything that anyone has in that room is going to get back around to me. If I&#39;m having sex with one person however and they&#39;re having different partners regularly, from a viral/bacterial standpoint that&#39;s no different than being involved in an orgy even though I never agreed to that.
+
+Your own personal reasons may be different, and I know that swingers go to a lot of effort to keep themselves and their partners safe. That being said, I know how bad some people&#39;s habits are, even when they are trying to be careful. Just like how an entire office building gets sick just because all it takes it one jackass to answer a communal company phone because it rings right after they just sneezed into their hand.
+
+Our culture still shakes hands upon meeting people, even though it&#39;s a proven spreader of disease. It&#39;s a holdover from showing someone that you weren&#39;t going to attack them with a weapon, which is obsolete since the invention of small-scale guns. We still do it though, because it&#39;s culture and part of good manners, and get sick as a result. 
+
+How this applies to sex and swinging is that you may have every intention of keeping yourself and others safe, you may get tested regularly and use protection during sex, even including things like dental dams. That being said, if we can&#39;t stop doing things like a handshake because it would be rude, how are people going to stop themselves from making mistakes in a far more intimate and less rational situation? 
+
+I&#39;m sure that will offend many swingers who are super safe and would never put others in danger, but that is my personal reason for avoiding it. I can masturbate all I want to orgy porn, but frankly the idea of actually having sex with a bunch of different people disgusts me on an intellectual level. I would far rather have a whole bunch of people in a room masturbating together and not touching than actually having sex. It doesn&#39;t matter how careful people are, to err is human and mistakes will happen. That&#39;s why despite having a high sex drive beyond what any partner has ever been able to match, I stay monogamous and just use masturbation to take care of the extra urges.
+Which manure spreader and map is this?
+B rank
 These stages use their concepts well, but are held back by either poor stage design or lackluster concepts in general.
 
 17. Fancy Spew
-This stage would be the first to introduce spreaders, ...</td>
-    </tr>
-    <tr>
-      <th>6105961</th>
-      <td>the ridgerunner isn't an UL rig at all, no, but it's also not ridiculously heavy.   it's still well under 2 lbs for the double layer with spreader bars (i think)
+This stage would be the first to introduce spreaders, but it certainly wouldn&#39;t be the last. With the giant spreader and its cohorts always creating more of both sides ink, it was never truly over for one side. However, that also gave a sense of... staleness. As if there was nothing you could do about the spreaders unless you literally spent the whole match watching them like a hawk. Not really that fun. Thus, B is where it resides. 
 
-if you want ultra light, hit up t...</td>
-    </tr>
-    <tr>
-      <th>6940080</th>
-      <td>tzlibre is a spreader of FUD, scammer of decent XTZ holders.</td>
-    </tr>
-    <tr>
-      <th>6992196</th>
-      <td>My primary surgeon destroyed my nose. I went to David Hacker (Toronto Rhinoplasty Clinic) and my nose was ruined. I couldn't breathe at all and it was collapsing. He left me with various issues (I...</td>
-    </tr>
-    <tr>
-      <th>7040925</th>
-      <td>Ultimately, I think he's the best candidate who is viable. I like Buttigieg a lot, but I think he needs more experience. Bennet had some great ideas, but he just doesn't have the right charisma.
+16. The Chronicles of Rolonium
+Rolonium finally got its debut outside of octo canyon in the time travel v teleportation splatfest, and it was... fine? I guess. The main issue with this one was that the rolonium didnt play a massive role in this one. Yeah sure, people focused it as soon as it recharged, but for the most part, its role in most battles was suprisingly weak. It didnt do too much damage, it wasn&#39;t too hard to clean up after, and it took a long time to recharge. Overall, not a bad map, but it didn&#39;t leave much of an impression.
 
-...</td>
-    </tr>
-    <tr>
-      <th>7083726</th>
-      <td>I remember when Synchros came out, I was one of those people who did not like the change and considered them cheap and ruined the game. Then I came back to the game when Xyz came out and started p...</td>
-    </tr>
-    <tr>
-      <th>7108326</th>
-      <td>Most likely, although that goes back to this really only should be done by someone who actually knows what they're doing and therefore knows if it's a soldered heatspreader or not. Based on the de...</td>
-    </tr>
-    <tr>
-      <th>7157612</th>
-      <td>Well if you’re more then 30 feet, yes you are bad with shottys, they spread and the mastiff spreader left-right</td>
-    </tr>
-    <tr>
-      <th>7361677</th>
-      <td>Plenty of bats eat insects, but plenty of bats eat fruit instead. They're great pollinators and seed-spreaders: [http://www.batcon.org/why-bats/bats-are/bats-are-important](http://www.batcon.org/w...</td>
-    </tr>
-    <tr>
-      <th>7462018</th>
-      <td>And I've been building computers for 20+ years and overclocking for as long so in the nicest possible way, you are teaching grandma to suck eggs. That is irrelevant though, just like comparing TIM...</td>
-    </tr>
-    <tr>
-      <th>7514889</th>
-      <td>That looks like a great deal, but I am height-constrained and need my RAM to be 31mm to less. So far I have only found that the Corsair Vengeance fits, but I had also heard about removing the heat...</td>
-    </tr>
-    <tr>
-      <th>7858724</th>
-      <td>The porn industry is, like, the biggest spreader of misoginy worldwide.
+15. Flooders in the Attic
+This stage gave us the Flooders, powerful OHKO enemies that both teams could use to pressure the enemy to retreat from. The flooders were used pretty well and had a presence throughout the battle. But the middle... dear god the middle. This map had one of the worst middle sections of the entire selection of shify stations. Thanks to it being raised, as well as the enemy flooder locking on to any allies in the middle, it could make it downright impossible to regain traction on this map if you lost it. Was definitely the downfall of this map imo.
+
+14. Wayslide Cool
+As our first taste of shifty station, this stage was not all that bad. It had a fun concept of horizontally moving platforms, which could prevent players from inking entire swathes of turf. While it certainly wasn&#39;t groundbreaking (especially compared with what was to come), it still was a fun and interesting map nonetheless.
+
+13.Railway Chillin
+This stage was done quite well. With Grindrails place everywhere on the map and areas only accesible by grindrail, it used them to their full extent. Why then, you&#39;re probably asking, is it so low? The answer: its middle. This map had one of the worst middles of any splatoon map... ever. Losing the middle here could lead to an extreme disadvantage, and breaking the other teams defense could end up overwhelmingly difficult. If the middle problem was fixed, the stage would be way higher, but for now, it stays around the middle.
+
+12. The Bouncy Twins
+While the Bounce pads were fun in this stage, I feel as if most of that fun came from just running straight into the enemy base. Playing a game of tag through their base while they silently screamed through their monitors was fun, but apart from that, they felt underused and the middle was kinda forgettable. Regardless, out of all the middle of the road stages, this one was the best.
+
+A rank
+These stages had good concepts, and executed them well--but were lacked the consistency of the higher up stages.
+
+11. A Swiftly Tilting Balance
+This was the final map for the TMNT splatfest tournament that happened, and after two repeat stations (neither of which were good ones), this map need to impress. And you know what? It succeeded! With an interesting concept and ample enough use, this maps only downside is its simplicity once the gimmick is discovered. Other than that, enjoy taking the weight off of your shoulders!
+10. The Ink is Spreading
+Now THIS was the best spreader stage. Now with switches to control the ink, this stage made the concept of spreaders interesting. While Fancy Spew was good in its own right, it doesnt copmare to the competitive epicenter of TIiS. This is probably the most all-around good stage of them all.
+9. Cannon Fire Pearlie
+Although these aren&#39;t exactly the cannons from single-player, they still serve thebsame purpose. And, as evident by this stages placing, just as fun. The cannons strong effect on the middle, combined with the giant slopes make this stage a truly chaotic one. The only issue i have with it is that the middle is very dense compared to the bases, so it can make comebacks difficult sometimes, but apart from that, good stage.
+
+S rank
+For stages that used their concepts greatly throughout the stage and used them very well, only to be held back from X by their lack of dynamic-ness.
+
+8. Grapplink Girl
+This stage used Grapplinks superbly, allowing players to quickly move to different parts of the map and even jump the entire map with specials such as Bubble Blower or Sting Ray. It had grapplinks that were the only way into the enemy base(or at least the less risky way) making it less prone to annoying teammates that try to sneak by the enemy and paint but end up dying. So thats good.
+7. The Switches
+Now here&#39;s a fun stage. The concept of having the switches block off the enemies from your spawn was a good one, and it made pushes that much more fun. There&#39;s really not that much to say about this stage. Its just a great overall stage.
+6. Geyser Town
+The one con about this stage is that the middle two geysers really aren&#39;t much more than a blockade. Apart from that, this stage is a fun one that puts geysers to full use, and even shows a few new things about them, like that fact that they instantly detonate bombs(who knew?).
+5. Zappy Longshockings
+This map truly felt like a game of time management. Between the wall blocking off players(if you couldnt guess i love area denial), the ink switches allowing you to enter enemy spawn, and the middle corridor of this saltspray rig shaped stage, it truly tests the player on where they had to be and when. Spend too long in one place, the enemy can easily take another. The only issue is that the switches feel a bit... lethargic... at times, but its not too much to worry about.
+4. Furler in the Ashes
+The second to last stage, appropriately put just before X rank. Finally using the long awaited furlers was good enough, but the suprise return of Mahi Mahi&#39;s water mechanics?! Now that was just icing on the cake. With the giant furlers allowing for stupid stuff such as being able to move way too fast with the splatlings or the best use of a sprinkler ever, this map only barely, barely misses out on X because it pales in comparison to the final 3.
+
+X rank
+The best of the best. These maps mechanics are so important to the stage that it makes every second on them important. They&#39;re dynamic, their fun, and they test the players ability to do more than just turf. They are what made shifty station stand out the most.
+
+3. The Bunker Games
+This stage. This stage was the first glimpse we had into how truly awesome the stations could be. With bunkers that appeared to outright deny players of swathes of turf, it made everyone invested for the whole match.
+2. Bridge to Terraswitchia
+This stage somehow did what The Bunker Games did even better, now having the area denial fully in the hands of the players. It perfectly handled the balance between offense and defense, and showed to players that if they got their butts handed to them in the first half, they would have to turn it up to 11 in order to fix that. Truly a great stage.
+
+1. Sweet Valley Tentacles
+Now, there was one problem with the previous stages that I decided not to mention until now. A problem that, while small, still brought them down a peg. And that problem was movement. In a game all about movement, its kind of boring to stanf in one place and wait to fight enemies. If you want to claim turf, then you should have to overcome your enemies head on to do it. And thats what Sweet Valley Tentacles does to put it above them all. It had everything: Area Denial, vast usage of a octo valley mechanic that none of us expected, large amounts of turf, and constantly shifting places of importance. If you pushed when needed, and defended your tentacles when they were under attack, you were guaranteed to succeed. It made sneakers(see grapplink girl to see what I&#39;m talking about) unable to be annoying without getting some serious targets on their backs, it made scaredy-cats who were too afraid to push hold their team back. It truly made for a dynamic stage, and I honestly feel like the concept of this map would make an excellent ranked mode. It truly made turf war feel like more than it was.
+B rank
+These stages use their concepts well, but are held back by either poor stage design or lackluster concepts in general.
+
+17. Fancy Spew
+This stage would be the first to introduce spreaders, but it certainly wouldn&#39;t be the last. With the giant spreader and its cohorts always creating more of both sides ink, it was never truly over for one side. However, that also gave a sense of... staleness. As if there was nothing you could do about the spreaders unless you literally spent the whole match watching them like a hawk. Not really that fun. Thus, B is where it resides. 
+
+16. The Chronicles of Rolonium
+Rolonium finally got its debut outside of octo canyon in the time travel v teleportation splatfest, and it was... fine? I guess. The main issue with this one was that the rolonium didnt play a massive role in this one. Yeah sure, people focused it as soon as it recharged, but for the most part, its role in most battles was suprisingly weak. It didnt do too much damage, it wasn&#39;t too hard to clean up after, and it took a long time to recharge. Overall, not a bad map, but it didn&#39;t leave much of an impression.
+
+15. Flooders in the Attic
+This stage gave us the Flooders, powerful OHKO enemies that both teams could use to pressure the enemy to retreat from. The flooders were used pretty well and had a presence throughout the battle. But the middle... dear god the middle. This map had one of the worst middle sections of the entire selection of shify stations. Thanks to it being raised, as well as the enemy flooder locking on to any allies in the middle, it could make it downright impossible to regain traction on this map if you lost it. Was definitely the downfall of this map imo.
+
+14. Wayslide Cool
+As our first taste of shifty station, this stage was not all that bad. It had a fun concept of horizontally moving platforms, which could prevent players from inking entire swathes of turf. While it certainly wasn&#39;t groundbreaking (especially compared with what was to come), it still was a fun and interesting map nonetheless.
+
+13.Railway Chillin
+This stage was done quite well. With Grindrails place everywhere on the map and areas only accesible by grindrail, it used them to their full extent. Why then, you&#39;re probably asking, is it so low? The answer: its middle. This map had one of the worst middles of any splatoon map... ever. Losing the middle here could lead to an extreme disadvantage, and breaking the other teams defense could end up overwhelmingly difficult. If the middle problem was fixed, the stage would be way higher, but for now, it stays around the middle.
+
+12. The Bouncy Twins
+While the Bounce pads were fun in this stage, I feel as if most of that fun came from just running straight into the enemy base. Playing a game of tag through their base while they silently screamed through their monitors was fun, but apart from that, they felt underused and the middle was kinda forgettable. Regardless, out of all the middle of the road stages, this one was the best.
+
+A rank
+These stages had good concepts, and executed them well--but were lacked the consistency of the higher up stages.
+
+11. A Swiftly Tilting Balance
+This was the final map for the TMNT splatfest tournament that happened, and after two repeat stations (neither of which were good ones), this map need to impress. And you know what? It succeeded! With an interesting concept and ample enough use, this maps only downside is its simplicity once the gimmick is discovered. Other than that, enjoy taking the weight off of your shoulders!
+10. The Ink is Spreading
+Now THIS was the best spreader stage. Now with switches to control the ink, this stage made the concept of spreaders interesting. While Fancy Spew was good in its own right, it doesnt copmare to the competitive epicenter of TIiS. This is probably the most all-around good stage of them all.
+9. Cannon Fire Pearlie
+Although these aren&#39;t exactly the cannons from single-player, they still serve thebsame purpose. And, as evident by this stages placing, just as fun. The cannons strong effect on the middle, combined with the giant slopes make this stage a truly chaotic one. The only issue i have with it is that the middle is very dense compared to the bases, so it can make comebacks difficult sometimes, but apart from that, good stage.
+
+S rank
+For stages that used their concepts greatly throughout the stage and used them very well, only to be held back from X by their lack of dynamic-ness.
+
+8. Grapplink Girl
+This stage used Grapplinks superbly, allowing players to quickly move to different parts of the map and even jump the entire map with specials such as Bubble Blower or Sting Ray. It had grapplinks that were the only way into the enemy base(or at least the less risky way) making it less prone to annoying teammates that try to sneak by the enemy and paint but end up dying. So thats good.
+7. The Switches
+Now here&#39;s a fun stage. The concept of having the switches block off the enemies from your spawn was a good one, and it made pushes that much more fun. There&#39;s really not that much to say about this stage. Its just a great overall stage.
+6. Geyser Town
+The one con about this stage is that the middle two geysers really aren&#39;t much more than a blockade. Apart from that, this stage is a fun one that puts geysers to full use, and even shows a few new things about them, like that fact that they instantly detonate bombs(who knew?).
+5. Zappy Longshockings
+This map truly felt like a game of time management. Between the wall blocking off players(if you couldnt guess i love area denial), the ink switches allowing you to enter enemy spawn, and the middle corridor of this saltspray rig shaped stage, it truly tests the player on where they had to be and when. Spend too long in one place, the enemy can easily take another. The only issue is that the switches feel a bit... lethargic... at times, but its not too much to worry about.
+4. Furler in the Ashes
+The second to last stage, appropriately put just before X rank. Finally using the long awaited furlers was good enough, but the suprise return of Mahi Mahi&#39;s water mechanics?! Now that was just icing on the cake. With the giant furlers allowing for stupid stuff such as being able to move way too fast with the splatlings or the best use of a sprinkler ever, this map only barely, barely misses out on X because it pales in comparison to the final 3.
+
+X rank
+The best of the best. These maps mechanics are so important to the stage that it makes every second on them important. They&#39;re dynamic, their fun, and they test the players ability to do more than just turf. They are what made shifty station stand out the most.
+
+3. The Bunker Games
+This stage. This stage was the first glimpse we had into how truly awesome the stations could be. With bunkers that appeared to outright deny players of swathes of turf, it made everyone invested for the whole match.
+2. Bridge to Terraswitchia
+This stage somehow did what The Bunker Games did even better, now having the area denial fully in the hands of the players. It perfectly handled the balance between offense and defense, and showed to players that if they got their butts handed to them in the first half, they would have to turn it up to 11 in order to fix that. Truly a great stage.
+
+1. Sweet Valley Tentacles
+Now, there was one problem with the previous stages that I decided not to mention until now. A problem that, while small, still brought them down a peg. And that problem was movement. In a game all about movement, its kind of boring to stanf in one place and wait to fight enemies. If you want to claim turf, then you should have to overcome your enemies head on to do it. And thats what Sweet Valley Tentacles does to put it above them all. It had everything: Area Denial, vast usage of a octo valley mechanic that none of us expected, large amounts of turf, and constantly shifting places of importance. If you pushed when needed, and defended your tentacles when they were under attack, you were guaranteed to succeed. It made sneakers(see grapplink girl to see what I&#39;m talking about) unable to be annoying without getting some serious targets on their backs, it made scaredy-cats who were too afraid to push hold their team back. It truly made for a dynamic stage, and I honestly feel like the concept of this map would make an excellent ranked mode. It truly made turf war feel like more than it was.
+the ridgerunner isn&#39;t an UL rig at all, no, but it&#39;s also not ridiculously heavy.   it&#39;s still well under 2 lbs for the double layer with spreader bars (i think)
+
+if you want ultra light, hit up towns end bridge hammock
+tzlibre is a spreader of FUD, scammer of decent XTZ holders.
+My primary surgeon destroyed my nose. I went to David Hacker (Toronto Rhinoplasty Clinic) and my nose was ruined. I couldn&#39;t breathe at all and it was collapsing. He left me with various issues (Inverted-v, alar collapse, etc). He was the most miserable and horrible man I ever met. I can&#39;t believe he&#39;s a doctor, but it seems that many others have posted and left reviews of their poor experiences with him...so I can hope others can avoid being botched by him. That year was horrible and all I could do was research and go to consultations with other surgeons to find a way to fix this mess.
+I would not recommend going to Oakley Smith. I ended up going to him (Oakley Smith) and he seemed good. But he&#39;s really just a salesman and he sold me on having him do my surgery...choosing him was mistake #2 I made. He fixed some issues (inverted-v poorly..., flared nostrils) and worsened other issues + created new ones (alar collapse worsened, pinched tip and crooked nose). He gave multiple excuses for the issues he left me with and then tried to convince me it was in my head or well my airways were &#34;open/not blocked&#34; so I should be able to breathe well (I can literally see my alar cartilage that has sunken in and blocked my airway + it sticks to my septum). I ended up getting several second opinions to confirm this. So I have a revision surgeon that will be fixing the issues oakley smith left me with (thicker spreader graft, alar strut grafts, tip repositioning).
+At my one year appointment he was more focused on my reviews/posts I left, kept asking why I was so angry (or was surprised at how frustrated/angry I was)...like do you think this is a joke? I paid you 18k to fix the function and look, you did a half-assed and lazy job. Idk he kept bringing these reviews/posts up and I realized then and there that he cares more about these posts/reviews than his patients. I&#39;m sure they&#39;re keeping an eye on any other posts I make as well based on how he kept bringing these posts/reviews up...He decided to try lying to my face and state that perhaps I had taken him talking/thinking out loud as stating that x is the issue. And dude no, you did your poor checkup and then straight up said to my face the issue is x (then it was y the next time, then z, etc). But whatever, so I had stressed I prioritized function over the look since the start. And he had the gall to be shocked about how angry I am, like he should know how hard the recovery is for rhinoplasty (let alone a revision), taking time off work/school, etc. And he went off on how he is the best at what he does and basically the gist was he&#39;s the best at rhinoplasty? And went on to state that any surgeon that tells me they can fix this is lying and whatnot. He was triggered tbh and just was going on and on about how he&#39;s the best, etc.
+It was a bit amusing to hear tbh (like I was trying to keep my eyes from rolling to the back of my head...), because based on my experience + the experience of all these numerous people I have met that have poor results from smith (and ones who did a second revision with him to end off worse)...He&#39;s not the best and he shouldn&#39;t be telling these patients that no other doctor can fix the mess he made (especially if he&#39;s basing it off whether it can fixed on his own skill+experience...which again is lacking as they caused the issues in the first place). There&#39;s no reason to scare these patients off from going to get a second opinion or getting a revision elsewhere.
+Either way he gave out some random percentage success rate (like I predicted) and said he would do a revision. A few days later I received a message and basically he thinks I have good results + revision is not worth it and he&#39;ll discuss things further/options in the new year. So having a nose that does not function and is crooked is a good result for him. Take that as you will if anyone is considering him. Either way I have a revision surgeon that will be fixing the issues Oakley Smith left me with. There was honestly no way I would trust him to have the skill/ability or the ethics to do another revision. He would definitely leave me worse off and I don&#39;t trust him not to do something I already declined (i.e. he and his student kept trying to push me to do a turbinate reduction, knowing that the alar collapse + other issues are causing the breathing problems, and I said no numerous times and they kept pushing). You want a doctor that see patients as people and not just a profit. Funny thing is that, I have stated smith uses fake reviews and it seems that he had many of the negative ones he received removed (example: he had like 380 reviews on ratemd a while ago and now it&#39;s down to 360 or something with like all his negative reviews removed). So please be careful if you choose to go to him as he has them removed. If I could go back in time I would never touch my nose (or go to Hacker or Smith). I could live with a crooked nose that&#39;s the thing; it&#39;s the breathing issues that are the worst.
+This girl is also someone that had their surgery with Smith btw:
+https://www.realself.com/question/niagara-fillers-fix-curved-nose
+This one is the same girl as above, but after Smith put filler in her nose.
+https://www.realself.com/question/niagara-nose-swollen
+and this one I posted somewhere else, but not sure if you saw it:
+https://www.realself.com/review/18-year-girl-successful-revision-rhinoplasty-move-life-2017
+I would have never touched my nose if I could go back in time. Otherwise I wouldn’t have gone to hacker or smith. I wish I had known smith manipulated his reviews and that I should have gone elsewhere (probably out of the country tbh…)
+Well if you’re more then 30 feet, yes you are bad with shottys, they spread and the mastiff spreader left-right
+That looks like a great deal, but I am height-constrained and need my RAM to be 31mm to less. So far I have only found that the Corsair Vengeance fits, but I had also heard about removing the heat spreader. Any idea if the bare board would fit, and it the missing thermal spreader would hurt performance?
+The porn industry is, like, the biggest spreader of misoginy worldwide.
 
 
-But our community overlaps with channer culture, therefore, we are up to no good — rite?</td>
-    </tr>
-    <tr>
-      <th>7888253</th>
-      <td>Have this very setup. My case is large enough that I was able to just place the 2nd noctua fan on top of the RAM w/heat spreaders intact. Would there be any beneficial/negative aspect to removing ...</td>
-    </tr>
-    <tr>
-      <th>8064183</th>
-      <td>The box needs to be either on a spreader bracket OR have a support wire (314.23 (D) 1;2) and as long as the mc has an insulated ground and its continuous through the box theres no problem using th...</td>
-    </tr>
-    <tr>
-      <th>8212472</th>
-      <td>So very evil... "Here is your cancer medicine, and here is your cancer spreader *points at Fallout 76* free now with every purchase!"</td>
-    </tr>
-    <tr>
-      <th>8232320</th>
-      <td>That bumper could've been saved if you wanted to get extremely involved. We would have to do that from time to time when used car managers wanted to save some money on a beater car. If you're inte...</td>
-    </tr>
-    <tr>
-      <th>8337842</th>
-      <td>99.99% sure fertilizer doesn't effect trees, but if I grow grass there as well, it would help that. Might need to use a solid fertilizer spreader though as all the boom arms on liquid spreaders wo...</td>
-    </tr>
-    <tr>
-      <th>8395777</th>
-      <td>Not everyone has spreader bars on hand.  
+But our community overlaps with channer culture, therefore, we are up to no good — rite?
+The box needs to be either on a spreader bracket OR have a support wire (314.23 (D) 1;2) and as long as the mc has an insulated ground and its continuous through the box theres no problem using the plastic box per 314.3 Exception 1.
+So very evil... &#34;Here is your cancer medicine, and here is your cancer spreader *points at Fallout 76* free now with every purchase!&#34;
+That bumper could&#39;ve been saved if you wanted to get extremely involved. We would have to do that from time to time when used car managers wanted to save some money on a beater car. If you&#39;re interested look into plastic welding. Or what we would do is melt a bondo spreader into the crack with a soldering iron and grind it to get it close, then bondo it up to find tune it. Feather fill primer is your best friend on repairs like that too. Awesome job on the repair! 
+99.99% sure fertilizer doesn&#39;t effect trees, but if I grow grass there as well, it would help that. Might need to use a solid fertilizer spreader though as all the boom arms on liquid spreaders would get stuck all the time.
+Not everyone has spreader bars on hand.  
 
-Personally, knowing that we don't have them with our rotator I would have ran a line from a light duty to the front of that truck, lift it up the exact s...</td>
-    </tr>
-    <tr>
-      <th>8488179</th>
-      <td>The person who was a large spreader of this photo is this guy, who posted the caption:   
-"Here's a photo of Jason Mamoa getting arrested while defending sacred land in Hawaii."
+Personally, knowing that we don&#39;t have them with our rotator I would have ran a line from a light duty to the front of that truck, lift it up the exact same way and use the light duty to pull on the nose when it&#39;s ready to be upright.  I&#39;d do it that way to avoid additional damage (it&#39;s totaled anyway but we&#39;ve got the equipment on scene) and I&#39;d hook it while it&#39;s on the ground to avoid having someone get under a 6500lb fish.
 
-He has since resp...</td>
-    </tr>
-    <tr>
-      <th>8586031</th>
-      <td>She is a sight to behold. I’ve never been aboard, but the crew have extended me an open invitation to sail with them whenever I want. I will def post a video from the deck and maybe the spreaders ...</td>
-    </tr>
-    <tr>
-      <th>8701328</th>
-      <td>I was set to agree with you but your post history is 100% negative, easy questions that have been answered 500 times in the past or complaining about other games.  You are a negativity spreader wh...</td>
-    </tr>
-    <tr>
-      <th>8769885</th>
-      <td>Wide ope. Is the only setting I’ve ever used for lime, pulverized or pelletized. 
+We&#39;ve had to do this with cars that end up in washes where you have to lift it out and can&#39;t just drag it out.  It&#39;s great when they have full coverage (easily around 750-1000 towing/labor) but it sucks when it&#39;s a liability beater.
+The person who was a large spreader of this photo is this guy, who posted the caption:   
+&#34;Here&#39;s a photo of Jason Mamoa getting arrested while defending sacred land in Hawaii.&#34;
 
-BTW, you should’ve seen the look on my neighbor’s face when I was putting down whit powder on my lawn with my dro...</td>
-    </tr>
-    <tr>
-      <th>9313624</th>
-      <td>I’d say too late to now.  Getting pretty cold and probably even colder in MI.
+He has since responded:
 
-But in the spring after the freezing temperature get seed and starter fertilizer.  
+ &#34;So I&#39;ve been informed that this photo is staged. But I&#39;m going to leave it up because it still brings attention to #WeAreMaunaKea&#34;  
+[https://twitter.com/the\_green\_city/status/1161448144980365317](https://twitter.com/the_green_city/status/1161448144980365317)   
 
-Use a metal rake (not a leaf rak...</td>
-    </tr>
-    <tr>
-      <th>9566584</th>
-      <td>I made my own spreader bar using rods, nuts and bolts from Home Depot.</td>
-    </tr>
-    <tr>
-      <th>9583899</th>
-      <td>spreader bar? may i ask what that is?</td>
-    </tr>
-  </tbody>
-</table>
+
+**POSTER BOY FOR THE ATTITUDE OF THE MOVEMENT.** 
+
+It is factually incorrect. I know it is factually incorrect. But **meh**, it brings attention to the movement so I am leaving the post as is, saying he was arrested.
+I was set to agree with you but your post history is 100% negative, easy questions that have been answered 500 times in the past or complaining about other games.  You are a negativity spreader when it suits you.
+I made my own spreader bar using rods, nuts and bolts from Home Depot.
+spreader bar? may i ask what that is?
+</pre>
 </div>
-</div>
-
 </div>
 
 </div>

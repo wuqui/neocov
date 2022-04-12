@@ -4,7 +4,6 @@
     "Read data": "read_data.html",
     "Preprocess comments": "preproc.html",
     "Type embeddings": "type_emb.html",
-    "Communities": "communities.html",
-    "NeoCov": "results.html"
+    "Communities": "communities.html"
   }
 }

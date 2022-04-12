@@ -2,7 +2,7 @@
 
 __all__ = ['Corpus', 'train_model', 'make_model_dict', 'intersection_align_gensim', 'smart_procrustes_align_gensim',
            'measure_distances', 'get_nearest_neighbours_models', 'get_pole_avg', 'make_sem_axis_avg', 'get_axis_sim',
-           'get_axis_sims', 'plot_emb_proj', 'get_nbs_vecs', 'dim_red_nbs_vecs', 'plot_nbs_vecs']
+           'get_axis_sims', 'aggregate_proj_sims', 'plot_sem_axis', 'get_nbs_vecs', 'dim_red_nbs_vecs']
 
 # Cell
 from gensim.models import Word2Vec
@@ -208,13 +208,29 @@ def get_axis_sims(lexs: list, models, pole_words: list, k=10):
 	return sims_df
 
 # Cell
-def plot_emb_proj(proj_sims, pole_words):
-	chart = alt.Chart(proj_sims).mark_line(point=True).encode(
-		x=alt.X('sim', title='SemSim'),
-		y=alt.Y('lex', title='', sort=None),
-		color=alt.Color('model', title='Model')
-	).properties(title=f'{pole_words[0]} vs {pole_words[1]}')
-	return chart
+def aggregate_proj_sims(proj_sims):
+	proj_sims = (proj_sims
+		.pivot(index='lex', columns='model', values='sim')
+		.assign(SimDiff = lambda df: df['Coronavirus'] - df['conspiracy'])
+		.sort_values('SimDiff', ascending=False)
+		.reset_index()
+	)
+	return proj_sims
+
+# Cell
+def plot_sem_axis(proj_sims, models):
+    base = alt.Chart(proj_sims).encode(
+        y=alt.Y('lex', title='', sort=alt.SortField("SimDiff"))
+        )
+
+    proj_sims_chart = alt.layer(
+        base.mark_line(point=alt.OverlayMarkDef(color='red'), color='red')
+            .encode(alt.X(models[1]['name'], title=f'r/{models[1]["name"]}: red')),
+        base.mark_line(point=alt.OverlayMarkDef(color='blue'), color='blue')
+            .encode(alt.X(models[0]['name'], title=f'r/{models[0]["name"]}: blue')),
+    ).properties(title='')
+
+    return proj_sims_chart
 
 # Cell
 def get_nbs_vecs(lex, model, k=50):
@@ -253,35 +269,3 @@ def dim_red_nbs_vecs(nbs_vecs, perplexity=50):
     nbs_vecs['y_tsne'] = Y_tsne[:, [1]]
 
     return nbs_vecs
-
-
-# Cell
-def plot_nbs_vecs(lex, nbs_vecs, perplexity=50):
-	brush = alt.selection(
-		type="interval",
-		on="[mousedown[event.altKey], mouseup] > mousemove",
-		translate="[mousedown[event.altKey], mouseup] > mousemove!",
-		zoom="wheel![event.altKey]",
-	)
-
-	interaction = alt.selection(
-		type="interval",
-		bind="scales",
-		on="[mousedown[!event.altKey], mouseup] > mousemove",
-		translate="[mousedown[!event.altKey], mouseup] > mousemove!",
-		zoom="wheel![!event.altKey]",
-	)
-
-	chart = (alt.Chart(nbs_vecs).mark_text(point=True).encode(
-		x = 'x_tsne:Q',
-		y = 'y_tsne:Q',
-		text = 'lex:O',
-		size = alt.condition("datum.type == 'center'", alt.value(25), alt.value(10)),
-		color = alt.condition(brush, 'subreddit', alt.value('lightgray')),
-		column = 'subreddit'
-		)
-		.properties(title=f"Social semantic variation for the word '{lex}'.")
-		.add_selection(brush, interaction)
-	)
-
-	return chart
